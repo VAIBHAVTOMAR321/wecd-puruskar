@@ -24,62 +24,61 @@ function Login() {
 
   return (
     <div className="login-page">
-      <Container fluid className="p-0">
+      <Container>
         <Row className="g-0 login-container">
           {/* Left side with image */}
-          <Col lg={6} className="login-image-col d-none d-lg-block" />
+          <Col lg={6} className="login-image-col d-none d-lg-block">
+            <div className="login-image-overlay">
+              <h2>Data Resource Center</h2>
+              <p>Empowering Children Through Information</p>
+            </div>
+          </Col>
 
           {/* Right side with login form */}
           <Col lg={6} className="login-form-col">
-            <Card className="login-card">
-              <div className="login-header">
-                <FcDepartment className="login-logo" />
-                <h3>
-                  {selectedDepartment ? `${selectedDepartment} Login` : 'DRC Portal Login'}
-                </h3>
-                <p>Welcome to the Data Resource Center</p>
-              </div>
-              <Card.Body>
-                <Form>
-                  <Form.Group className="mb-3" controlId="formDepartment">
-                    <Form.Label>Select Department</Form.Label>
-                    <Form.Select
-                      aria-label="Department selection"
-                      value={selectedDepartment}
-                      onChange={(e) => setSelectedDepartment(e.target.value)}
-                    >
-                      <option value="">Select Department...</option>
-                      {departments.map((dept, index) => (
-                        <option key={index} value={dept}>{dept}</option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formEmailMobile">
-                    <Form.Label>Email or Mobile Number</Form.Label>
-                    <Form.Control type="text" placeholder="Enter email or mobile" />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                  </Form.Group>
-
-                  <div className="d-flex justify-content-between align-items-center mb-4">
-                    <Form.Check type="checkbox" label="Remember me" />
-                    <Link to="/forgot-password">Forgot Password?</Link>
-                  </div>
-
-                  <div className="d-grid">
-                    <Button variant="primary" type="submit" size="lg">Login</Button>
-                  </div>
-                </Form>
-                <div className="text-center mt-4">
-                  <span className="text-muted">Don't have an account? </span>
-                  <Link to="/register">Register Now</Link>
+            <div className="w-100" >
+                <div className="login-header">
+               
+                    <h3>
+                    {selectedDepartment ? `${selectedDepartment}` : 'DRC Portal Login'}
+                    </h3>
+                    <p>Welcome to the Data Resource Center</p>
                 </div>
-              </Card.Body>
-            </Card>
+                <div className="p-4">
+                    <Form>
+                    <Form.Group className="mb-3" controlId="formDepartment">
+                        <Form.Label>Select Department</Form.Label>
+                        <Form.Select
+                        aria-label="Department selection"
+                        value={selectedDepartment}
+                        onChange={(e) => setSelectedDepartment(e.target.value)}
+                        >
+                        <option value="">Select Department...</option>
+                        {departments.map((dept, index) => (
+                            <option key={index} value={dept}>{dept}</option>
+                        ))}
+                        </Form.Select>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formEmailMobile">
+                        <Form.Label>Email or Mobile Number</Form.Label>
+                        <Form.Control type="text" placeholder="Enter email or mobile" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" />
+                    </Form.Group>
+
+                   
+
+                    <div className="d-grid">
+                        <Button variant="primary" type="submit" size="lg">Login</Button>
+                    </div>
+                    </Form>
+                   
+                </div>
+            </div>
           </Col>
         </Row>
       </Container>
