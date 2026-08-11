@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -198,6 +198,19 @@ const schemes = [
 // =====================================================
 
 function Home() {
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
+
+  // Group schemes by department for easier lookup
+  const schemesByDepartment = departments.reduce((acc, dept) => {
+    acc[dept.name] = schemes.filter(scheme => scheme.department === dept.name);
+    return acc;
+  }, {});
+
+  const handleDepartmentClick = (departmentName) => {
+    // Toggle selection: if the same department is clicked again, deselect it
+    setSelectedDepartment(departmentName === selectedDepartment ? null : departmentName);
+  };
+
   return (
     <div className="drc-home">
 
@@ -527,6 +540,84 @@ function Home() {
         </Container>
 
       </section>
+
+
+      {/* =================================================
+          FIND SCHEMES FOR YOU
+      ================================================= */}
+
+      <section className="section find-schemes-section">
+        <Container>
+          <div className="section-heading">
+            <Badge>For You</Badge>
+            <h2>Find Schemes by Department</h2>
+            <p>
+              Select a department to see the government schemes relevant to its work area.
+            </p>
+          </div>
+
+          <Row className="g-3 mb-5 justify-content-center">
+            {departments.map((department, index) => (
+              <Col xs={6} sm={4} md={3} lg={2} key={index}>
+                <div
+                  className={`department-selector-card ${selectedDepartment === department.name ? 'active' : ''}`}
+                  onClick={() => handleDepartmentClick(department.name)}
+                >
+                  <div className="department-icon">{department.icon}</div>
+                  <small>{department.name}</small>
+                </div>
+              </Col>
+            ))}
+          </Row>
+
+          {selectedDepartment && (
+            <div className="selected-department-schemes">
+              <h3>Schemes under {selectedDepartment}</h3>
+              <Row className="g-4">
+                {schemesByDepartment[selectedDepartment] && schemesByDepartment[selectedDepartment].length > 0 ? (
+                  schemesByDepartment[selectedDepartment].map((scheme, index) => (
+                    <Col lg={6} key={index}>
+                      <Accordion className="scheme-accordion">
+                        <Accordion.Item eventKey={String(index)}> {/* Unique eventKey */}
+                          <Accordion.Header>
+                            <div className="scheme-title">
+                              <div className="scheme-icon">
+                                <FaBookOpen />
+                              </div>
+                              <div>
+                                <strong>{scheme.name}</strong>
+                                <small>{scheme.department}</small>
+                              </div>
+                            </div>
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <div className="scheme-detail">
+                              <strong>उद्देश्य</strong>
+                              <p>{scheme.objective}</p>
+                              <strong>पात्रता</strong>
+                              <p>{scheme.eligibility}</p>
+                              <strong>लाभ</strong>
+                              <p>{scheme.benefits}</p>
+                            </div>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    </Col>
+                  ))
+                ) : (
+                  <Col lg={12}>
+                    <p className="text-center text-muted">No schemes found for this department.</p>
+                  </Col>
+                )}
+              </Row>
+            </div>
+          )}
+        </Container>
+      </section>
+
+
+
+
 
 
       {/* =================================================
