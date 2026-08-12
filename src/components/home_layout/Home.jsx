@@ -28,6 +28,12 @@ import {
   FaArrowRight,
   FaSearch,
   FaCheckCircle,
+  FaUsers,
+  FaChartLine,
+  FaTint,
+  FaShoppingCart,
+  FaLeaf,
+  FaHandHoldingHeart,
   FaDatabase,
 } from "react-icons/fa";
 
@@ -41,24 +47,19 @@ import drcHomeImg from "../../assets/images/drc_home-img.png";
 
 const departments = [
   {
-    name: "गृह विभाग",
-    workArea: "बाल सुरक्षा एवं संरक्षण",
-    icon: <FaShieldAlt />,
-  },
-  {
     name: "न्याय एवं विधि परामर्शी विभाग",
     workArea: "बाल अधिकार एवं कानूनी सहायता",
     icon: <FaBalanceScale />,
   },
   {
-    name: "महिला सशक्तिकरण एवं बाल विकास विभाग",
-    workArea: "बाल कल्याण एवं समग्र विकास",
-    icon: <FaChild />,
-  },
-  {
     name: "वित्त विभाग",
     workArea: "योजनाओं के लिए वित्तीय सहायता एवं बजट",
     icon: <FaHandsHelping />,
+  },
+  {
+    name: "नियोजन विभाग",
+    workArea: "राज्य के विकास की योजना",
+    icon: <FaChartLine />,
   },
   {
     name: "स्वास्थ्य एवं परिवार कल्याण विभाग",
@@ -86,7 +87,7 @@ const departments = [
     icon: <FaHome />,
   },
   {
-    name: "कौशल विकास विभाग",
+    name: "कौशल विकास एवं सेवा योजना विभाग",
     workArea: "कौशल एवं व्यावसायिक प्रशिक्षण",
     icon: <FaBriefcase />,
   },
@@ -99,6 +100,41 @@ const departments = [
     name: "श्रम विभाग",
     workArea: "बाल श्रम रोकथाम एवं श्रमिक परिवारों के बच्चों का कल्याण",
     icon: <FaHardHat />,
+  },
+  {
+    name: "पेयजल विभाग",
+    workArea: "स्वच्छ पेयजल की उपलब्धता",
+    icon: <FaTint />,
+  },
+  {
+    name: "खाद्य एवं नागरिक आपूर्ति उपभोक्ता विभाग",
+    workArea: "खाद्य सुरक्षा और आपूर्ति",
+    icon: <FaShoppingCart />,
+  },
+  {
+    name: "समाज कल्याण विभाग",
+    workArea: "सामाजिक सुरक्षा और कल्याण",
+    icon: <FaUsers />,
+  },
+  {
+    name: "कृषि विभाग",
+    workArea: "कृषि विकास और किसान कल्याण",
+    icon: <FaLeaf />,
+  },
+  {
+    name: "महिला कल्याण विभाग",
+    workArea: "महिला सशक्तिकरण एवं कल्याण",
+    icon: <FaChild />,
+  },
+  {
+    name: "एसोसिएशन फॉर वॉलंटरी एक्शन (AVA)",
+    workArea: "स्वैच्छिक कार्यों के माध्यम से सामुदायिक विकास",
+    icon: <FaHandHoldingHeart />,
+  },
+  {
+    name: "एसपीओटीकाईएम, पुलिस मुख्यालय",
+    workArea: "कानून व्यवस्था और बाल सुरक्षा",
+    icon: <FaShieldAlt />,
   },
 ];
 
@@ -271,7 +307,7 @@ function Home() {
 
                 <div>
                   <FaCheckCircle />
-                  <span>12 Departments</span>
+                  <span>18 Departments</span>
                 </div>
 
                 <div>
