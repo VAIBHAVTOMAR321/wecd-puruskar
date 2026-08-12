@@ -50,91 +50,163 @@ const departments = [
     name: "न्याय एवं विधि परामर्शी विभाग",
     workArea: "बाल अधिकार एवं कानूनी सहायता",
     icon: <FaBalanceScale />,
+    cardColor: "#e7f5ff",
+    color: "#8ecae6",
+    studentCount: 1250,
+    schemesCount: 5,
   },
   {
     name: "वित्त विभाग",
     workArea: "योजनाओं के लिए वित्तीय सहायता एवं बजट",
     icon: <FaHandsHelping />,
+    cardColor: "#fff8e1",
+    color: "#fca311",
+    studentCount: 8500,
+    schemesCount: 8,
   },
   {
     name: "नियोजन विभाग",
     workArea: "राज्य के विकास की योजना",
     icon: <FaChartLine />,
+    cardColor: "#eaf6f5",
+    color: "#2a9d8f",
+    studentCount: 3200,
+    schemesCount: 6,
   },
   {
     name: "स्वास्थ्य एवं परिवार कल्याण विभाग",
     workArea: "बाल स्वास्थ्य, पोषण एवं चिकित्सा",
     icon: <FaHeartbeat />,
+    cardColor: "#fdeee9",
+    color: "#e76f51",
+    studentCount: 15000,
+    schemesCount: 12,
   },
   {
     name: "शिक्षा विभाग",
     workArea: "बाल शिक्षा, विद्यालय एवं साक्षरता",
     icon: <FaSchool />,
+    cardColor: "#e4f8fb",
+    color: "#48cae4",
+    studentCount: 25000,
+    schemesCount: 15,
   },
   {
     name: "युवा कल्याण एवं खेल विभाग",
     workArea: "खेल, युवा विकास एवं प्रतिभा प्रोत्साहन",
     icon: <FaRunning />,
+    cardColor: "#f6eefe",
+    color: "#c77dff",
+    studentCount: 7800,
+    schemesCount: 9,
   },
   {
     name: "पंचायती राज विभाग",
     workArea: "ग्रामीण स्तर पर बाल कल्याण कार्यक्रम",
     icon: <FaMapMarkedAlt />,
+    cardColor: "#f0f9e6",
+    color: "#70e000",
+    studentCount: 11200,
+    schemesCount: 7,
   },
   {
     name: "ग्राम्य विकास विभाग",
     workArea: "ग्रामीण बच्चों के विकास एवं सहायता कार्यक्रम",
     icon: <FaHome />,
+    cardColor: "#fff9e6",
+    color: "#ffbe0b",
+    studentCount: 9500,
+    schemesCount: 10,
   },
   {
     name: "कौशल विकास एवं सेवा योजना विभाग",
     workArea: "कौशल एवं व्यावसायिक प्रशिक्षण",
     icon: <FaBriefcase />,
+    cardColor: "#e0f7fa",
+    color: "#00b4d8",
+    studentCount: 6400,
+    schemesCount: 11,
   },
   {
     name: "आवास एवं शहरी विकास विभाग",
     workArea: "शहरी क्षेत्रों में बाल एवं परिवार सहायता",
     icon: <FaBuilding />,
+    cardColor: "#fef0f5",
+    color: "#f72585",
+    studentCount: 4800,
+    schemesCount: 8,
   },
   {
     name: "श्रम विभाग",
     workArea: "बाल श्रम रोकथाम एवं श्रमिक परिवारों के बच्चों का कल्याण",
     icon: <FaHardHat />,
+    cardColor: "#f9fbe7",
+    color: "#c0d628",
+    studentCount: 2100,
+    schemesCount: 6,
   },
   {
     name: "पेयजल विभाग",
     workArea: "स्वच्छ पेयजल की उपलब्धता",
     icon: <FaTint />,
+    cardColor: "#ebf9f8",
+    color: "#ade8f4",
+    studentCount: 18000,
+    schemesCount: 4,
   },
   {
     name: "खाद्य एवं नागरिक आपूर्ति उपभोक्ता विभाग",
     workArea: "खाद्य सुरक्षा और आपूर्ति",
     icon: <FaShoppingCart />,
+    cardColor: "#fff5f7",
+    color: "#ff8fab",
+    studentCount: 22000,
+    schemesCount: 5,
   },
   {
     name: "समाज कल्याण विभाग",
     workArea: "सामाजिक सुरक्षा और कल्याण",
     icon: <FaUsers />,
+    cardColor: "#f3eef2",
+    color: "#b5838d",
+    studentCount: 13500,
+    schemesCount: 14,
   },
   {
     name: "कृषि विभाग",
     workArea: "कृषि विकास और किसान कल्याण",
     icon: <FaLeaf />,
+    cardColor: "#edf8f3",
+    color: "#52b788",
+    studentCount: 5600,
+    schemesCount: 9,
   },
   {
     name: "महिला कल्याण विभाग",
     workArea: "महिला सशक्तिकरण एवं कल्याण",
     icon: <FaChild />,
+    cardColor: "#fef3f7",
+    color: "#f78fb3",
+    studentCount: 19800,
+    schemesCount: 18,
   },
   {
     name: "एसोसिएशन फॉर वॉलंटरी एक्शन (AVA)",
     workArea: "स्वैच्छिक कार्यों के माध्यम से सामुदायिक विकास",
     icon: <FaHandHoldingHeart />,
+    cardColor: "#fffde6",
+    color: "#ffdd00",
+    studentCount: 850,
+    schemesCount: 3,
   },
   {
     name: "एसपीओटीकाईएम, पुलिस मुख्यालय",
     workArea: "कानून व्यवस्था और बाल सुरक्षा",
     icon: <FaShieldAlt />,
+    cardColor: "#eeeffd",
+    color: "#a2a6f0",
+    studentCount: 450,
+    schemesCount: 4,
   },
 ];
 
@@ -236,6 +308,16 @@ const schemes = [
 
 function Home() {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [studentLegendExpanded, setStudentLegendExpanded] = useState(false);
+  const [schemeLegendExpanded, setSchemeLegendExpanded] = useState(false);
+
+  const [tooltip, setTooltip] = useState({
+    visible: false,
+    content: "",
+    x: 0,
+    y: 0,
+  });
+
 
   // Group schemes by department for easier lookup
   const schemesByDepartment = departments.reduce((acc, dept) => {
@@ -248,7 +330,72 @@ function Home() {
     setSelectedDepartment(departmentName === selectedDepartment ? null : departmentName);
   };
 
-  const handleScroll = (id) => {
+  const generateConicGradient = (data, key, colors) => {
+    const total = data.reduce((sum, item) => sum + item[key], 0);
+    let cumulativePercentage = 0;
+    const gradientParts = data.map((item, index) => {
+      const percentage = (item[key] / total) * 100;
+      const start = cumulativePercentage;
+      cumulativePercentage += percentage;
+      const end = cumulativePercentage;
+      return `${colors[index]} ${start}% ${end}%`;
+    });
+    return `conic-gradient(${gradientParts.join(", ")})`;
+  };
+
+  const sortedByStudent = [...departments].sort((a, b) => b.studentCount - a.studentCount);
+  const studentChartGradient = generateConicGradient(
+    sortedByStudent,
+    'studentCount',
+    sortedByStudent.map(d => d.color)
+  );
+
+  const sortedBySchemes = [...departments].sort((a, b) => b.schemesCount - a.schemesCount);
+  const schemeChartGradient = generateConicGradient(
+    sortedBySchemes,
+    'schemesCount',
+    sortedBySchemes.map(d => d.color)
+  );
+
+  const handleMouseMove = (e, data, key) => {
+    const chart = e.currentTarget;
+    const rect = chart.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const angle = (Math.atan2(y - centerY, x - centerX) * 180 / Math.PI + 450) % 360;
+    const percentage = angle / 360;
+
+    const total = data.reduce((sum, item) => sum + item[key], 0);
+    let cumulativePercentage = 0;
+
+    let foundDept = null;
+    for (const item of data) {
+        const itemPercentage = item[key] / total;
+        if (percentage >= cumulativePercentage && percentage < cumulativePercentage + itemPercentage) {
+            foundDept = item;
+            break;
+        }
+        cumulativePercentage += itemPercentage;
+    }
+
+    if (foundDept) {
+        setTooltip({
+            visible: true,
+            content: `${foundDept.name}: ${foundDept[key].toLocaleString('en-IN')}`,
+            x: e.clientX,
+            y: e.clientY,
+        });
+    }
+};
+
+const handleMouseLeave = () => {
+    setTooltip({ visible: false, content: '', x: 0, y: 0 });
+};
+  const handleScroll = (id) => { // This closing brace was incorrect
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -257,6 +404,12 @@ function Home() {
 
   return (
     <div className="drc-home">
+      {tooltip.visible && (
+        <div className="chart-tooltip" style={{ top: tooltip.y, left: tooltip.x }}>
+          {tooltip.content}
+        </div>
+      )}
+
 
       {/* =================================================
           HERO
@@ -405,31 +558,34 @@ function Home() {
                 xl={3}
                 key={index}
               >
-
-                <Card className="department-card">
+                <Card
+                  className="department-card"
+                  style={{ backgroundColor: department.cardColor }}
+                >
 
                   <Card.Body>
 
-                    <div className="department-top">
-
+                    <div className="department-header">
                       <div className="department-icon">
                         {department.icon}
                       </div>
-
-                      <span className="department-number">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-
+                      <h5>{department.name}</h5>
                     </div>
 
-                    <h5>
-                      {department.name}
-                    </h5>
+                    <div className="department-stats">
+                      <div>
+                        <strong>{department.studentCount.toLocaleString('en-IN')}</strong>
+                        <small>Students</small>
+                      </div>
+                      <div>
+                        <strong>{department.schemesCount}</strong>
+                        <small>Schemes</small>
+                      </div>
+                    </div>
 
                     <p>
                       {department.workArea}
                     </p>
-
                   </Card.Body>
 
                 </Card>
@@ -442,6 +598,77 @@ function Home() {
 
         </Container>
 
+      </section>
+
+      {/* =================================================
+          DEPARTMENT STATS
+      ================================================= */}
+
+      <section id="department-stats" className="section department-stats-section">
+        <Container>
+          <div className="section-heading">
+            <h2>Department Statistics</h2>
+            <p>A graphical overview of student and scheme counts across various departments.</p>
+          </div>
+
+          <Row className="g-5">
+            <Col lg={6}>
+              <div className="pie-chart-card">
+                <h4 className="chart-title">Registered Students</h4>
+                <div className="pie-chart-wrapper">
+                  <div
+                    className="pie-chart"
+                    style={{ background: studentChartGradient }}
+                    onMouseMove={(e) => handleMouseMove(e, sortedByStudent, 'studentCount')}
+                    onMouseLeave={handleMouseLeave}
+                  ></div>
+                  <ul className="pie-chart-legend">
+                    {sortedByStudent.slice(0, studentLegendExpanded ? sortedByStudent.length : 5).map((dept, index) => (
+                      <li key={index}>
+                        <span className="legend-color" style={{ backgroundColor: dept.color }}></span>
+                        <span className="legend-label">{dept.name}</span>
+                        <span className="legend-value">{dept.studentCount.toLocaleString('en-IN')}</span>
+                      </li>
+                    ))}
+                    {sortedByStudent.length > 5 && (
+                      <li className="legend-toggle" onClick={() => setStudentLegendExpanded(!studentLegendExpanded)}>
+                        {studentLegendExpanded ? "Show Less" : `... and ${sortedByStudent.length - 5} more`}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </Col>
+
+            <Col lg={6}>
+              <div className="pie-chart-card">
+                <h4 className="chart-title">Available Schemes</h4>
+                <div className="pie-chart-wrapper">
+                  <div
+                    className="pie-chart"
+                    style={{ background: schemeChartGradient }}
+                    onMouseMove={(e) => handleMouseMove(e, sortedBySchemes, 'schemesCount')}
+                    onMouseLeave={handleMouseLeave}
+                  ></div>
+                  <ul className="pie-chart-legend">
+                    {sortedBySchemes.slice(0, schemeLegendExpanded ? sortedBySchemes.length : 5).map((dept, index) => (
+                      <li key={index}>
+                        <span className="legend-color" style={{ backgroundColor: dept.color }}></span>
+                        <span className="legend-label">{dept.name}</span>
+                        <span className="legend-value">{dept.schemesCount}</span>
+                      </li>
+                    ))}
+                    {sortedBySchemes.length > 5 && (
+                       <li className="legend-toggle" onClick={() => setSchemeLegendExpanded(!schemeLegendExpanded)}>
+                         {schemeLegendExpanded ? "Show Less" : `... and ${sortedBySchemes.length - 5} more`}
+                       </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </section>
 
 

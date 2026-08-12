@@ -434,8 +434,6 @@
 
     border-radius: 14px !important;
 
-    background: #fff;
-
     box-shadow: var(--drc-shadow);
 
     transition:
@@ -449,23 +447,22 @@
 .department-card:hover {
     transform: translateY(-7px);
 
-    border-color: #b9d2f7 !important;
+    border-color: var(--drc-primary) !important;
 
     box-shadow: var(--drc-shadow-hover);
 }
 
 .department-card .card-body {
-    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
-.department-top {
+.department-header {
     display: flex;
-
     align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 22px;
+    gap: 12px;
+    margin-bottom: 15px;
 }
 
 .department-icon {
@@ -482,40 +479,30 @@
     background: var(--drc-light-blue);
 
     color: var(--drc-primary);
-
     font-size: 23px;
-}
-
-.department-number {
-    font-size: 12px;
-
-    font-weight: 700;
-
-    color: #98a2b3;
+    flex-shrink: 0;
 }
 
 .department-card h5 {
-    min-height: 50px;
-
+    min-height: 48px;
     font-size: 16px;
-
     line-height: 1.5;
-
     font-weight: 700;
-
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
-.department-card p {
+.department-card > .card-body > p {
     min-height: 48px;
 
+    flex-grow: 1;
     font-size: 13px;
 
     line-height: 1.6;
 
     color: var(--drc-muted);
 
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    margin-bottom: 0;
 }
 
 .department-link {
@@ -546,55 +533,162 @@
     transform: translateX(4px);
 }
 
+.department-stats {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.department-stats > div {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 6px 10px;
+    text-align: center;
+    flex-grow: 1;
+    transition: background-color 0.3s ease;
+}
+
+.department-card:hover .department-stats > div {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.department-stats strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--drc-primary-dark);
+}
+
+.department-stats small {
+    font-size: 11px;
+    color: var(--drc-muted);
+}
 
 /* =====================================================
-   EMPOWERMENT
+   CHART TOOLTIP
+===================================================== */
+.chart-tooltip {
+    position: fixed;
+    background: rgba(17, 24, 39, 0.85);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    pointer-events: none;
+    transform: translate(15px, -15px);
+    transform: translate(15px, -25px);
+    white-space: nowrap;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* =====================================================
+   DEPARTMENT STATS CHART
 ===================================================== */
 
-.empowerment-section {
-    background:
-        linear-gradient(135deg,
-            #073b7a 0%,
-            #0b5ed7 60%,
-            #2679e8 100%);
-
-    color: #fff;
+.department-stats-section {
+    background: var(--drc-bg);
 }
 
-.light-heading .badge {
-    background: rgba(255, 255, 255, 0.14) !important;
-
-    color: #fff !important;
-}
-
-.light-heading h2 {
-    color: #fff;
-}
-
-.light-heading p {
-    color: rgba(255, 255, 255, 0.78);
-}
-
-.empowerment-card {
-    position: relative;
-
-    min-height: 130px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
+.pie-chart-card {
+    background: #fff;
     padding: 25px;
-
     border-radius: 14px;
+    box-shadow: var(--drc-shadow);
+    border: 1px solid var(--drc-border);
+    height: 100%;
+}
 
-    background: rgba(255, 255, 255, 0.1);
+.chart-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
 
-    border: 1px solid rgba(255, 255, 255, 0.15);
+.pie-chart-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
 
-    transition: all 0.3s ease;
+.pie-chart {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1px solid var(--drc-border);
+}
+
+.pie-chart-legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    flex-grow: 1;
+}
+
+.pie-chart-legend li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    color: var(--drc-muted);
+}
+
+.pie-chart-legend li:last-child {
+    margin-bottom: 0;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.legend-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    color: var(--drc-text);
+}
+
+.legend-value {
+    font-weight: 600;
+    margin-left: 10px;
+    color: var(--drc-primary-dark);
+}
+
+.pie-chart-legend .legend-toggle {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--drc-primary);
+    margin-top: 8px;
+    list-style-type: none;
+}
+
+.pie-chart-legend .legend-toggle:hover {
+    text-decoration: underline;
+}
+
+.student-bar {
+    background-color: var(--drc-primary);
+}
+
+.scheme-bar {
+    background-color: #6c757d;
+}
+
+@media (max-width: 575px) {
+    .pie-chart-wrapper {
+        flex-direction: column;
+    }
+
+    .pie-chart-legend {
+        width: 100%;
+    }
 }
 
 .empowerment-card:hover {
