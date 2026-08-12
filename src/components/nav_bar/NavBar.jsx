@@ -27,6 +27,7 @@ function NavBar() {
               to="/Login"
               variant="primary"
               className="primary-btn"
+              size="sm"
             >
               Login
             </Button>

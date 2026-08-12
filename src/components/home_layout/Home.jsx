@@ -211,6 +211,13 @@ function Home() {
     setSelectedDepartment(departmentName === selectedDepartment ? null : departmentName);
   };
 
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="drc-home">
 
@@ -242,12 +249,18 @@ function Home() {
 
               <div className="hero-buttons">
 
-                <Button className="primary-btn">
+                <Button
+                  className="primary-btn"
+                  onClick={() => handleScroll("departments")}
+                >
                   Explore Departments
                   <FaArrowRight />
                 </Button>
 
-                <Button className="secondary-btn">
+                <Button
+                  className="secondary-btn"
+                  onClick={() => handleScroll("schemes")}
+                >
                   Explore Schemes
                 </Button>
 
@@ -284,22 +297,6 @@ function Home() {
                   alt="Children Education and Empowerment"
                 />
 
-                <div className="floating-card floating-card-one">
-                  <FaChild />
-                  <div>
-                    <strong>Child Empowerment</strong>
-                    <small>Education & Protection</small>
-                  </div>
-                </div>
-
-                <div className="floating-card floating-card-two">
-                  <FaDatabase />
-                  <div>
-                    <strong>12 Departments</strong>
-                    <small>Connected Resources</small>
-                  </div>
-                </div>
-
               </div>
 
             </Col>
@@ -313,7 +310,7 @@ function Home() {
           ABOUT DRC
       ================================================= */}
 
-      <section className="section about-drc-section">
+      <section className="section about-drc-section section-padding">
         <Container>
           <Row className="align-items-center g-5">
            
@@ -343,7 +340,7 @@ function Home() {
           DEPARTMENTS
       ================================================= */}
 
-      <section className="section departments-section">
+      <section id="departments" className="section departments-section section-padding">
 
         <Container>
 
@@ -415,7 +412,7 @@ function Home() {
           CHILD EMPOWERMENT
       ================================================= */}
 
-      <section className="section empowerment-section">
+      <section className="section empowerment-section section-padding">
 
         <Container>
 
@@ -452,8 +449,6 @@ function Home() {
                     <p>{area.description}</p>
                   </div>
 
-                  <FaArrowRight className="empowerment-arrow" />
-
                 </div>
 
               </Col>
@@ -471,7 +466,7 @@ function Home() {
           HOW IT WORKS
       ================================================= */}
 
-      <section className="section flow-section">
+      <section className="section flow-section section-padding">
 
         <Container>
 
@@ -546,7 +541,7 @@ function Home() {
           FIND SCHEMES FOR YOU
       ================================================= */}
 
-      <section className="section find-schemes-section">
+      <section className="section find-schemes-section section-padding">
         <Container>
           <div className="section-heading">
             <Badge>For You</Badge>
@@ -624,7 +619,7 @@ function Home() {
           SCHEMES
       ================================================= */}
 
-      <section className="section schemes-section">
+      <section id="schemes" className="section schemes-section section-padding">
 
         <Container>
 
