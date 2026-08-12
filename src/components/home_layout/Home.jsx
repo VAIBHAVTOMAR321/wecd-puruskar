@@ -220,31 +220,43 @@ const empowermentAreas = [
     title: "बाल शिक्षा",
     description: "शिक्षा एवं सीखने के अवसर",
     icon: <FaBookOpen />,
+    beneficiaries: 120500,
+    programs: 25,
   },
   {
     title: "बाल संरक्षण",
     description: "सुरक्षा एवं बाल अधिकार",
     icon: <FaShieldAlt />,
+    beneficiaries: 55200,
+    programs: 15,
   },
   {
     title: "स्वास्थ्य एवं पोषण",
     description: "स्वास्थ्य एवं पोषण सेवाएँ",
     icon: <FaHeartbeat />,
+    beneficiaries: 210000,
+    programs: 32,
   },
   {
     title: "छात्रवृत्ति",
     description: "शैक्षणिक एवं वित्तीय सहायता",
     icon: <FaGraduationCap />,
+    beneficiaries: 85000,
+    programs: 18,
   },
   {
     title: "कौशल विकास",
     description: "कौशल एवं व्यावसायिक प्रशिक्षण",
     icon: <FaBriefcase />,
+    beneficiaries: 42000,
+    programs: 22,
   },
   {
     title: "डिजिटल साक्षरता",
     description: "डिजिटल शिक्षा एवं जागरूकता",
     icon: <FaLaptop />,
+    beneficiaries: 75000,
+    programs: 12,
   },
 ];
 
@@ -255,8 +267,11 @@ const empowermentAreas = [
 
 const schemes = [
   {
+    studentCount: 95000,
     name: "बेटी बचाओ, बेटी पढ़ाओ",
     department: "महिला सशक्तिकरण एवं बाल विकास विभाग",
+    category: "Protection",
+    icon: <FaShieldAlt />,
     objective:
       "बालिकाओं की सुरक्षा, शिक्षा एवं सशक्तिकरण को बढ़ावा देना।",
     eligibility: "बालिकाएँ एवं उनके परिवार",
@@ -264,8 +279,11 @@ const schemes = [
       "बालिकाओं की शिक्षा, सुरक्षा एवं सामाजिक जागरूकता को बढ़ावा।",
   },
   {
+    studentCount: 85000,
     name: "मध्याह्न भोजन योजना",
     department: "शिक्षा विभाग",
+    category: "Nutrition",
+    icon: <FaLeaf />,
     objective:
       "बच्चों की विद्यालय में उपस्थिति और पोषण स्तर में सुधार करना।",
     eligibility: "पात्र विद्यालयों के विद्यार्थी",
@@ -273,8 +291,11 @@ const schemes = [
       "विद्यालय में पौष्टिक भोजन की सुविधा।",
   },
   {
+    studentCount: 120000,
     name: "एकीकृत बाल विकास सेवाएँ",
     department: "महिला सशक्तिकरण एवं बाल विकास विभाग",
+    category: "Health",
+    icon: <FaHeartbeat />,
     objective:
       "छोटे बच्चों के स्वास्थ्य, पोषण और प्रारंभिक विकास में सुधार करना।",
     eligibility: "0–6 वर्ष के बच्चे एवं पात्र माताएँ",
@@ -282,8 +303,11 @@ const schemes = [
       "पोषण, स्वास्थ्य जांच एवं आंगनवाड़ी सेवाएँ।",
   },
   {
+    studentCount: 45000,
     name: "सुकन्या समृद्धि योजना",
     department: "वित्त विभाग",
+    category: "Finance",
+    icon: <FaBriefcase />,
     objective:
       "बालिका के भविष्य की शिक्षा एवं अन्य आवश्यकताओं के लिए बचत को बढ़ावा देना।",
     eligibility: "पात्र बालिकाएँ",
@@ -291,8 +315,11 @@ const schemes = [
       "बचत एवं सरकारी नियमों के अनुसार वित्तीय लाभ।",
   },
   {
+    studentCount: 15000,
     name: "बाल श्रम रोकथाम एवं पुनर्वास",
     department: "श्रम विभाग",
+    category: "Welfare",
+    icon: <FaHandsHelping />,
     objective:
       "बाल श्रम को रोकना तथा बच्चों को शिक्षा एवं पुनर्वास से जोड़ना।",
     eligibility: "बाल श्रम से प्रभावित बच्चे",
@@ -301,6 +328,19 @@ const schemes = [
   },
 ];
 
+const schemeDepartments = [
+  "All Departments",
+  ...Array.from(new Set(schemes.map((scheme) => scheme.department))),
+];
+
+const categoryColors = {
+  Protection: "#7c3aed",
+  Nutrition: "#16a34a",
+  Health: "#dc2626",
+  Finance: "#0ea5e9",
+  Welfare: "#f59e0b",
+};
+
 
 // =====================================================
 // HOME COMPONENT
@@ -308,6 +348,7 @@ const schemes = [
 
 function Home() {
   const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [activeSchemeDepartment, setActiveSchemeDepartment] = useState("All Departments");
   const [studentLegendExpanded, setStudentLegendExpanded] = useState(false);
   const [schemeLegendExpanded, setSchemeLegendExpanded] = useState(false);
 
@@ -321,13 +362,22 @@ function Home() {
 
   // Group schemes by department for easier lookup
   const schemesByDepartment = departments.reduce((acc, dept) => {
-    acc[dept.name] = schemes.filter(scheme => scheme.department === dept.name);
+    acc[dept.name] = schemes.filter((scheme) => scheme.department === dept.name);
     return acc;
   }, {});
+
+  const filteredSchemes =
+    activeSchemeDepartment === "All Departments"
+      ? schemes
+      : schemes.filter((scheme) => scheme.department === activeSchemeDepartment);
 
   const handleDepartmentClick = (departmentName) => {
     // Toggle selection: if the same department is clicked again, deselect it
     setSelectedDepartment(departmentName === selectedDepartment ? null : departmentName);
+  };
+
+  const handleSchemeDepartmentSelect = (department) => {
+    setActiveSchemeDepartment(department);
   };
 
   const generateConicGradient = (data, key, colors) => {
@@ -437,6 +487,29 @@ const handleMouseLeave = () => {
                 लाभ आसानी से खोज सकते हैं।
               </p>
 
+              <div className="hero-stats">
+                <div className="hero-stat-item">
+                  <strong>{departments.length.toLocaleString('en-IN')}+</strong>
+                  <span>Departments</span>
+                </div>
+                <div className="hero-stat-item">
+                  <strong>
+                    {departments.reduce((sum, dept) => sum + dept.schemesCount, 0).toLocaleString('en-IN')}+
+                  </strong>
+                  <span>Schemes</span>
+                </div>
+                <div className="hero-stat-item">
+                  <strong>
+                    {(
+                      empowermentAreas.reduce((sum, area) => sum + area.beneficiaries, 0) / 100000
+                    ).toFixed(1)}
+                    L+
+                  </strong>
+                  <span>Beneficiaries</span>
+                </div>
+              </div>
+
+
               <div className="hero-buttons">
 
                 <Button
@@ -523,6 +596,72 @@ const handleMouseLeave = () => {
             </Col>
           </Row>
         </Container>
+      </section>
+
+
+      {/* =================================================
+          HOW IT WORKS
+      ================================================= */}
+
+      <section className="section flow-section section-padding">
+
+        <Container>
+
+          <div className="section-heading">
+
+            <Badge>How DRC Works</Badge>
+
+            <h2>
+              From Department to Beneficiary
+            </h2>
+
+            <p>
+              DRC में जानकारी को सरल और व्यवस्थित तरीके से खोजें।
+            </p>
+
+          </div>
+
+
+          <div className="timeline-container">
+            <div className="timeline-item">
+              <div className="timeline-icon"><FaBuilding /></div>
+              <div className="timeline-content">
+                <span className="timeline-step">Step 1</span>
+                <h5>Department (विभाग)</h5>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-icon"><FaBriefcase /></div>
+              <div className="timeline-content">
+                <span className="timeline-step">Step 2</span>
+                <h5>Work Area (कार्य क्षेत्र)</h5>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-icon"><FaBookOpen /></div>
+              <div className="timeline-content">
+                <span className="timeline-step">Step 3</span>
+                <h5>Scheme (योजना / सेवा)</h5>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-icon"><FaGraduationCap /></div>
+              <div className="timeline-content">
+                <span className="timeline-step">Step 4</span>
+                <h5>Objective (उद्देश्य)</h5>
+              </div>
+            </div>
+            <div className="timeline-item">
+              <div className="timeline-icon"><FaHandsHelping /></div>
+              <div className="timeline-content">
+                <span className="timeline-step">Step 5</span>
+                <h5>Benefits (लाभ)</h5>
+              </div>
+            </div>
+          </div>
+
+        </Container>
+
       </section>
 
 
@@ -696,105 +835,73 @@ const handleMouseLeave = () => {
           </div>
 
 
-          <Row className="g-4">
-
-            {empowermentAreas.map((area, index) => (
-
-              <Col md={6} lg={4} key={index}>
-
-                <div className="empowerment-card">
-
-                  <div className="empowerment-icon">
-                    {area.icon}
+          <Row className="g-5 align-items-center">
+            <Col lg={6}>
+              <div className="empowerment-list">
+                {empowermentAreas.map((area, index) => (
+                  <div className="empowerment-item" key={index}>
+                    <div className="empowerment-item-icon">
+                      {area.icon}
+                    </div>
+                    <div className="empowerment-item-content">
+                      <h5>{area.title}</h5>
+                      <p>{area.description}</p>
+                    </div>
+                    <div className="empowerment-item-stats">
+                      <div>
+                        <strong>{area.beneficiaries.toLocaleString('en-IN')}</strong>
+                        <small>Beneficiaries</small>
+                      </div>
+                      <div>
+                        <strong>{area.programs}</strong>
+                        <small>Schemes</small>
+                      </div>
+                    </div>
+                    <div className="empowerment-item-arrow">
+                      <FaArrowRight />
+                    </div>
                   </div>
-
-                  <div>
-                    <h5>{area.title}</h5>
-                    <p>{area.description}</p>
-                  </div>
-
+                ))}
+              </div>
+            </Col>
+            <Col lg={6}>
+              <div className="empowerment-chart-container">
+                <div className="empowerment-chart">
+                  <h5 className="empowerment-chart-title">Beneficiaries by Area</h5>
+                  {empowermentAreas.map((area, index) => (
+                    <div className="bar-chart-item" key={index}>
+                      <div className="bar-chart-label">{area.title}</div>
+                      <div className="bar-chart-bar-wrapper">
+                        <div
+                          className="bar-chart-bar"
+                          style={{ width: `${(area.beneficiaries / Math.max(...empowermentAreas.map(a => a.beneficiaries))) * 100}%` }}
+                        >
+                          <span>{area.beneficiaries.toLocaleString('en-IN')}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-
-              </Col>
-
-            ))}
-
+                <div className="empowerment-chart">
+                  <h5 className="empowerment-chart-title">Schemes by Area</h5>
+                  {empowermentAreas.map((area, index) => (
+                    <div className="bar-chart-item" key={index}>
+                      <div className="bar-chart-label">{area.title}</div>
+                      <div className="bar-chart-bar-wrapper">
+                        <div
+                          className="bar-chart-bar scheme-bar"
+                          style={{ width: `${(area.programs / Math.max(...empowermentAreas.map(a => a.programs))) * 100}%` }}
+                        >
+                          <span>{area.programs}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Col>
           </Row>
 
-        </Container>
-
-      </section>
-
-
-      {/* =================================================
-          HOW IT WORKS
-      ================================================= */}
-
-      <section className="section flow-section section-padding">
-
-        <Container>
-
-          <div className="section-heading">
-
-            <Badge>How DRC Works</Badge>
-
-            <h2>
-              From Department to Beneficiary
-            </h2>
-
-            <p>
-              DRC में जानकारी को सरल और व्यवस्थित तरीके से खोजें।
-            </p>
-
-          </div>
-
-
-          <div className="flow-container">
-
-            <div className="flow-box">
-              <div className="flow-number">01</div>
-              <FaBuilding />
-              <h5>Department</h5>
-              <p>विभाग</p>
-            </div>
-
-            <FaArrowRight className="flow-arrow" />
-
-            <div className="flow-box">
-              <div className="flow-number">02</div>
-              <FaBriefcase />
-              <h5>Work Area</h5>
-              <p>कार्य क्षेत्र</p>
-            </div>
-
-            <FaArrowRight className="flow-arrow" />
-
-            <div className="flow-box">
-              <div className="flow-number">03</div>
-              <FaBookOpen />
-              <h5>Scheme</h5>
-              <p>योजना / सेवा</p>
-            </div>
-
-            <FaArrowRight className="flow-arrow" />
-
-            <div className="flow-box">
-              <div className="flow-number">04</div>
-              <FaGraduationCap />
-              <h5>Objective</h5>
-              <p>उद्देश्य</p>
-            </div>
-
-            <FaArrowRight className="flow-arrow" />
-
-            <div className="flow-box">
-              <div className="flow-number">05</div>
-              <FaHandsHelping />
-              <h5>Benefits</h5>
-              <p>लाभ</p>
-            </div>
-
-          </div>
 
         </Container>
 
@@ -820,10 +927,14 @@ const handleMouseLeave = () => {
               <Col xs={6} sm={4} md={3} lg={2} key={index}>
                 <div
                   className={`department-selector-card ${selectedDepartment === department.name ? 'active' : ''}`}
+                  style={{ '--dept-color': department.color, '--dept-bg-color': department.cardColor }}
                   onClick={() => handleDepartmentClick(department.name)}
                 >
                   <div className="department-icon">{department.icon}</div>
                   <small>{department.name}</small>
+                  <div className="scheme-count-badge">
+                    {department.schemesCount} Scheme{department.schemesCount !== 1 ? 's' : ''}
+                  </div>
                 </div>
               </Col>
             ))}
@@ -831,7 +942,10 @@ const handleMouseLeave = () => {
 
           {selectedDepartment && (
             <div className="selected-department-schemes">
-              <h3>Schemes under {selectedDepartment}</h3>
+              <div className="selected-department-header">
+                <h3>Schemes under <span>{selectedDepartment}</span></h3>
+              </div>
+
               <Row className="g-4">
                 {schemesByDepartment[selectedDepartment] && schemesByDepartment[selectedDepartment].length > 0 ? (
                   schemesByDepartment[selectedDepartment].map((scheme, index) => (
@@ -901,64 +1015,55 @@ const handleMouseLeave = () => {
 
           </div>
 
-
-          <Row className="g-4">
-
-            {schemes.map((scheme, index) => (
-
-              <Col lg={6} key={index}>
-
-                <Accordion className="scheme-accordion">
-
-                  <Accordion.Item eventKey="0">
-
-                    <Accordion.Header>
-
-                      <div className="scheme-title">
-
-                        <div className="scheme-icon">
-                          <FaBookOpen />
-                        </div>
-
-                        <div>
-                          <strong>
-                            {scheme.name}
-                          </strong>
-
-                          <small>
-                            {scheme.department}
-                          </small>
-                        </div>
-
-                      </div>
-
-                    </Accordion.Header>
-
-                    <Accordion.Body>
-
-                      <div className="scheme-detail">
-
-                        <strong>उद्देश्य</strong>
-                        <p>{scheme.objective}</p>
-
-                        <strong>पात्रता</strong>
-                        <p>{scheme.eligibility}</p>
-
-                        <strong>लाभ</strong>
-                        <p>{scheme.benefits}</p>
-
-                      </div>
-
-                    </Accordion.Body>
-
-                  </Accordion.Item>
-
-                </Accordion>
-
-              </Col>
-
+          <div className="schemes-filters-row">
+            {schemeDepartments.map((dept, index) => (
+              <button
+                key={index}
+                className={`scheme-pill ${activeSchemeDepartment === dept ? 'active' : ''}`}
+                onClick={() => handleSchemeDepartmentSelect(dept)}
+              >
+                {dept}
+              </button>
             ))}
+          </div>
 
+          <Row className="g-4 scheme-card-grid">
+            {filteredSchemes.map((scheme, index) => (
+              <Col lg={4} md={6} key={index}>
+                <div className="scheme-card">
+                  <div className="scheme-card-accent" />
+                  <div className="scheme-card-header">
+                    <div className="scheme-badge" style={{ backgroundColor: categoryColors[scheme.category] }}>
+                      <span className="scheme-badge-dot" />
+                      {scheme.category}
+                    </div>
+                    <div className="scheme-card-icon">
+                      {scheme.icon}
+                    </div>
+                  </div>
+
+                  <div className="scheme-card-body">
+                    <h3>{scheme.name}</h3>
+                    <p className="scheme-card-meta">{scheme.department}</p>
+                    {scheme.studentCount && (
+                      <p className="scheme-card-meta"><strong>Enrolled:</strong> {scheme.studentCount.toLocaleString('en-IN')} students</p>
+                    )}
+                    <p>{scheme.objective}</p>
+                  </div>
+
+                  <div className="scheme-card-footer">
+                    <div>
+                      <strong>पात्रता</strong>
+                      <p>{scheme.eligibility}</p>
+                    </div>
+                    <div>
+                      <strong>लाभ</strong>
+                      <p>{scheme.benefits}</p>
+                    </div>
+                  </div>
+                </div>
+              </Col>
+            ))}
           </Row>
 
         </Container>
