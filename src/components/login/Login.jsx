@@ -38,10 +38,10 @@ function Login() {
                 <div className="login-logo">
                   <FaDatabase />
                 </div>
-                <h3>DRC Portal Login</h3>
+                <h3>{selectedDepartment || 'DRC Portal Login'}</h3>
                 <p>Welcome to the Data Resource Center</p>
               </Card.Header>
-              <Card.Body>
+             
                 <Form>
                   <Form.Group className="mb-4" controlId="formDepartment">
                     <Form.Label>Select Department</Form.Label>
@@ -75,7 +75,7 @@ function Login() {
                     </Button>
                   </div>
                 </Form>
-              </Card.Body>
+              
             </Card>
           </Col>
         </Row>

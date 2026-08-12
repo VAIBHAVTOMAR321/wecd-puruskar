@@ -78,7 +78,7 @@
 .login-card {
     border: none;
     background-color: transparent;
-    max-width: 450px;
+    max-width: 520px;
     width: 100%;
     animation: fadeIn 0.5s ease-in-out;
 }
