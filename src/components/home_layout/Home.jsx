@@ -32,6 +32,7 @@ import {
 } from "react-icons/fa";
 
 import "./Home.css";
+import drcHomeImg from "../../assets/images/drc_home-img.png";
 
 
 // =====================================================
@@ -293,7 +294,7 @@ function Home() {
               <div className="hero-image-wrapper">
 
                 <img
-                  src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1200&auto=format&fit=crop"
+                  src={drcHomeImg}
                   alt="Children Education and Empowerment"
                 />
 
