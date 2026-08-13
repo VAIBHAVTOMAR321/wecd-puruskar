@@ -85,7 +85,7 @@ function NavBar() {
             </Nav.Link>
 
             {/* BENEFITS */}
-            <Nav.Link as={Link} to="/benefits">
+            <Nav.Link as={Link} to="/AdminDashboard">
               Benefits
             </Nav.Link>
 

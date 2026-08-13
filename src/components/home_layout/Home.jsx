@@ -35,10 +35,16 @@ import {
   FaLeaf,
   FaHandHoldingHeart,
   FaDatabase,
+  FaFileAlt,
+  FaAppleAlt,
 } from "react-icons/fa";
 
 import "./Home.css";
 import drcHomeImg from "../../assets/images/drc_home-img.png";
+
+
+
+
 
 
 // =====================================================
@@ -341,17 +347,46 @@ const categoryColors = {
   Welfare: "#f59e0b",
 };
 
+// category tags data
+const categoryTags = [
+  { label: 'Education', icon: <FaGraduationCap />, color: '#1a5276' },
+  { label: 'Health', icon: <FaHeartbeat />, color: '#e74c3c' },
+  { label: 'Nutrition', icon: <FaAppleAlt />, color: '#138808' },
+  { label: 'Protection', icon: <FaShieldAlt />, color: '#8e44ad' },
+  { label: 'Welfare', icon: <FaHandsHelping />, color: '#FF9933' },
+];
 
+// stat ring data
+const totalSchemes = departments.reduce((sum, dept) => sum + dept.schemesCount, 0);
+const totalBeneficiaries = empowermentAreas.reduce((sum, a) => sum + a.beneficiaries, 0);
+const statRingSegments = [
+  { label: 'Education', percent: 35, color: '#1a5276' },
+  { label: 'Health', percent: 25, color: '#e74c3c' },
+  { label: 'Nutrition', percent: 20, color: '#138808' },
+  { label: 'Protection', percent: 12, color: '#8e44ad' },
+  { label: 'Welfare', percent: 8, color: '#FF9933' },
+];
 // =====================================================
 // HOME COMPONENT
 // =====================================================
 
 function Home() {
+  
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [activeSchemeDepartment, setActiveSchemeDepartment] = useState("All Departments");
   const [studentLegendExpanded, setStudentLegendExpanded] = useState(false);
   const [schemeLegendExpanded, setSchemeLegendExpanded] = useState(false);
-
+  const [hoverStat, setHoverStat] = useState(null);
+  const categories = [
+  { label: 'Education', icon: <FaGraduationCap />, color: '#1a5276', count: Math.round(totalSchemes * 0.35) },
+  { label: 'Health', icon: <FaHeartbeat />, color: '#e74c3c', count: Math.round(totalSchemes * 0.25) },
+  { label: 'Nutrition', icon: <FaAppleAlt />, color: '#27ae60', count: Math.round(totalSchemes * 0.20) },
+  { label: 'Protection', icon: <FaShieldAlt />, color: '#8e44ad', count: Math.round(totalSchemes * 0.12) },
+  { label: 'Welfare', icon: <FaHandsHelping />, color: '#FF9933', count: Math.round(totalSchemes * 0.08) },
+];
+// inside your component:
+const [activeCard, setActiveCard] = useState(null);
+const [activeTag, setActiveTag] = useState(null);
   const [tooltip, setTooltip] = useState({
     visible: false,
     content: "",
@@ -379,7 +414,11 @@ function Home() {
   const handleSchemeDepartmentSelect = (department) => {
     setActiveSchemeDepartment(department);
   };
-
+const statCards = [
+  { key: 'dept', icon: <FaDatabase />, label: 'Departments', value: departments.length, suffix: '+', color: '#FF9933', desc: 'Active government bodies' },
+  { key: 'scheme', icon: <FaFileAlt />, label: 'Schemes', value: totalSchemes.toLocaleString('en-IN'), suffix: '+', color: '#1a5276', desc: 'Child welfare programs' },
+  { key: 'ben', icon: <FaUsers />, label: 'Beneficiaries', value: (totalBeneficiaries / 100000).toFixed(1), suffix: 'L+', color: '#138808', desc: 'Children reached nationwide' },
+];
   const generateConicGradient = (data, key, colors) => {
     const total = data.reduce((sum, item) => sum + item[key], 0);
     let cumulativePercentage = 0;
@@ -465,108 +504,162 @@ const handleMouseLeave = () => {
           HERO
       ================================================= */}
 
-      <section className="drc-hero">
-        <Container>
-          <Row className="align-items-center">
+<section className="drc-hero">
+  <Container>
+    <Row className="align-items-stretch hero-row">
 
-            <Col lg={6} className="hero-content">
+      {/* ===== LEFT — CONTENT + INTERACTIVE STATS ===== */}
+      <Col lg={7} className="hero-left">
 
-              <div className="hero-badge">
-                <FaDatabase />
-                <span>Data Resource Center</span>
+        <div className="hero-badge">
+          <FaDatabase />
+          <span>Data Resource Center</span>
+        </div>
+
+        <h1>
+          Empowering Children
+          <span>Through Information</span>
+        </h1>
+
+        <p>
+          एक केंद्रीकृत डिजिटल प्लेटफॉर्म जहाँ आप विभाग,
+          योजनाएँ, सेवाएँ, उद्देश्य और बच्चों के लिए उपलब्ध
+          लाभ आसानी से खोज सकते हैं।
+        </p>
+
+        {/* Interactive Stat Cards Row */}
+        <div className="hero-stat-cards">
+          {statCards.map((stat) => (
+            <div
+              key={stat.key}
+              className={`stat-card ${hoverStat === stat.key ? 'stat-card-active' : ''}`}
+              style={{ '--stat-color': stat.color }}
+              onMouseEnter={() => setHoverStat(stat.key)}
+              onMouseLeave={() => setHoverStat(null)}
+            >
+              <div className="stat-card-icon">{stat.icon}</div>
+              <div className="stat-card-body">
+                <strong>{stat.value}<small>{stat.suffix}</small></strong>
+                <span>{stat.label}</span>
               </div>
-
-              <h1>
-                Empowering Children
-                <span> Through Information</span>
-              </h1>
-
-              <p>
-                एक केंद्रीकृत डिजिटल प्लेटफॉर्म जहाँ आप विभाग,
-                योजनाएँ, सेवाएँ, उद्देश्य और बच्चों के लिए उपलब्ध
-                लाभ आसानी से खोज सकते हैं।
-              </p>
-
-              <div className="hero-stats">
-                <div className="hero-stat-item">
-                  <strong>{departments.length.toLocaleString('en-IN')}+</strong>
-                  <span>Departments</span>
-                </div>
-                <div className="hero-stat-item">
-                  <strong>
-                    {departments.reduce((sum, dept) => sum + dept.schemesCount, 0).toLocaleString('en-IN')}+
-                  </strong>
-                  <span>Schemes</span>
-                </div>
-                <div className="hero-stat-item">
-                  <strong>
-                    {(
-                      empowermentAreas.reduce((sum, area) => sum + area.beneficiaries, 0) / 100000
-                    ).toFixed(1)}
-                    L+
-                  </strong>
-                  <span>Beneficiaries</span>
-                </div>
+              <div className="stat-card-desc">
+                <FaArrowRight />
+                <span>{stat.desc}</span>
               </div>
+              <div className="stat-card-bar" />
+            </div>
+          ))}
+        </div>
+
+        {/* Buttons */}
+        <div className="hero-buttons">
+          <Button className="primary-btn" onClick={() => handleScroll("departments")}>
+            Explore Departments <FaArrowRight />
+          </Button>
+          <Button className="secondary-btn" onClick={() => handleScroll("schemes")}>
+            Browse Schemes
+          </Button>
+        </div>
+
+        {/* Interactive Category Tags */}
+        <div className="hero-categories">
+          {categories.map((cat, i) => (
+            <div
+              key={i}
+              className={`cat-tag ${activeTag === i ? 'cat-tag-active' : ''}`}
+              style={{ '--cat-color': cat.color, '--cat-delay': `${i * 0.07}s` }}
+              onMouseEnter={() => setActiveTag(i)}
+              onMouseLeave={() => setActiveTag(null)}
+            >
+              <span className="cat-icon">{cat.icon}</span>
+              <span className="cat-label">{cat.label}</span>
+              <span className="cat-count">{cat.count}</span>
+            </div>
+          ))}
+        </div>
+
+      </Col>
 
 
-              <div className="hero-buttons">
+      {/* ===== RIGHT — IMAGE + DATA PANEL ===== */}
+      <Col lg={5} className="hero-right">
 
-                <Button
-                  className="primary-btn"
-                  onClick={() => handleScroll("departments")}
-                >
-                  Explore Departments
-                  <FaArrowRight />
-                </Button>
+        <div className="right-panel">
 
-                <Button
-                  className="secondary-btn"
-                  onClick={() => handleScroll("schemes")}
-                >
-                  Explore Schemes
-                </Button>
-
+          {/* Full Image */}
+          <div className="panel-image">
+            <img src={drcHomeImg} alt="Children Education and Empowerment" />
+            <div className="panel-image-overlay" />
+            {/* Overlay stat chip on image */}
+            <div className="image-chip">
+              <FaUsers />
+              <div>
+                <strong>{(totalBeneficiaries / 100000).toFixed(1)}L+</strong>
+                <span>Beneficiaries</span>
               </div>
+            </div>
+          </div>
 
-              <div className="hero-points">
-
-                <div>
-                  <FaCheckCircle />
-                  <span>18 Departments</span>
-                </div>
-
-                <div>
-                  <FaCheckCircle />
-                  <span>Child Empowerment</span>
-                </div>
-
-                <div>
-                  <FaCheckCircle />
-                  <span>Government Schemes</span>
-                </div>
-
+          {/* Data strip below image */}
+          <div className="panel-data-strip">
+            <div className="strip-item">
+              <div className="strip-icon" style={{ background: '#FF9933' }}><FaDatabase /></div>
+              <div>
+                <strong>{departments.length}+</strong>
+                <span>Departments</span>
               </div>
-
-            </Col>
-
-
-            <Col lg={6} className="hero-visual">
-
-              <div className="hero-image-wrapper">
-
-                <img
-                  src={drcHomeImg}
-                  alt="Children Education and Empowerment"
-                />
-
+            </div>
+            <div className="strip-divider" />
+            <div className="strip-item">
+              <div className="strip-icon" style={{ background: '#1a5276' }}><FaFileAlt /></div>
+              <div>
+                <strong>{totalSchemes.toLocaleString('en-IN')}+</strong>
+                <span>Schemes</span>
               </div>
+            </div>
+            <div className="strip-divider" />
+            <div className="strip-item">
+              <div className="strip-icon" style={{ background: '#138808' }}><FaCheckCircle /></div>
+              <div>
+                <strong>Active</strong>
+                <span>Status</span>
+              </div>
+            </div>
+          </div>
 
-            </Col>
+          {/* Mini progress section */}
+          <div className="panel-progress">
+            {[
+              { label: 'Education', pct: 35, color: '#1a5276' },
+              { label: 'Health', pct: 25, color: '#e74c3c' },
+              { label: 'Nutrition', pct: 20, color: '#27ae60' },
+              { label: 'Protection', pct: 12, color: '#8e44ad' },
+              { label: 'Welfare', pct: 8, color: '#FF9933' },
+            ].map((bar, i) => (
+              <div key={i} className="progress-row">
+                <span className="progress-label">{bar.label}</span>
+                <div className="progress-track">
+                  <div className="progress-fill" style={{ width: `${bar.pct}%`, background: bar.color }} />
+                </div>
+                <span className="progress-pct">{bar.pct}%</span>
+              </div>
+            ))}
+          </div>
 
-          </Row>
-        </Container>
-      </section>
+          {/* Tricolor footer */}
+          <div className="panel-tricolor">
+            <div style={{ background: '#FF9933' }} />
+            <div style={{ background: '#ffffff' }} />
+            <div style={{ background: '#138808' }} />
+          </div>
+
+        </div>
+
+      </Col>
+
+    </Row>
+  </Container>
+</section>
 
 
       {/* =================================================

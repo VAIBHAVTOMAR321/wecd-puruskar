@@ -1,0 +1,302 @@
+/* Admin Left Navigation */
+.admin-left-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  z-index: 1020; /* Ensure it's above other content */
+  background: #111827; /* Dark, modern background */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border-right: 1px solid #dee2e6;
+}
+
+.admin-left-nav .nav-header {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #495057;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.admin-left-nav .nav-header h4 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-left-nav .nav-menu {
+  padding: 0.5rem 0;
+}
+
+.admin-left-nav .nav-menu .nav-link {
+  color: #fff; /* Softer text color */
+  padding: 0.5rem 1rem;
+  margin: 0.125rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-weight: 400;
+  font-size: 14px; /* Slightly larger font */
+}
+
+.admin-left-nav .nav-menu .nav-link:hover {
+  background: #fff; /* Darker hover state */
+  color: #000;
+}
+
+.admin-left-nav .nav-menu .nav-link.active {
+  background: #374151; /* Active state background */
+  color: #ffffff;
+  font-weight: 500;
+  border-left: 3px solid #3b82f6; /* Accent color */
+}
+
+.admin-left-nav .nav-menu .nav-link.active .nav-icon {
+  color: #3b82f6; /* Accent color for icon */
+}
+
+.admin-left-nav .nav-menu .nav-link .nav-icon {
+  margin-right: 0.375rem;
+  font-size: 0.9rem;
+
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+}
+
+.admin-left-nav .toggle-btn {
+  background: #e9ecef;
+  border: 1px solid #dee2e6;
+  color: #495057;
+  margin: 0.5rem;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+}
+
+.admin-left-nav .toggle-btn:hover {
+  background: #dee2e6;
+  transform: scale(1.05);
+}
+
+/* Mobile sidebar */
+.admin-left-nav.mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 280px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  height: 100vh;
+  pointer-events: auto;
+}
+
+.admin-left-nav .mobile-menu {
+  padding: 0.5rem;
+}
+
+.admin-left-nav .mobile-menu .nav-link {
+  padding: 0.625rem 0.875rem;
+  margin: 0.125rem 0;
+}
+
+/* Compact sidebar for desktop */
+.admin-left-nav.compact {
+  width: 60px !important;
+}
+
+.admin-left-nav.compact .nav-header {
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.admin-left-nav.compact .nav-header h4,
+.admin-left-nav.compact .nav-menu .nav-link .nav-text {
+  display: none;
+}
+
+.admin-left-nav.compact .nav-menu .nav-link {
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+}
+
+.admin-left-nav.compact .nav-menu .nav-link .nav-icon {
+  margin-right: 0;
+  font-size: 1rem;
+  display: block;
+
+}
+.nav-link-custom span{
+  margin-left: 8px !important;
+}
+
+.admin-left-nav.compact .sidebar-toggle-btn {
+  width: 45px;
+  margin: 0.5rem auto;
+}
+
+/* Toggle button styling */
+.sidebar-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #9ca3af;
+  font-size: 1rem;
+  padding: 0.375rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle-btn:hover {
+  background: #1f2937;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar-toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu-wrapper {
+  margin: 0.25rem 0;
+}
+
+.dropdown-menu-wrapper .nav-link-custom {
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin: 0.125rem 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu-wrapper .nav-link-custom:hover {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+.dropdown-menu-wrapper .bi-chevron-up,
+.dropdown-menu-wrapper .bi-chevron-down {
+  font-size: 10px;
+}
+
+.dropdown-submenu {
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+  border-left: 1px solid #374151;
+}
+
+.dropdown-submenu .nav-link-custom {
+  padding: 0.4rem 1rem;
+  font-size: 13px;
+}
+
+.dropdown-submenu .nav-link-custom .nav-icon {
+  margin-right: 0.375rem;
+  font-size: 0.85rem;
+  display: inline-block;
+  width: 16px;
+  text-align: center;
+}
+
+/* Compact sidebar dropdown */
+.admin-left-nav.compact .dropdown-menu-wrapper {
+  position: relative;
+}
+
+.admin-left-nav.compact .dropdown-menu-wrapper .nav-link-custom {
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.admin-left-nav.compact .dropdown-menu-wrapper .nav-link-custom .nav-text {
+  display: none;
+}
+
+.admin-left-nav.compact .dropdown-menu-wrapper .nav-text {
+  display: none;
+}
+
+.admin-left-nav.compact .dropdown-menu-wrapper .nav-icon {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.admin-left-nav.compact .dropdown-menu-wrapper .bi-chevron-up,
+.admin-left-nav.compact .dropdown-menu-wrapper .bi-chevron-down {
+  display: none;
+}
+
+.admin-left-nav.compact .dropdown-submenu {
+  position: absolute;
+  left: 60px;
+  top: 0;
+  background: #1f2937;
+  min-width: 160px;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-left: 0;
+  border-left: none;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 1001;
+}
+
+.admin-left-nav.compact .dropdown-menu-wrapper:hover .dropdown-submenu {
+  display: block;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 767px) {
+  .admin-left-nav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 100%;
+    max-width: 280px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    height: 100vh;
+  }
+
+  .admin-left-nav.open {
+    left: 0;
+  }
+
+  .admin-left-nav.compact {
+    width: 100%;
+    max-width: 60px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .admin-left-nav {
+    width: 220px;
+  }
+
+  .admin-left-nav.compact {
+    width: 60px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-left-nav {
+    width: 240px;
+  }
+
+  .admin-left-nav.compact {
+    width: 80px;
+  }
+}

@@ -1,0 +1,49 @@
+import React from 'react'
+import { Navbar, Nav, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+
+const AdminTopNav = () => {
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    navigate('/login')
+  }
+
+  return (
+    <Navbar bg="white" expand="md" className="admin-top-nav shadow-sm border-bottom">
+      <Navbar.Brand href="/AdminDashboard" className="ms-3 d-flex align-items-center">
+        {/* <img src={Logo} alt="BrainRock Logo" className="admin-logo-img me-3" /> */}
+        <div className="admin-logo-text">
+          <div className="admin-logo-main">Data Resource Center</div>
+          <div className="admin-logo-sub">Empowering Children Through Information</div>
+        </div>
+      </Navbar.Brand>
+      
+      {/* Logout button for mobile view - visible only on sm and smaller screens */}
+      <Button 
+        variant="primary" 
+        onClick={handleLogout}
+        className="logout-btn d-flex d-md-none align-items-center ms-3"
+        size="sm"
+      >
+        <i className="bi bi-box-arrow-right me-1"></i> Logout
+      </Button>
+      
+      <Navbar.Collapse id="admin-topnav" className="justify-content-end">
+        <Nav className="align-items-center">
+          {/* Logout button for desktop view - visible only on md and larger screens */}
+          <Button 
+            variant="primary" 
+            onClick={handleLogout}
+            className="logout-btn d-none d-md-flex align-items-center"
+            size="sm"
+          >
+            <i className="bi bi-box-arrow-right me-1"></i> Logout
+          </Button>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  )
+}
+
+export default AdminTopNav

@@ -1,28 +1,43 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import Home from "./components/home_layout/Home";
+import Login from "./components/login/Login";
+import NavBar from "./components/nav_bar/NavBar";
+
+import AdminDashBoard from "./components/all_dashbords/admin/AdminDashBoard";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import Home from "./components/home_layout/Home";
-import NavBar from "./components/nav_bar/NavBar";
-import Footer from "./components/footer/Footer";
-import Login from "./components/login/Login";
+import "./App.css";
 
+// A wrapper component to conditionally render the NavBar
+const AppContent = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/AdminDashboard");
+
+  return (
+    <>
+      {!isAdminRoute && <NavBar />}
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+       
+
+        {/* Admin Routes */}
+        <Route path="/AdminDashboard" element={<AdminDashBoard />} />
+        {/* Add other admin routes from AdminLeftNav here as needed */}
+      </Routes>
+    </>
+  );
+};
 
 function App() {
-  return (
-    <BrowserRouter>
-      <NavBar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Login" element={<Login />} />
-       
-      </Routes>
-
-      <Footer />
-    </BrowserRouter>
-  );
+  return <Router><AppContent /></Router>;
 }
 
 export default App;
