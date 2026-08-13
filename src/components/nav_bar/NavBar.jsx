@@ -27,7 +27,7 @@ function NavBar() {
             
 
             {/* SERVICES */}
-            <Nav.Link as={Link} to="/services">
+            <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
 
@@ -35,7 +35,7 @@ function NavBar() {
             <Nav.Link as={Link} to="/AdminDashboard">
               About Us
             </Nav.Link>
-            <Nav.Link as={Link} to="/AdminDashboard">
+            <Nav.Link as={Link} to="/">
               success story
             </Nav.Link>
 
