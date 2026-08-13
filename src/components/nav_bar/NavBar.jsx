@@ -32,10 +32,10 @@ function NavBar() {
             </Nav.Link>
 
             {/* BENEFITS */}
-            <Nav.Link as={Link} to="/AdminDashboard">
+            <Nav.Link as={Link} to="/AboutUs">
               About Us
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/SuccessStory">
               Success story
             </Nav.Link>
 
