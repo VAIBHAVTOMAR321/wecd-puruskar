@@ -316,7 +316,7 @@ function SuccessStory() {
 
   const chartOptions = {
     responsive: true,
-    maintainAspectRatio: true,
+    aspectRatio: 2.5, // Makes the chart wider than it is tall
     plugins: {
       legend: {
         position: "top",
@@ -485,13 +485,17 @@ function SuccessStory() {
 
         {/* ══════ CHART ══════ */}
         {filteredData.length > 1 && (
-          <div className="ss-chart-card">
-            <div className="ss-chart-header">
-              <FaChartBar />
-              <h4>Village Performance Comparison</h4>
-            </div>
-            <Bar options={chartOptions} data={chartData} />
-          </div>
+          <Row className="justify-content-center">
+            <Col lg={10} xl={9}>
+              <div className="ss-chart-card">
+                <div className="ss-chart-header">
+                  <FaChartBar />
+                  <h4>Village Performance Comparison</h4>
+                </div>
+                <Bar options={chartOptions} data={chartData} />
+              </div>
+            </Col>
+          </Row>
         )}
 
         {/* ══════ VILLAGE STORY CARDS ══════ */}
