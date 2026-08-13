@@ -1803,7 +1803,7 @@ h6 { font-size: clamp(11px, 2.5vw, 16px); }
 /* Ensure all images are responsive */
 img {
     max-width: 100%;
-    height: auto;
+    
     display: block;
 }
 

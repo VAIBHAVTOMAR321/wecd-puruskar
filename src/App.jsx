@@ -37,7 +37,7 @@ const AppContent = () => {
         <Route path="/AdminDashboard" element={<AdminDashBoard />} />
         {/* Add other admin routes from AdminLeftNav here as needed */}
       </Routes>
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </>
   );
 };
