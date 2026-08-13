@@ -1,6 +1,7 @@
 ﻿import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { FaDatabase } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const departments = [
@@ -27,6 +28,12 @@ const departments = [
 function Login() {
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [loginType, setLoginType] = useState('state');
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate('/AdminDashboard');
+  };
 
   return (
     <div className="login-page">
@@ -49,7 +56,7 @@ function Login() {
                 <p>Welcome to the Data Resource Center</p>
               </Card.Header>
               <Card.Body>
-                <Form className="login-form">
+                <Form className="login-form" onSubmit={handleLogin}>
                   <Form.Group className="mb-3">
                     <Form.Label>Login as</Form.Label>
                     <div className="d-flex">
