@@ -241,13 +241,13 @@ function AboutUs() {
               <div className="about-hero-inner">
                 <div className="about-hero-badge">
                   <FaDatabase />
-                  <span>About DRC</span>
+                  <span>About SRC</span>
                 </div>
                 <h1>
                   About <span>डेटा रिसोर्स सेंटर</span>
                 </h1>
                 <p>
-                  DRC एक केंद्रीकृत डिजिटल प्लेटफॉर्म है जिसे बाल सशक्तिकरण के लिए
+                  SRC एक केंद्रीकृत डिजिटल प्लेटफॉर्म है जिसे बाल सशक्तिकरण के लिए
                   उपलब्ध सरकारी विभागों, योजनाओं, सेवाओं और लाभों के बारे में
                   व्यापक जानकारी प्रदान करने के लिए डिज़ाइन किया गया है। हमारा
                   उद्देश्य सूचना तक आसान पहुँच सुनिश्चित करना है ताकि हर बच्चे को
@@ -344,7 +344,7 @@ function AboutUs() {
       <section className="about-flow-section">
         <Container>
           <div className="about-section-heading">
-            <h2>How DRC Works</h2>
+            <h2>How SRC Works</h2>
             <p>जानकारी विभाग से लाभार्थी तक कैसे पहुँचती है</p>
           </div>
           <div className="flow-steps">

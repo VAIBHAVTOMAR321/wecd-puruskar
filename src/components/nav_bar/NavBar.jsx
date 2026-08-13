@@ -14,9 +14,9 @@ function NavBar() {
             src={ulLogo}
             height="30"
             className="d-inline-block align-top me-2"
-            alt="DRC Logo"
+            alt="SRC Logo"
           />
-          Data Resource Center
+          State Resource Center
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

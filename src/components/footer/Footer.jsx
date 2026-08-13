@@ -24,7 +24,7 @@ function Footer() {
 
   const quickLinks = [
     { label: "Home", href: "#home" },
-    { label: "About DRC", href: "#about" },
+    { label: "About SRC", href: "#about" },
     { label: "Departments", href: "#departments" },
     { label: "Schemes", href: "#schemes" },
     { label: "Empowerment", href: "#empowerment" },
@@ -54,7 +54,7 @@ function Footer() {
                 className="uk-state-logo"
               />
               <div className="footer-brand-text">
-                <span className="footer-brand-name">Data Resource Center</span>
+                <span className="footer-brand-name">State Resource Center</span>
                 <span className="footer-brand-sub">उत्तराखण्ड सरकार</span>
               </div>
             </div>
@@ -164,7 +164,7 @@ function Footer() {
               alt="UK Logo"
               className="uk-state-logo-sm"
             />
-            <span>© {currentYear} Data Resource Center, Government of Uttarakhand</span>
+            <span>© {currentYear} State Resource Center, Government of Uttarakhand</span>
           </div>
           <div className="footer-bottom-right">
             <a href="#privacy">Privacy Policy</a>

@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
@@ -43,7 +42,7 @@ const AppContent = () => {
 };
 
 function App() {
-  return <Router><AppContent /></Router>;
+  return <AppContent />;
 }
 
 export default App;

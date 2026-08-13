@@ -513,7 +513,7 @@ const handleMouseLeave = () => {
 
         <div className="hero-badge">
           <FaDatabase />
-          <span>Data Resource Center</span>
+          <span>State Resource Center</span>
         </div>
 
         <h1>
@@ -682,7 +682,7 @@ const handleMouseLeave = () => {
             </h2>
 
             <p>
-              DRC में जानकारी को सरल और व्यवस्थित तरीके से खोजें।
+              SRC में जानकारी को सरल और व्यवस्थित तरीके से खोजें।
             </p>
 
           </div>

@@ -41,7 +41,7 @@ function Login() {
         <Row className="g-0 login-container align-items-stretch">
           <Col lg={6} className="login-image-col d-none d-lg-flex">
             <div className="login-image-overlay">
-              <h2 className="login-image-title">Data Resource Center</h2>
+              <h2 className="login-image-title">State Resource Center</h2>
               <p>Empowering Children Through Information</p>
             </div>
           </Col>
@@ -52,8 +52,8 @@ function Login() {
                 <div className="login-logo">
                   <FaDatabase />
                 </div>
-                <h4>{selectedDepartment || 'DRC Portal Login'}</h4>
-                <p>Welcome to the Data Resource Center</p>
+                <h4>{selectedDepartment || 'SRC Portal Login'}</h4>
+                <p>Welcome to the State Resource Center</p>
               </Card.Header>
               <Card.Body>
                 <Form className="login-form" onSubmit={handleLogin}>
