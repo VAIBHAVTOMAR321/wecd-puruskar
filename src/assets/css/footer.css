@@ -1,6 +1,6 @@
 /* ===== DRC FOOTER - LIGHT COLOR THEME ===== */
 .drc-footer {
-  background: linear-gradient(180deg, #f7f9fc 0%, #eef2f7 100%);
+ 
   padding: 0 0 0;
   position: relative;
   border-top: 3px solid transparent;
@@ -23,6 +23,7 @@
 /* ===== UK LOGO IMAGE ===== */
 .uk-state-logo {
   width: 56px;
+  margin-top:12px;
   height: 56px;
   object-fit: contain;
   flex-shrink: 0;
