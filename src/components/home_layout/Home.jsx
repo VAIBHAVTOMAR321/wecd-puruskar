@@ -376,14 +376,6 @@ function Home() {
   const [activeSchemeDepartment, setActiveSchemeDepartment] = useState("All Departments");
   const [studentLegendExpanded, setStudentLegendExpanded] = useState(false);
   const [schemeLegendExpanded, setSchemeLegendExpanded] = useState(false);
-  const [hoverStat, setHoverStat] = useState(null);
-  const categories = [
-  { label: 'Education', icon: <FaGraduationCap />, color: '#1a5276', count: Math.round(totalSchemes * 0.35) },
-  { label: 'Health', icon: <FaHeartbeat />, color: '#e74c3c', count: Math.round(totalSchemes * 0.25) },
-  { label: 'Nutrition', icon: <FaAppleAlt />, color: '#27ae60', count: Math.round(totalSchemes * 0.20) },
-  { label: 'Protection', icon: <FaShieldAlt />, color: '#8e44ad', count: Math.round(totalSchemes * 0.12) },
-  { label: 'Welfare', icon: <FaHandsHelping />, color: '#FF9933', count: Math.round(totalSchemes * 0.08) },
-];
 // inside your component:
 const [activeCard, setActiveCard] = useState(null);
 const [activeTag, setActiveTag] = useState(null);
@@ -414,11 +406,7 @@ const [activeTag, setActiveTag] = useState(null);
   const handleSchemeDepartmentSelect = (department) => {
     setActiveSchemeDepartment(department);
   };
-const statCards = [
-  { key: 'dept', icon: <FaDatabase />, label: 'Departments', value: departments.length, suffix: '+', color: '#FF9933', desc: 'Active government bodies' },
-  { key: 'scheme', icon: <FaFileAlt />, label: 'Schemes', value: totalSchemes.toLocaleString('en-IN'), suffix: '+', color: '#1a5276', desc: 'Child welfare programs' },
-  { key: 'ben', icon: <FaUsers />, label: 'Beneficiaries', value: (totalBeneficiaries / 100000).toFixed(1), suffix: 'L+', color: '#138808', desc: 'Children reached nationwide' },
-];
+
   const generateConicGradient = (data, key, colors) => {
     const total = data.reduce((sum, item) => sum + item[key], 0);
     let cumulativePercentage = 0;
@@ -504,21 +492,18 @@ const handleMouseLeave = () => {
           HERO
       ================================================= */}
 
-<section className="drc-hero">
+ <section className="drc-hero">
   <Container>
-    <Row className="align-items-stretch hero-row">
+    <Row className="align-items-center">
 
-      {/* ===== LEFT — CONTENT + INTERACTIVE STATS ===== */}
-      <Col lg={7} className="hero-left">
+      {/* ===== LEFT CONTENT ===== */}
+      <Col lg={6} className="hero-content">
 
-        <div className="hero-badge">
-          <FaDatabase />
-          <span>Data Resource Center</span>
-        </div>
+       
 
         <h1>
           Empowering Children
-          <span>Through Information</span>
+          <span> Through Information</span>
         </h1>
 
         <p>
@@ -527,133 +512,213 @@ const handleMouseLeave = () => {
           लाभ आसानी से खोज सकते हैं।
         </p>
 
-        {/* Interactive Stat Cards Row */}
-        <div className="hero-stat-cards">
-          {statCards.map((stat) => (
-            <div
-              key={stat.key}
-              className={`stat-card ${hoverStat === stat.key ? 'stat-card-active' : ''}`}
-              style={{ '--stat-color': stat.color }}
-              onMouseEnter={() => setHoverStat(stat.key)}
-              onMouseLeave={() => setHoverStat(null)}
-            >
-              <div className="stat-card-icon">{stat.icon}</div>
-              <div className="stat-card-body">
-                <strong>{stat.value}<small>{stat.suffix}</small></strong>
-                <span>{stat.label}</span>
-              </div>
-              <div className="stat-card-desc">
-                <FaArrowRight />
-                <span>{stat.desc}</span>
-              </div>
-              <div className="stat-card-bar" />
-            </div>
-          ))}
+        <div className="hero-stats">
+          <div className="hero-stat-item">
+            <strong>{departments.length.toLocaleString('en-IN')}+</strong>
+            <span>Departments</span>
+          </div>
+          <div className="hero-stat-item">
+            <strong>{totalSchemes.toLocaleString('en-IN')}+</strong>
+            <span>Schemes</span>
+          </div>
+          <div className="hero-stat-item">
+            <strong>{(totalBeneficiaries / 100000).toFixed(1)}L+</strong>
+            <span>Beneficiaries</span>
+          </div>
         </div>
 
-        {/* Buttons */}
         <div className="hero-buttons">
           <Button className="primary-btn" onClick={() => handleScroll("departments")}>
             Explore Departments <FaArrowRight />
           </Button>
           <Button className="secondary-btn" onClick={() => handleScroll("schemes")}>
-            Browse Schemes
+            Explore Schemes
           </Button>
         </div>
 
-        {/* Interactive Category Tags */}
-        <div className="hero-categories">
-          {categories.map((cat, i) => (
-            <div
-              key={i}
-              className={`cat-tag ${activeTag === i ? 'cat-tag-active' : ''}`}
-              style={{ '--cat-color': cat.color, '--cat-delay': `${i * 0.07}s` }}
-              onMouseEnter={() => setActiveTag(i)}
-              onMouseLeave={() => setActiveTag(null)}
-            >
-              <span className="cat-icon">{cat.icon}</span>
-              <span className="cat-label">{cat.label}</span>
-              <span className="cat-count">{cat.count}</span>
-            </div>
-          ))}
+        <div className="hero-points">
+          <div><FaCheckCircle /><span>18 Departments</span></div>
+          <div><FaCheckCircle /><span>Child Empowerment</span></div>
+          <div><FaCheckCircle /><span>Government Schemes</span></div>
         </div>
 
       </Col>
 
 
-      {/* ===== RIGHT — IMAGE + DATA PANEL ===== */}
-      <Col lg={5} className="hero-right">
+      {/* ===== RIGHT INTERACTIVE VISUAL ===== */}
+      <Col lg={6} className="hero-visual">
 
-        <div className="right-panel">
-
-          {/* Full Image */}
-          <div className="panel-image">
+        {/* Layer 1: Full Image */}
+        <div className="hero-image-container">
+          <div className="hero-image-frame">
             <img src={drcHomeImg} alt="Children Education and Empowerment" />
-            <div className="panel-image-overlay" />
-            {/* Overlay stat chip on image */}
-            <div className="image-chip">
-              <FaUsers />
-              <div>
-                <strong>{(totalBeneficiaries / 100000).toFixed(1)}L+</strong>
-                <span>Beneficiaries</span>
-              </div>
-            </div>
           </div>
-
-          {/* Data strip below image */}
-          <div className="panel-data-strip">
-            <div className="strip-item">
-              <div className="strip-icon" style={{ background: '#FF9933' }}><FaDatabase /></div>
-              <div>
-                <strong>{departments.length}+</strong>
-                <span>Departments</span>
-              </div>
-            </div>
-            <div className="strip-divider" />
-            <div className="strip-item">
-              <div className="strip-icon" style={{ background: '#1a5276' }}><FaFileAlt /></div>
-              <div>
-                <strong>{totalSchemes.toLocaleString('en-IN')}+</strong>
-                <span>Schemes</span>
-              </div>
-            </div>
-            <div className="strip-divider" />
-            <div className="strip-item">
-              <div className="strip-icon" style={{ background: '#138808' }}><FaCheckCircle /></div>
-              <div>
-                <strong>Active</strong>
-                <span>Status</span>
-              </div>
-            </div>
+          {/* Image overlay badge */}
+          <div className="image-badge">
+            <FaDatabase />
+            <span>DRC Portal</span>
           </div>
+        </div>
 
-          {/* Mini progress section */}
-          <div className="panel-progress">
-            {[
-              { label: 'Education', pct: 35, color: '#1a5276' },
-              { label: 'Health', pct: 25, color: '#e74c3c' },
-              { label: 'Nutrition', pct: 20, color: '#27ae60' },
-              { label: 'Protection', pct: 12, color: '#8e44ad' },
-              { label: 'Welfare', pct: 8, color: '#FF9933' },
-            ].map((bar, i) => (
-              <div key={i} className="progress-row">
-                <span className="progress-label">{bar.label}</span>
-                <div className="progress-track">
-                  <div className="progress-fill" style={{ width: `${bar.pct}%`, background: bar.color }} />
-                </div>
-                <span className="progress-pct">{bar.pct}%</span>
+        {/* Layer 2: Stat Ring — top right */}
+        <div className="stat-ring-wrapper">
+          <svg viewBox="0 0 120 120" className="stat-ring-svg">
+            {statRingSegments.reduce((acc, seg, i) => {
+              const offset = acc.offset;
+              const circumference = 2 * Math.PI * 48;
+              const dashLen = (seg.percent / 100) * circumference;
+              const gap = circumference - dashLen;
+              acc.elements.push(
+                <circle
+                  key={i}
+                  cx="60" cy="60" r="48"
+                  fill="none"
+                  stroke={seg.color}
+                  strokeWidth="8"
+                  strokeDasharray={`${dashLen} ${gap}`}
+                  strokeDashoffset={-offset}
+                  strokeLinecap="round"
+                  className="stat-segment"
+                  style={{ '--delay': `${i * 0.15}s` }}
+                />
+              );
+              acc.offset += dashLen;
+              return acc;
+            }, { elements: [], offset: 0 }).elements}
+            <text x="60" y="56" textAnchor="middle" className="ring-center-num">
+              {departments.length}+
+            </text>
+            <text x="60" y="72" textAnchor="middle" className="ring-center-label">
+              Depts
+            </text>
+          </svg>
+          {/* Ring legend — appears on hover */}
+          <div className="ring-legend">
+            {statRingSegments.map((seg, i) => (
+              <div key={i} className="legend-item">
+                <span className="legend-dot" style={{ background: seg.color }} />
+                <span className="legend-label">{seg.label}</span>
+                <span className="legend-pct">{seg.percent}%</span>
               </div>
             ))}
           </div>
-
-          {/* Tricolor footer */}
-          <div className="panel-tricolor">
-            <div style={{ background: '#FF9933' }} />
-            <div style={{ background: '#ffffff' }} />
-            <div style={{ background: '#138808' }} />
-          </div>
-
         </div>
+
+        {/* Layer 3: Interactive Floating Cards */}
+        <div
+          className={`floating-card fc-dept ${activeCard === 'dept' ? 'fc-active' : ''}`}
+          onMouseEnter={() => setActiveCard('dept')}
+          onMouseLeave={() => setActiveCard(null)}
+        >
+          <div className="fc-icon"><FaDatabase /></div>
+          <div className="fc-info">
+            <strong>{departments.length}+</strong>
+            <span>Departments</span>
+          </div>
+          <div className="fc-pulse" />
+          {/* Expanded detail on hover */}
+          <div className="fc-expand">
+            <div className="fc-expand-row">
+              <FaArrowRight />
+              <span>Active: {departments.length}</span>
+            </div>
+            <div className="fc-expand-row">
+              <FaArrowRight />
+              <span>Schemes: {totalSchemes.toLocaleString('en-IN')}</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`floating-card fc-schemes ${activeCard === 'schemes' ? 'fc-active' : ''}`}
+          onMouseEnter={() => setActiveCard('schemes')}
+          onMouseLeave={() => setActiveCard(null)}
+        >
+          <div className="fc-icon"><FaFileAlt /></div>
+          <div className="fc-info">
+            <strong>{totalSchemes.toLocaleString('en-IN')}+</strong>
+            <span>Schemes</span>
+          </div>
+          <div className="fc-pulse" />
+          <div className="fc-expand">
+            <div className="fc-expand-row">
+              <FaArrowRight />
+              <span>Central: {Math.round(totalSchemes * 0.6)}</span>
+            </div>
+            <div className="fc-expand-row">
+              <FaArrowRight />
+              <span>State: {Math.round(totalSchemes * 0.4)}</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`floating-card fc-beneficiaries ${activeCard === 'ben' ? 'fc-active' : ''}`}
+          onMouseEnter={() => setActiveCard('ben')}
+          onMouseLeave={() => setActiveCard(null)}
+        >
+          <div className="fc-icon"><FaUsers /></div>
+          <div className="fc-info">
+            <strong>{(totalBeneficiaries / 100000).toFixed(1)}L+</strong>
+            <span>Beneficiaries</span>
+          </div>
+          <div className="fc-pulse" />
+          <div className="fc-expand">
+            <div className="fc-expand-row">
+              <FaArrowRight />
+              <span>Rural: {(totalBeneficiaries * 0.65 / 100000).toFixed(1)}L</span>
+            </div>
+            <div className="fc-expand-row">
+              <FaArrowRight />
+              <span>Urban: {(totalBeneficiaries * 0.35 / 100000).toFixed(1)}L</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Layer 4: Interactive Category Tags */}
+        <div className="hero-tags">
+          {categoryTags.map((tag, i) => (
+            <div
+              key={i}
+              className={`hero-tag ${activeTag === i ? 'tag-active' : ''}`}
+              style={{ '--tag-color': tag.color, '--delay': `${i * 0.08}s` }}
+              onMouseEnter={() => setActiveTag(i)}
+              onMouseLeave={() => setActiveTag(null)}
+            >
+              <span className="tag-icon">{tag.icon}</span>
+              <span className="tag-label">{tag.label}</span>
+              <span className="tag-arrow"><FaArrowRight /></span>
+            </div>
+          ))}
+        </div>
+
+        {/* Layer 5: Mini Progress Bars */}
+        <div className="hero-mini-bars">
+          {statRingSegments.slice(0, 3).map((seg, i) => (
+            <div key={i} className="mini-bar-item">
+              <div className="mini-bar-head">
+                <span className="mini-bar-label">{seg.label}</span>
+                <span className="mini-bar-pct">{seg.percent}%</span>
+              </div>
+              <div className="mini-bar-track">
+                <div
+                  className="mini-bar-fill"
+                  style={{ width: `${seg.percent}%`, background: seg.color }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Decorative: Tricolor strip */}
+        <div className="tricolor-bar">
+          <div className="tc-saffron" />
+          <div className="tc-white" />
+          <div className="tc-green" />
+        </div>
+
+        {/* Decorative: Dot grid */}
+        <div className="hero-dot-grid" />
 
       </Col>
 
