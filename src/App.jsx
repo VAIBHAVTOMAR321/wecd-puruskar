@@ -20,7 +20,7 @@ import Footer from "./components/footer/Footer";
 // A wrapper component to conditionally render the NavBar
 const AppContent = () => {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/AdminDashboard");
+  const isAdminRoute = location.pathname.startsWith("/AdminDashBoard");
 
   return (
     <>

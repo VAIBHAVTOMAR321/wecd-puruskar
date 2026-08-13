@@ -1,255 +1,268 @@
-import React, { useState, useEffect } from 'react'
-import { Nav, Button, Offcanvas } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import "../../../assets/css/adminleftnav.css" // Import specific CSS
+import React, { useState, useEffect } from "react";
+import { Nav, Offcanvas, Collapse } from "react-bootstrap";
+import {
+  FaTachometerAlt,
+  FaSignOutAlt,
+  FaChevronDown,
+  FaChevronRight,
+  FaImages,
+  FaUsers,
+  FaBook,
+  FaBuilding,
+  FaImage,
+  FaTools,
+  FaComments, 
+  FaCube,
+  FaProjectDiagram,
+  FaServer,
+  FaUserCircle,
+  FaCalendarAlt,
+  FaPlusSquare,
+  FaEdit,
+  FaMusic,
+  FaGlassCheers,
+  FaIndustry,
+  FaQuestionCircle,
+  FaTrophy,
+  FaBriefcase,
+  FaGraduationCap, 
+  FaUsersCog, // Added for Our Team icon
+  FaTasks,
+  FaClock
+} from "react-icons/fa";
 
-const AdminLeftNav = ({ show, setShow }) => {
-  const [showOffcanvas, setShowOffcanvas] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
-  const [showSchemesMenu, setShowSchemesMenu] = useState(false)
-  const [showGroomingMenu, setShowGroomingMenu] = useState(false)
-  const [showJobsMenu, setShowJobsMenu] = useState(false)
+import "../../../../src/assets/css/adminleftnav.css";
 
+
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  FaInfoCircle,
+  FaBullseye,
+  
+} from "react-icons/fa";
+
+
+
+
+const AdminLeftnav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClick }) => {
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+ 
+  const [openSubmenu, setOpenSubmenu] = useState(null);
+  const toggleSubmenu = (index) => {
+    setOpenSubmenu(openSubmenu === index ? null : index);
+  };
+
+  // Automatically close sidebar when navigating on mobile or tablet views
   useEffect(() => {
-    const checkMobile = () => {
-      const mobile = window.innerWidth < 768 // Standard mobile breakpoint
-      setIsMobile(mobile)
-      if (mobile) {
-        setShow(false)
-      } else {
-        setShow(true)
-      }
+    if (isMobile || isTablet) {
+      setSidebarOpen(false);
     }
+  }, [location.pathname, isMobile, isTablet, setSidebarOpen]);
 
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
-  const handleToggle = () => {
-    if (isMobile) {
-      setShowOffcanvas(!showOffcanvas)
-    } else {
-      setShow(!show)
+  const handleItemClick = (e, path, isActive) => {
+    if (onNavClick) {
+      e.preventDefault();
+      onNavClick(path);
+    } else if (!isActive) {
+      // Only close sidebar if navigating to a different page
+      setSidebarOpen(false);
     }
-  }
+  };
+
+ const menuItems = [
+      {
+        icon: <FaTachometerAlt />,
+        label: "DashBoard",
+        path: "/AdminDashboard",
+        active: true,
+      },
+      {
+        icon: <FaServer />,
+        label: "All Services",
+        path: "/AllServices",
+      },
+      {
+        icon: <FaCube />,
+        label: "Our Products",
+        path: "/AllProducts",
+      },
+      {
+        icon: <FaProjectDiagram />,
+        label: "Our Projects",
+        path: "/AllProjects",
+      },
+      {
+        icon: <FaUsersCog />, // Using FaUsersCog for Our Team
+        label: "Our Team",
+        path: "/OurTeam", // New path for OurTeam component
+      },
+      {
+        icon: <FaQuestionCircle />,
+        label: "Queries",
+        path: "/Query",
+      }, 
+     ];
+
+  //  Auto-close sidebar when switching to mobile or tablet
 
   return (
     <>
-      {/* Mobile Toggle Button */}
-      {isMobile && (
-        <Button 
-          variant="light" 
-          onClick={() => setShowOffcanvas(true)} 
-          className="mobile-menu-btn"
-          style={{ position: 'fixed', top: '1rem', right: '1rem', zIndex: 1050, border: '1px solid #dee2e6' }}
-          size="sm"
-        >
-          <i className="bi bi-list"></i>
-        </Button>
-      )}
-
       {/* Desktop Sidebar */}
-      {!isMobile && (
-        <div className={`admin-left-nav ${show ? '' : 'compact'} d-flex flex-column`}>
-          <div className="nav-header">
-            <button className="sidebar-toggle-btn" onClick={handleToggle}>
-              <i className={`bi ${show ? 'bi-arrow-left' : 'bi-arrow-right'}`}></i>
-            </button>
-          </div>
-          
-          <Nav className="nav-menu flex-column">
-            <Nav.Link as={Link} to="/AdminDashboard" className="nav-link-custom ">
-              <i className="bi bi-grid-fill nav-icon"></i>
-              <span className="nav-text">Dashboard</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Enrollments" className="nav-link-custom ">
-              <i className="bi bi-person-lines-fill nav-icon"></i>
-              <span className="nav-text">Enrollments</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Feedback" className="nav-link-custom ">
-              <i className="bi bi-chat-square-text nav-icon"></i>
-              <span className="nav-text">Feedback</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/StudentIssues" className="nav-link-custom ">
-              <i className="bi bi-exclamation-circle nav-icon"></i>
-              <span className="nav-text">Student Issues</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/EmployeeIssues" className="nav-link-custom ">
-              <i className="bi bi-person-badge nav-icon"></i>
-              <span className="nav-text">Employee Issues</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/StudentAnalysis" className="nav-link-custom ">
-              <i className="bi bi-bar-chart-line nav-icon"></i>
-              <span className="nav-text">Student Analysis</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/QuizManagement" className="nav-link-custom ">
-              <i className="bi bi-question-circle nav-icon"></i>
-              <span className="nav-text">Quiz Management</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/EmployeeQuiz" className="nav-link-custom ">
-              <i className="bi bi-person-workspace nav-icon"></i> {/* Using a suitable icon */}
-              <span className="nav-text">Employee Quiz</span>
-            </Nav.Link>
-            <Nav.Link as={Link} to="/StudentQuizManagement" className="nav-link-custom ">
-              <i className="bi bi-person-check nav-icon"></i>
-              <span className="nav-text">Student Quiz</span>
-            </Nav.Link>
-
-            {/* Schemes Dropdown */}
-            <div className="dropdown-menu-wrapper">
-              <div 
-                className="nav-link-custom d-flex align-items-center justify-content-between"
-                onClick={() => setShowSchemesMenu(!showSchemesMenu)}
-                style={{ cursor: 'pointer' }}
-              >
-                <span className="d-flex align-items-center">
-                  <i className="bi bi-file-earmark-text nav-icon"></i>
-                  <span className="nav-text">Schemes</span>
-                </span>
-                <i className={`bi bi-chevron-${showSchemesMenu ? 'up' : 'down'}`}></i>
+      <div
+        className={`user-left-nav ${sidebarOpen ? "sidebar-open" : "sidebar-closed"}`}
+      >
+        <div className="sidebar-header">
+          {sidebarOpen ? (
+            <div className="logo-container">
+              <div className="logo">
+                  Admin Panel
               </div>
-              {showSchemesMenu && (
-                <div className="dropdown-submenu">
-                  <Nav.Link as={Link} to="/ManageGovtSchemes" className="nav-link-custom ">
-                    <i className="bi bi-list nav-icon"></i>
-                    <span className="nav-text">Manage Schemes</span>
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/AddGovtSchemes" className="nav-link-custom ">
-                    <i className="bi bi-plus-circle nav-icon"></i>
-                    <span className="nav-text">Add Scheme</span>
-                  </Nav.Link>
-                </div>
-              )}
             </div>
-
-            {/* Grooming Dropdown */}
-            {/* <div className="dropdown-menu-wrapper">
-              <div 
-                className="nav-link-custom d-flex align-items-center justify-content-between"
-                onClick={() => setShowGroomingMenu(!showGroomingMenu)}
-                style={{ cursor: 'pointer' }}
-              >
-                <span className="d-flex align-items-center">
-                  <i className="bi bi-person-badge nav-icon"></i>
-                  <span className="nav-text">Grooming</span>
-                </span>
-                <i className={`bi bi-chevron-${showGroomingMenu ? 'up' : 'down'}`}></i>
-              </div>
-              {showGroomingMenu && (
-                <div className="dropdown-submenu">
-                  <Nav.Link as={Link} to="/CreateGroomingClass" className="nav-link-custom ">
-                    <i className="bi bi-plus-circle nav-icon"></i>
-                    <span className="nav-text">Create Grooming</span>
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/ManageGroomingClasses" className="nav-link-custom ">
-                    <i className="bi bi-calendar-check nav-icon"></i>
-                    <span className="nav-text">Manage Grooming</span>
-                  </Nav.Link>
-                </div>
-              )}
-            </div> */}
-
-            {/* Jobs/Seminars/Workshops Dropdown */}
-            <div className="dropdown-menu-wrapper">
-              <div 
-                className="nav-link-custom d-flex align-items-center justify-content-between"
-                onClick={() => setShowJobsMenu(!showJobsMenu)}
-                style={{ cursor: 'pointer' }}
-              >
-                <span className="d-flex align-items-center">
-                  <i className="bi bi-briefcase nav-icon"></i>
-                  <span className="nav-text">Jobs & More</span>
-                </span>
-                <i className={`bi bi-chevron-${showJobsMenu ? 'up' : 'down'}`}></i>
-              </div>
-              {showJobsMenu && (
-                <div className="dropdown-submenu">
-                  <Nav.Link as={Link} to="/AddJob" className="nav-link-custom ">
-                    <i className="bi bi-plus-circle nav-icon"></i>
-                    <span className="nav-text">Add Job</span>
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/ManageJobs" className="nav-link-custom ">
-                    <i className="bi bi-briefcase-fill nav-icon"></i>
-                    <span className="nav-text">Manage Jobs</span>
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/AddSeminar" className="nav-link-custom ">
-                    <i className="bi bi-plus-circle nav-icon"></i>
-                    <span className="nav-text">Add Seminar</span>
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/AddWorkshop" className="nav-link-custom ">
-                    <i className="bi bi-hammer nav-icon"></i>
-                    <span className="nav-text">Add Workshop</span>
-                  </Nav.Link>
-                </div>
-              )}
+          ) : (
+            <div className="logo-container logo-collapsed">
             </div>
-          </Nav>
+          )}
         </div>
+
+        <Nav className="sidebar-nav flex-column">
+          
+         {menuItems
+  .filter(item =>
+    item.allowedRoles ? item.allowedRoles.includes(userRole) : true
+  )
+  .map((item, index) => (
+    <div key={index}>
+      {/* If submenu exists */}
+      {item.submenu ? (
+        <Nav.Link
+          className={`nav-item ${item.active ? "active" : ""}`}
+          onClick={() => toggleSubmenu(index)}
+        >
+          <span className="nav-icon">{item.icon}</span>
+          <span className="nav-text">{item.label}</span>
+          <span className="submenu-arrow">
+            {openSubmenu === index ? <FaChevronDown /> : <FaChevronRight />}
+          </span>
+        </Nav.Link>
+      ) : (
+         <Link
+           to={item.path}
+           className={`nav-item nav-link ${item.active ? "active" : ""}`}
+           onClick={(e) => handleItemClick(e, item.path, item.active)}
+         >
+           <span className="nav-icon">{item.icon}</span>
+           <span className="nav-text">{item.label}</span>
+         </Link>
       )}
 
-      {/* Mobile Offcanvas Sidebar */}
-      <Offcanvas 
-        show={showOffcanvas} 
-        onHide={() => setShowOffcanvas(false)} 
-        placement="start"
-        className="admin-left-nav mobile"
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title className="fw-semibold fs-6">Admin Panel</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <Nav className="nav-menu mobile-menu flex-column">
-            <Nav.Link as={Link} to="/AdminDashboard" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-grid-fill nav-icon me-2"></i> Dashboard
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Enrollments" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-person-lines-fill nav-icon me-2"></i> Enrollments
-            </Nav.Link>
-            <Nav.Link as={Link} to="/Feedback" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-chat-square-text nav-icon me-2"></i> Feedback
-            </Nav.Link>
-            <Nav.Link as={Link} to="/StudentIssues" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-exclamation-circle nav-icon me-2"></i> Student Issues
-            </Nav.Link>
-            <Nav.Link as={Link} to="/EmployeeIssues" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-person-badge nav-icon me-2"></i> Employee Issues
-            </Nav.Link>
-            <Nav.Link as={Link} to="/StudentAnalysis" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-bar-chart-line nav-icon me-2"></i> Student Analysis
-            </Nav.Link>
-            <Nav.Link as={Link} to="/QuizManagement" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-question-circle nav-icon me-2"></i> Quiz Management
-            </Nav.Link>
-            <Nav.Link as={Link} to="/EmployeeQuiz" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-person-workspace nav-icon me-2"></i> Employee Quiz
-            </Nav.Link>
-            <Nav.Link as={Link} to="/StudentQuizManagement" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-person-check nav-icon me-2"></i> Student Quiz
-            </Nav.Link>
-            <Nav.Link as={Link} to="/ManageGovtSchemes" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-file-earmark-text nav-icon me-2"></i> Manage Schemes
-            </Nav.Link>
-            <Nav.Link as={Link} to="/AddGovtSchemes" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-plus-circle nav-icon me-2"></i> Add Scheme
-            </Nav.Link>
-            <Nav.Link as={Link} to="/CreateGroomingClass" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-person-badge nav-icon me-2"></i> Create Grooming
-            </Nav.Link>
-            <Nav.Link as={Link} to="/ManageGroomingClasses" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-calendar-check nav-icon me-2"></i> Manage Grooming
-            </Nav.Link>
-            <Nav.Link as={Link} to="/AddJob" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-briefcase nav-icon me-2"></i> Add Job
-            </Nav.Link>
-            <Nav.Link as={Link} to="/ManageJobs" className="nav-link-custom" onClick={() => setShowOffcanvas(false)}>
-              <i className="bi bi-briefcase-fill nav-icon me-2"></i> Manage Jobs
-            </Nav.Link>
-          </Nav>
-        </Offcanvas.Body>
-      </Offcanvas>
-    </>
-  )
-}
+      {/* Submenu */}
+      {item.submenu && (
+        <Collapse in={openSubmenu === index}>
+          <div className="submenu-container-user">
+            {item.submenu.map((subItem, subIndex) => (
+                 <Link
+                   key={subIndex}
+                   to={subItem.path}
+                   className="submenu-item-user nav-link"
+                   onClick={(e) => handleItemClick(e, subItem.path, false)}
+                 >
+                   <span className="submenu-icon">{subItem.icon}</span>
+                   <span className="nav-text br-text-sub">{subItem.label}</span>
+                 </Link>
+            ))}
+          </div>
+        </Collapse>
+      )}
+    </div>
+  ))}
 
-export default AdminLeftNav
+        </Nav>
+
+        <div className="sidebar-footer">
+          <Nav.Link
+            className="nav-item logout-btn"
+            onClick={() => {
+              if (typeof logout === "function") {
+                logout();
+                navigate("/login");
+              }
+            }}
+          >
+            <span className="nav-icon">
+              <FaSignOutAlt />
+            </span>
+            <span className="nav-text">Logout</span>
+          </Nav.Link>
+        </div>
+      </div>
+
+      {/*  Mobile / Tablet Sidebar (Offcanvas) */}
+  <Offcanvas
+  show={(isMobile || isTablet) && sidebarOpen}
+  onHide={() => setSidebarOpen(false)}
+  className="user-mobile-offcanvas"
+  placement="start"
+  backdrop={true}
+  scroll={false}
+  enforceFocus={false} //  ADD THIS LINE — fixes close button focus issue
+>
+  <Offcanvas.Header closeButton className="user-offcanvas-header">
+    <Offcanvas.Title className="br-off-title">Menu</Offcanvas.Title>
+  </Offcanvas.Header>
+
+  <Offcanvas.Body className="user-offcanvas-body">
+    <Nav className="flex-column">
+      {menuItems.map((item, index) => (
+        <div key={index}>
+          {item.submenu ? (
+            <Nav.Link
+              className={`nav-item ${item.active ? "active" : ""}`}
+              onClick={() => toggleSubmenu(index)}
+            >
+              <span className="nav-icon">{item.icon}</span>
+              <span className="nav-text br-nav-text-mob">{item.label}</span>
+              <span className="submenu-arrow">
+                {openSubmenu === index ? <FaChevronDown /> : <FaChevronRight />}
+              </span>
+            </Nav.Link>
+          ) : (
+             <Link
+               to={item.path}
+               className={`nav-item nav-link ${item.active ? "active" : ""}`}
+               onClick={(e) => handleItemClick(e, item.path, item.active)}
+             >
+               <span className="nav-icon">{item.icon}</span>
+               <span className="nav-text br-nav-text-mob">{item.label}</span>
+             </Link>
+          )}
+
+          {item.submenu && (
+            <Collapse in={openSubmenu === index}>
+              <div className="submenu-container-user">
+                {item.submenu.map((subItem, subIndex) => (
+                   <Link
+                     key={subIndex}
+                     to={subItem.path}
+                     className="submenu-item nav-link"
+                     onClick={(e) => handleItemClick(e, subItem.path, false)}
+                   >
+                     <span className="nav-text">{subItem.label}</span>
+                   </Link>
+                ))}
+              </div>
+            </Collapse>
+          )}
+        </div>
+      ))}
+    </Nav>
+  </Offcanvas.Body>
+</Offcanvas>
+
+    </>
+  );
+};
+
+export default AdminLeftnav;

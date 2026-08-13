@@ -32,7 +32,7 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    navigate('/AdminDashboard');
+    navigate('/AdminDashBoard');
   };
 
   return (

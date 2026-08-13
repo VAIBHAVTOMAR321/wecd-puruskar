@@ -1,49 +1,131 @@
-import React from 'react'
-import { Navbar, Nav, Button } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Badge,
+  Dropdown,
+  Image,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
+import {
+  FaBars,
+  FaBell,
+  FaUserCircle,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const AdminTopNav = () => {
-  const navigate = useNavigate()
+
+
+function AdminTopNav({ toggleSidebar }) {
+  const navigate = useNavigate();
+
+  // State to track if the API itself failed (404/500)
+  const [apiError, setApiError] = useState(null);
+
+  // User Profile State
+  const [userDetails, setUserDetails] = useState({
+    full_name: "",
+    profile_picture: null,
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [imageError, setImageError] = useState(false);
+
+ 
+
+  const getDisplayName = () => {
+    return userDetails.full_name || "Admin";
+  };
+
+  const getUserPhotoUrl = () => {
+    const profilePicture = userDetails.profile_picture;
+    if (profilePicture && !imageError) {
+      return profilePicture;
+    }
+    return null;
+  };
+
+
 
   const handleLogout = () => {
-    navigate('/login')
-  }
+    navigate("/", { replace: true });
+  };
 
   return (
-    <Navbar bg="white" expand="md" className="admin-top-nav shadow-sm border-bottom">
-      <Navbar.Brand href="/AdminDashboard" className="ms-3 d-flex align-items-center">
-        {/* <img src={Logo} alt="BrainRock Logo" className="admin-logo-img me-3" /> */}
-        <div className="admin-logo-text">
-          <div className="admin-logo-main">Data Resource Center</div>
-          <div className="admin-logo-sub">Empowering Children Through Information</div>
-        </div>
-      </Navbar.Brand>
-      
-      {/* Logout button for mobile view - visible only on sm and smaller screens */}
-      <Button 
-        variant="primary" 
-        onClick={handleLogout}
-        className="logout-btn d-flex d-md-none align-items-center ms-3"
-        size="sm"
-      >
-        <i className="bi bi-box-arrow-right me-1"></i> Logout
-      </Button>
-      
-      <Navbar.Collapse id="admin-topnav" className="justify-content-end">
-        <Nav className="align-items-center">
-          {/* Logout button for desktop view - visible only on md and larger screens */}
-          <Button 
-            variant="primary" 
-            onClick={handleLogout}
-            className="logout-btn d-none d-md-flex align-items-center"
-            size="sm"
-          >
-            <i className="bi bi-box-arrow-right me-1"></i> Logout
-          </Button>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  )
-}
+    <header className="dashboard-header">
+      <Container fluid>
+        <Row className="align-items-center">
+          <Col xs="auto">
+            <Button
+              variant="light"
+              className="sidebar-toggle"
+              onClick={toggleSidebar}
+            >
+              <FaBars />
+            </Button>
+          </Col>
 
-export default AdminTopNav
+          <Col>
+            {error && (
+              <Alert variant="warning" className="mb-0 py-1">
+                <small>{error}</small>
+              </Alert>
+            )}
+          </Col>
+          
+          <Col xs="auto">
+             <div className="header-actions d-flex align-items-center">
+                
+              
+
+                {/* User Profile Dropdown */}
+                <Dropdown align="end">
+                  <Dropdown.Toggle
+                    variant="light"
+                    className="user-profile-btn d-flex align-items-center"
+                    style={{
+                      gap: "4px",
+                      border: "1px solid #e5e7eb",
+                      padding: "2px 6px",
+                    }}
+                  >
+                    {getUserPhotoUrl() ? (
+                      <Image
+                        src={getUserPhotoUrl()}
+                        roundedCircle
+                        className="user-avatar"
+                        onError={handleImageError}
+                        style={{
+                          width: 28,
+                          height: 28,
+                          objectFit: "cover",
+                        }}
+                        alt="User"
+                      />
+                    ) : (
+                      <FaUserCircle style={{ fontSize: 24, color: "rgb(250 93 77)" }} />
+                    )}
+                    {/* Name hidden on mobile to save space for other buttons, but Avatar remains visible */}
+                    <span style={{ fontWeight: 500, fontSize: "0.85rem" }} className="">
+                      {getDisplayName()}
+                    </span>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={handleLogout}>
+                      <FaSignOutAlt className="me-2" /> Logout
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </header>
+    );
+  }
+  
+  export default AdminTopNav;
