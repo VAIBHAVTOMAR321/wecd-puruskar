@@ -73,7 +73,7 @@
 
 .footer-desc {
   font-size: 13px;
-  color: #5a6577;
+  color: #ffff;
   line-height: 1.7;
   margin-bottom: 16px;
 }
@@ -127,7 +127,7 @@
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: #5a6577;
+  color: #ffff;
   text-decoration: none;
   padding: 4px 0;
   transition: all 0.25s ease;
@@ -140,7 +140,7 @@
 
 .footer-link-arrow {
   font-size: 8px;
-  color: #b0b8c4;
+  color: #ffff;
   transition: all 0.25s ease;
 }
 
@@ -151,7 +151,7 @@
 
 .footer-res-icon {
   font-size: 12px;
-  color: #7b8794;
+  color: #ffff;
   transition: color 0.25s ease;
 }
 
@@ -199,7 +199,7 @@
 
 .footer-contact-item span {
   font-size: 12px;
-  color: #5a6577;
+  color: #ffff;
   line-height: 1.4;
 }
 
