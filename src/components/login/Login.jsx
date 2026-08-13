@@ -26,6 +26,7 @@ const departments = [
 
 function Login() {
   const [selectedDepartment, setSelectedDepartment] = useState('');
+  const [loginType, setLoginType] = useState('state');
 
   return (
     <div className="login-page">
@@ -47,9 +48,32 @@ function Login() {
                 <h3>{selectedDepartment || 'DRC Portal Login'}</h3>
                 <p>Welcome to the Data Resource Center</p>
               </Card.Header>
-             
-                <Form>
-                  <Form.Group className="mb-4" controlId="formDepartment">
+              <Card.Body>
+                <Form className="login-form">
+                  <Form.Group className="mb-3">
+                    <Form.Label>Login as</Form.Label>
+                    <div className="d-flex">
+                      <Form.Check
+                        inline
+                        label="State Admin"
+                        name="loginType"
+                        type="radio"
+                        id="state-admin-radio"
+                        value="state"
+                        checked={loginType === 'state'}
+                        onChange={(e) => setLoginType(e.target.value)} />
+                      <Form.Check
+                        inline
+                        label="District Admin"
+                        name="loginType"
+                        type="radio"
+                        id="district-admin-radio"
+                        value="district"
+                        checked={loginType === 'district'}
+                        onChange={(e) => setLoginType(e.target.value)} />
+                    </div>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formDepartment">
                     <Form.Label>Select Department</Form.Label>
                     <Form.Select
                       aria-label="Department selection"
@@ -65,23 +89,23 @@ function Login() {
                     </Form.Select>
                   </Form.Group>
 
-                  <Form.Group className="mb-4" controlId="formEmailMobile">
+                  <Form.Group className="mb-3" controlId="formEmailMobile">
                     <Form.Label>Email or Mobile Number</Form.Label>
                     <Form.Control type="text" placeholder="Enter email or mobile" />
                   </Form.Group>
 
-                  <Form.Group className="mb-4" controlId="formPassword">
+                  <Form.Group className="mb-3" controlId="formPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                   </Form.Group>
 
-                  <div className="d-grid">
-                    <Button variant="primary" type="submit" className="primary-btn">
+                  <div className="text-center mt-4">
+                    <Button variant="primary" type="submit" className="login-submit-btn">
                       Login
                     </Button>
                   </div>
                 </Form>
-              
+              </Card.Body>
             </Card>
           </Col>
         </Row>
