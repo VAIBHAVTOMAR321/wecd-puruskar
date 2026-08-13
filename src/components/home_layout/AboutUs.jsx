@@ -244,7 +244,7 @@ function AboutUs() {
                   <span>About SRC</span>
                 </div>
                 <h1>
-                  About <span>डेटा रिसोर्स सेंटर</span>
+                  About <span>State Resource Center</span>
                 </h1>
                 <p>
                   SRC एक केंद्रीकृत डिजिटल प्लेटफॉर्म है जिसे बाल सशक्तिकरण के लिए
