@@ -36,7 +36,7 @@ function NavBar() {
               About Us
             </Nav.Link>
             <Nav.Link as={Link} to="/">
-              success story
+              Success story
             </Nav.Link>
 
           </Nav>
