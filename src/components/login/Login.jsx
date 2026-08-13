@@ -45,7 +45,7 @@ function Login() {
                 <div className="login-logo">
                   <FaDatabase />
                 </div>
-                <h3>{selectedDepartment || 'DRC Portal Login'}</h3>
+                <h4>{selectedDepartment || 'DRC Portal Login'}</h4>
                 <p>Welcome to the Data Resource Center</p>
               </Card.Header>
               <Card.Body>
