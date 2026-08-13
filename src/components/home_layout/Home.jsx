@@ -1168,88 +1168,9 @@ const handleMouseLeave = () => {
      
 
 
-      {/* =================================================
-          FOOTER
-      ================================================= */}
+     
 
-      <footer className="drc-footer">
-
-        <Container>
-
-          <Row className="g-4">
-
-            <Col lg={5}>
-
-              <div className="footer-brand">
-                <FaDatabase />
-
-                <span>
-                  Data Resource Center
-                </span>
-              </div>
-
-              <p>
-                बच्चों के सशक्तिकरण, संरक्षण, शिक्षा और
-                कल्याण से संबंधित जानकारी का केंद्रीकृत डिजिटल प्लेटफॉर्म।
-              </p>
-
-            </Col>
-
-
-            <Col sm={6} lg={2}>
-
-              <h6>Quick Links</h6>
-
-              <a href="#home">Home</a>
-              <a href="#departments">Departments</a>
-              <a href="#schemes">Schemes</a>
-
-            </Col>
-
-
-            <Col sm={6} lg={2}>
-
-              <h6>Resources</h6>
-
-              <a href="#education">Education</a>
-              <a href="#protection">Child Protection</a>
-              <a href="#benefits">Benefits</a>
-
-            </Col>
-
-
-            <Col lg={3}>
-
-              <h6>DRC</h6>
-
-              <p className="footer-contact">
-                Government Information Resource Platform
-              </p>
-
-              <p className="footer-contact">
-                Email: support@drc.gov.in
-              </p>
-
-            </Col>
-
-          </Row>
-
-
-          <div className="footer-bottom">
-
-            <span>
-              © {new Date().getFullYear()} Data Resource Center
-            </span>
-
-            <span>
-              All Rights Reserved
-            </span>
-
-          </div>
-
-        </Container>
-
-      </footer>
+   
 
     </div>
   );

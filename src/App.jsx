@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import SuccessStory from "./components/home_layout/SuccessStory";
 import AboutUs from "./components/home_layout/AboutUs";
+import Footer from "./components/footer/Footer";
 
 // A wrapper component to conditionally render the NavBar
 const AppContent = () => {
@@ -36,6 +37,7 @@ const AppContent = () => {
         <Route path="/AdminDashboard" element={<AdminDashBoard />} />
         {/* Add other admin routes from AdminLeftNav here as needed */}
       </Routes>
+      <Footer />
     </>
   );
 };
