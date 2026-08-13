@@ -76,34 +76,12 @@ const AdminLeftnav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavCl
       {
         icon: <FaTachometerAlt />,
         label: "DashBoard",
-        path: "/AdminDashboard",
+        path: "/AdminDashBoard",
         active: true,
       },
-      {
-        icon: <FaServer />,
-        label: "All Services",
-        path: "/AllServices",
-      },
-      {
-        icon: <FaCube />,
-        label: "Our Products",
-        path: "/AllProducts",
-      },
-      {
-        icon: <FaProjectDiagram />,
-        label: "Our Projects",
-        path: "/AllProjects",
-      },
-      {
-        icon: <FaUsersCog />, // Using FaUsersCog for Our Team
-        label: "Our Team",
-        path: "/OurTeam", // New path for OurTeam component
-      },
-      {
-        icon: <FaQuestionCircle />,
-        label: "Queries",
-        path: "/Query",
-      }, 
+      
+      
+      
      ];
 
   //  Auto-close sidebar when switching to mobile or tablet
