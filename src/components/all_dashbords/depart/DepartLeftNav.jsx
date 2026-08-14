@@ -44,7 +44,7 @@ import {
 
 
 
-const AdminLeftnav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClick }) => {
+const DepartLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClick }) => {
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -243,4 +243,4 @@ const AdminLeftnav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavCl
   );
 };
 
-export default AdminLeftnav;
+export default DepartLeftNav;

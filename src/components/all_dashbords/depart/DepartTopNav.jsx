@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function AdminTopNav({ toggleSidebar }) {
+function DepartTopNav({ toggleSidebar }) {
   const navigate = useNavigate();
 
   // State to track if the API itself failed (404/500)
@@ -128,4 +128,4 @@ function AdminTopNav({ toggleSidebar }) {
     );
   }
   
-  export default AdminTopNav;
+  export default DepartTopNav;
