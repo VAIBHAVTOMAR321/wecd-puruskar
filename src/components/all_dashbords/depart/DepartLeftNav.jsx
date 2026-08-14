@@ -33,7 +33,6 @@ import {
 
 import "../../../../src/assets/css/adminleftnav.css";
 
-
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   FaInfoCircle,
@@ -41,15 +40,10 @@ import {
   
 } from "react-icons/fa";
 
-
-
-
 const DepartLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClick }) => {
   
   const navigate = useNavigate();
   const location = useLocation();
-
- 
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const toggleSubmenu = (index) => {
     setOpenSubmenu(openSubmenu === index ? null : index);
@@ -71,7 +65,6 @@ const DepartLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavC
       setSidebarOpen(false);
     }
   };
-
  const menuItems = [
       {
         icon: <FaTachometerAlt />,
@@ -79,9 +72,6 @@ const DepartLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavC
         path: "/AdminDashBoard",
         active: true,
       },
-      
-      
-      
      ];
 
   //  Auto-close sidebar when switching to mobile or tablet

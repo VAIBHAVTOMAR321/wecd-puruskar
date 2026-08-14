@@ -18,24 +18,20 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
-
 function StateTopNav({ toggleSidebar }) {
   const navigate = useNavigate();
 
   // State to track if the API itself failed (404/500)
   const [apiError, setApiError] = useState(null);
-
   // User Profile State
   const [userDetails, setUserDetails] = useState({
     full_name: "",
     profile_picture: null,
   });
+  
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imageError, setImageError] = useState(false);
-
- 
 
   const getDisplayName = () => {
     return userDetails.full_name || "Sate Admin";
