@@ -167,6 +167,12 @@ const ChildWelfareCommiRegi = () => {
       files,
     } = e.target;
 
+    let processedValue = value;
+    if (name === 'cncp_child_aadhaar_number') {
+      // Allow only digits
+      processedValue = value.replace(/\D/g, '');
+    }
+
     setFormData((prev) => ({
       ...prev,
 
@@ -175,7 +181,7 @@ const ChildWelfareCommiRegi = () => {
       [name]:
         type === "file"
           ? files?.[0] || null
-          : value,
+          : processedValue,
     }));
 
     setError("");
@@ -597,6 +603,8 @@ const ChildWelfareCommiRegi = () => {
                         }
                         placeholder="Enter state"
                         required
+                        disabled
+                        readOnly
                       />
 
                     </Form.Group>
