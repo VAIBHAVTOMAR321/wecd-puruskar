@@ -5,9 +5,27 @@ import { FaDatabase } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 import ulLogo from "../../assets/images/uk_logo.jpeg"
 
+const translations = {
+  en: {
+    brand: "State Resource Center",
+    home: "Home",
+    about: "About Us",
+    success: "Success Story",
+    login: "Login"
+  },
+  hi: {
+    brand: "राज्य संसाधन केंद्र",
+    home: "होम",
+    about: "हमारे बारे में",
+    success: "सफलता की कहानी",
+    login: "लॉगिन"
+  }
+};
+
 function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const { language, toggleLanguage } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +49,7 @@ function NavBar() {
             className="d-inline-block align-top me-2"
             alt="SRC Logo"
           />
-          State Resource Center
+          {t.brand}
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -43,15 +61,15 @@ function NavBar() {
 
             {/* SERVICES */}
             <Nav.Link as={NavLink} to="/" end className="nav-link-custom">
-              Home
+              {t.home}
             </Nav.Link>
 
             {/* BENEFITS */}
             <Nav.Link as={NavLink} to="/AboutUs" className="nav-link-custom">
-              About Us
+              {t.about}
             </Nav.Link>
             <Nav.Link as={NavLink} to="/SuccessStory" className="nav-link-custom">
-              Success story
+              {t.success}
             </Nav.Link>
 
           </Nav>
@@ -73,7 +91,7 @@ function NavBar() {
               className="primary-btn"
               size="sm"
             >
-              Login
+              {t.login}
             </Button>
           </Nav>
 

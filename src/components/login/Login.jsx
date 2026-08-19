@@ -3,7 +3,65 @@ import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { FaDatabase, FaUserShield, FaBuilding, FaGlobe, FaKey } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
 import './Login.css';
+
+const translations = {
+  en: {
+    imageTitle: "State Resource Center",
+    imageSubtitle: "Empowering Children Through Information",
+    loginTitle: "SRC Portal Login",
+    welcome: "Welcome! Please login to your account.",
+    loginAs: "Login as",
+    stateAdmin: "State Admin",
+    districtAdmin: "District Admin",
+    cwc: "CWC",
+    department: "Department",
+    username: "Username",
+    uttarakhand: "Uttarakhand",
+    selectDepartment: "Select Department",
+    loading: "Loading...",
+    selectDepartmentPlaceholder: "Select Department...",
+    errorLoadingDepartments: "Error loading departments",
+    couldNotLoadDepartments: "Could not load departments. Please try again later.",
+    selectDistrict: "Select District",
+    selectDistrictPlaceholder: "Select District...",
+    errorLoadingDistricts: "Error loading districts",
+    couldNotLoadDistricts: "Could not load districts. Please try again later.",
+    password: "Password",
+    loginButton: "Login",
+    invalidLoginType: "Invalid login type selected.",
+    pleaseSelect: "Please select a",
+    loginFailed: "Login failed. Please check your credentials.",
+  },
+  hi: {
+    imageTitle: "राज्य संसाधन केंद्र",
+    imageSubtitle: "सूचना के माध्यम से बच्चों को सशक्त बनाना",
+    loginTitle: "एसआरसी पोर्टल लॉगिन",
+    welcome: "आपका स्वागत है! कृपया अपने खाते में लॉगिन करें।",
+    loginAs: "इस रूप में लॉगिन करें",
+    stateAdmin: "राज्य व्यवस्थापक",
+    districtAdmin: "जिला व्यवस्थापक",
+    cwc: "सीडब्ल्यूसी",
+    department: "विभाग",
+    username: "उपयोगकर्ता नाम",
+    uttarakhand: "उत्तराखंड",
+    selectDepartment: "विभाग चुनें",
+    loading: "लोड हो रहा है...",
+    selectDepartmentPlaceholder: "विभाग चुनें...",
+    errorLoadingDepartments: "विभाग लोड करने में त्रुटि",
+    couldNotLoadDepartments: "विभाग लोड नहीं हो सके। कृपया बाद में पुनः प्रयास करें।",
+    selectDistrict: "जिला चुनें",
+    selectDistrictPlaceholder: "जिला चुनें...",
+    errorLoadingDistricts: "जिले लोड करने में त्रुटि",
+    couldNotLoadDistricts: "जिले लोड नहीं हो सके। कृपया बाद में पुनः प्रयास करें।",
+    password: "पासवर्ड",
+    loginButton: "लॉगिन",
+    invalidLoginType: "अमान्य लॉगिन प्रकार चुना गया।",
+    pleaseSelect: "कृपया एक चुनें",
+    loginFailed: "लॉगिन विफल। कृपया अपनी साख जांचें।",
+  }
+};
 
 function Login() {
   const [departments, setDepartments] = useState([]);
@@ -16,6 +74,8 @@ function Login() {
   const [error, setError] = useState({ api: null, departments: null, districts: null });
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { language } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const fetchDepartments = async () => {
@@ -82,12 +142,12 @@ function Login() {
         username = selectedDepartment;
         break;
       default:
-        setError(prev => ({ ...prev, api: 'Invalid login type selected.' }));
+        setError(prev => ({ ...prev, api: t.invalidLoginType }));
         return;
     }
 
     if ((loginType === 'district' || loginType === 'cwc' || loginType === 'department') && !username) {
-      setError(prev => ({ ...prev, api: `Please select a ${loginType}.` }));
+      setError(prev => ({ ...prev, api: `${t.pleaseSelect} ${loginType}.` }));
       return;
     }
 
@@ -99,7 +159,7 @@ function Login() {
       });
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.detail || 'Login failed. Please check your credentials.');
+        throw new Error(data.detail || t.loginFailed);
       }
 
       login(data); // Store user data and tokens
@@ -131,12 +191,23 @@ function Login() {
     password,
     navigate,
     login,
+    t,
   ]);
 
   const getLoginTitle = () => {
-    if (loginType === 'department' && selectedDepartment) return selectedDepartment;
-    if ((loginType === 'district' || loginType === 'cwc') && selectedDistrict) return selectedDistrict;
-    return 'SRC Portal Login';
+    if (loginType === 'department' && selectedDepartment) {
+      if (language === 'hi') return selectedDepartment;
+      const dept = departments.find(d => d.department_hindi === selectedDepartment);
+      return dept ? dept.department : selectedDepartment;
+    }
+    if ((loginType === 'district' || loginType === 'cwc') && selectedDistrict) {
+      if (language === 'hi') {
+        const dist = districts.find(d => d.district === selectedDistrict);
+        return dist ? dist.district_hindi || selectedDistrict : selectedDistrict;
+      }
+      return selectedDistrict;
+    }
+    return t.loginTitle;
   };
 
   return (
@@ -145,8 +216,8 @@ function Login() {
         <Row className="g-0 login-container align-items-stretch">
           <Col lg={6} className="login-image-col d-none d-lg-flex">
             <div className="login-image-overlay">
-              <h2 className="login-image-title">State Resource Center</h2>
-              <p>Empowering Children Through Information</p>
+              <h2 className="login-image-title">{t.imageTitle}</h2>
+              <p>{t.imageSubtitle}</p>
             </div>
           </Col>
 
@@ -156,15 +227,15 @@ function Login() {
                 <div className="text-center mb-4">
                   <FaDatabase size={40} className="text-primary mb-3" />
                   <h3 className="fw-bold">{getLoginTitle()}</h3>
-                  <p className="text-muted">Welcome! Please login to your account.</p>
+                  <p className="text-muted">{t.welcome}</p>
                 </div>
                 <Form className="login-form" onSubmit={handleLogin}>
                   <Form.Group className="mb-3">
-                    <Form.Label>Login as</Form.Label>
+                    <Form.Label>{t.loginAs}</Form.Label>
                     <div className="d-flex flex-wrap">
                       <Form.Check
                         className="me-3 mb-2"
-                        label="State Admin"
+                        label={t.stateAdmin}
                         name="loginType"
                         type="radio"
                         id="state-admin-radio"
@@ -173,7 +244,7 @@ function Login() {
                         onChange={(e) => setLoginType(e.target.value)} />
                       <Form.Check
                         className="me-3 mb-2"
-                        label="District Admin"
+                        label={t.districtAdmin}
                         name="loginType"
                         type="radio"
                         id="district-admin-radio"
@@ -182,7 +253,7 @@ function Login() {
                         onChange={(e) => setLoginType(e.target.value)} />
                       <Form.Check
                         className="me-3 mb-2"
-                        label="CWC"
+                        label={t.cwc}
                         name="loginType"
                         type="radio"
                         id="cwc-admin-radio"
@@ -191,7 +262,7 @@ function Login() {
                         onChange={(e) => setLoginType(e.target.value)} />
                       <Form.Check
                         className="mb-2"
-                        label="Department"
+                        label={t.department}
                         name="loginType"
                         type="radio"
                         id="department-admin-radio"
@@ -203,10 +274,10 @@ function Login() {
 
                   {loginType === 'state' && (
                     <Form.Group className="mb-3" controlId="formUsername">
-                      <Form.Label><FaUserShield className="me-2" />Username</Form.Label>
+                      <Form.Label><FaUserShield className="me-2" />{t.username}</Form.Label>
                       <Form.Control
                         type="text"
-                        value="Uttarakhand"
+                        value={t.uttarakhand}
                         readOnly
                         disabled
                       />
@@ -215,57 +286,53 @@ function Login() {
 
                   {loginType === 'department' && (
                     <Form.Group className="mb-3" controlId="formDepartment">
-                      <Form.Label><FaBuilding className="me-2" />Select Department</Form.Label>
+                      <Form.Label><FaBuilding className="me-2" />{t.selectDepartment}</Form.Label>
                       <Form.Select
                         aria-label="Department selection"
                         value={selectedDepartment}
                         onChange={(e) => setSelectedDepartment(e.target.value)}
                         required>
-                        <option value="">{loading.departments ? 'Loading...' : 'Select Department...'}</option>
-                        {error.departments && <option value="" disabled>Error loading departments</option>}
+                        <option value="">{loading.departments ? t.loading : t.selectDepartmentPlaceholder}</option>
+                        {error.departments && <option value="" disabled>{t.errorLoadingDepartments}</option>}
                         {!loading.departments && !error.departments && departments.map((dept) => (
-                          <option key={dept.department} value={dept.department_hindi}>
-                            {dept.department_hindi}
+                          <option key={dept.department} value={language === 'en' ? dept.department : dept.department_hindi}>
+                            {language === 'en' ? dept.department : dept.department_hindi}
                           </option>
                         ))}
                       </Form.Select>
                       {error.departments && <Form.Text className="text-danger">
-                        Could not load departments. Please try again later.
+                        {t.couldNotLoadDepartments}
                       </Form.Text>}
                     </Form.Group>
                   )}
 
                   {(loginType === 'district' || loginType === 'cwc') && (
                     <Form.Group className="mb-3" controlId="formDistrict">
-                      <Form.Label><FaGlobe className="me-2" />Select District</Form.Label>
-                      <Form.Select
-                        aria-label="District selection"
-                        value={selectedDistrict}
-                        onChange={(e) => setSelectedDistrict(e.target.value)}
-                        required>
-                        <option value="">{loading.districts ? 'Loading...' : 'Select District...'}</option>
-                        {error.districts && <option value="" disabled>Error loading districts</option>}
+                      <Form.Label><FaGlobe className="me-2" />{t.selectDistrict}</Form.Label>
+                      <Form.Select aria-label="District selection" value={selectedDistrict} onChange={(e) => setSelectedDistrict(e.target.value)} required>
+                        <option value="">{loading.districts ? t.loading : t.selectDistrictPlaceholder}</option>
+                        {error.districts && <option value="" disabled>{t.errorLoadingDistricts}</option>}
                         {!loading.districts && !error.districts && districts.map((dist) => (
-                          <option key={dist.district} value={dist.district}>
-                            {dist.district}
+                          <option key={dist.district} value={language === 'en' ? dist.district : dist.district_hindi || dist.district}>
+                            {language === 'en' ? dist.district : dist.district_hindi || dist.district}
                           </option>
                         ))}
                       </Form.Select>
                       {error.districts && <Form.Text className="text-danger">
-                        Could not load districts. Please try again later.
+                        {t.couldNotLoadDistricts}
                       </Form.Text>}
                     </Form.Group>
                   )}
 
                   <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label><FaKey className="me-2" />Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <Form.Label><FaKey className="me-2" />{t.password}</Form.Label>
+                    <Form.Control type="password" placeholder={t.password} value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </Form.Group>
 
                   <div className="text-center mt-4">
                     {error.api && <p className="text-danger text-center">{error.api}</p>}
                     <Button variant="primary" type="submit" className="login-submit-btn">
-                      Login
+                      {t.loginButton}
                     </Button>
                   </div>
                 </Form>
