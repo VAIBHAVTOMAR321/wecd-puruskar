@@ -150,9 +150,9 @@ function Login() {
             </div>
           </Col>
 
-          <Col lg={6} className="login-form-col d-flex align-items-center justify-content-center py-5">
-            <Card className="login-card border-0 shadow-lg w-100" style={{ maxWidth: '500px' }}>
-              <Card.Body className="p-4 p-md-5">
+          <Col lg={6} className="login-form-col d-flex align-items-center justify-content-center p-2">
+            <div className="login-card border-0 w-100">
+              <div className="p-3">
                 <div className="text-center mb-4">
                   <FaDatabase size={40} className="text-primary mb-3" />
                   <h3 className="fw-bold">{getLoginTitle()}</h3>
@@ -269,8 +269,8 @@ function Login() {
                     </Button>
                   </div>
                 </Form>
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>
