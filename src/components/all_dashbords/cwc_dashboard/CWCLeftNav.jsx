@@ -79,6 +79,12 @@ const CWCLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClic
         path: "/AdminDashBoard",
         active: true,
       },
+       {
+        icon: <FaTachometerAlt />,
+        label: "CWC Registration",
+        path: "/ChildWelfareCommiRegi",
+        active: true,
+      },
       
       
       

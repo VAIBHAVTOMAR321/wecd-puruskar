@@ -1,0 +1,124 @@
+.cwc-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e6e9ef;
+}
+
+.cwc-page-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.cwc-page-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.cwc-form-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.form-section-title {
+  font-size: 17px;
+  font-weight: 700;
+  text-align: justify;
+  color: #1e3a8a;
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.cwc-form-card .form-label {
+  font-size: 14px;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.cwc-back-btn{
+    font-size:12px;
+}
+
+.cwc-form-card .form-control,
+.cwc-form-card .form-select {
+  min-height: 44px;
+  border-radius: 7px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.cwc-form-card .form-control:focus,
+.cwc-form-card .form-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.12);
+}
+
+.cwc-form-card input[type="file"] {
+  padding: 8px 10px;
+  background: #ffffff;
+}
+
+.cwc-form-card .form-text {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.district-loading {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.cwc-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cwc-form-actions .btn {
+  min-width: 120px;
+  min-height: 42px;
+  border-radius: 7px;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .cwc-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cwc-page-title {
+    font-size: 20px;
+  }
+
+  .cwc-back-btn {
+    width: 100%;
+  }
+
+  .cwc-form-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .cwc-form-actions .btn {
+    width: 100%;
+    margin: 0 !important;
+  }
+}

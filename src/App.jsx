@@ -19,11 +19,12 @@ import StateDashBoard from "./components/all_dashbords/state_Admin/StateDashBoar
 import DepartDashBoard from "./components/all_dashbords/depart/DepartDashBoard";
 import CWCDashBoard from "./components/all_dashbords/cwc_dashboard/CWCDashBoard";
 import { LanguageProvider } from "./context/LanguageContext";
+import ChildWelfareCommiRegi from "./components/all_dashbords/cwc_dashboard/ChildWelfareCommiRegi";
 
 // A wrapper component to conditionally render the NavBar
 const AppContent = () => {
   const location = useLocation();
-  const isDisRoute = ["/DisDashBoard", "/DepartDashBoard", "/StateDashBoard", "/CWCDashBoard"].some((route) =>
+  const isDisRoute = ["/DisDashBoard", "/DepartDashBoard", "/StateDashBoard", "/ChildWelfareCommiRegi","/CWCDashBoard"].some((route) =>
     location.pathname.startsWith(route)
   );
 
@@ -44,6 +45,8 @@ const AppContent = () => {
           <Route path="/StateDashBoard" element={<StateDashBoard />} />
           <Route path="/DepartDashBoard" element={<DepartDashBoard />} />
           <Route path="/CWCDashBoard" element={<CWCDashBoard />} />
+          <Route path="/ChildWelfareCommiRegi" element={<ChildWelfareCommiRegi />} />
+          
           {/* Add other Dis routes from DisLeftNav here as needed */}
         </Routes>
       </div>
