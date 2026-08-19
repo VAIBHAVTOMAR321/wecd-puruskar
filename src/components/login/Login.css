@@ -7,7 +7,9 @@
     justify-content: center;
     padding: 2rem 0;
 }
-
+.form-check-label{
+    font-size:14px;
+}
 .login-container {
     background-color: #fff;
     border-radius: 15px;
@@ -126,7 +128,7 @@
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: var(--drc-text);
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
 }
 
