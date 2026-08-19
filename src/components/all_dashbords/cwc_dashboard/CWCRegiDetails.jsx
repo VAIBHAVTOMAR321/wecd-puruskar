@@ -162,49 +162,74 @@ const CWCRegiDetails = () => {
            {selectedRegistration && (
              <Modal show={showModal} onHide={handleCloseModal} size="lg">
                <Modal.Header closeButton>
-                 <Modal.Title>Registration Details - {selectedRegistration.form_id}</Modal.Title>
+                 <Modal.Title className="text-primary fw-bold">Registration Details - {selectedRegistration.form_id}</Modal.Title>
                </Modal.Header>
                <Modal.Body>
-                 <Row>
-                   <Col md={6}>
-                     <p><strong>State:</strong> {selectedRegistration.state}</p>
-                     <p><strong>District:</strong> {selectedRegistration.district}</p>
-                     <p><strong>CWC Name:</strong> {selectedRegistration.child_welfare_committee_name}</p>
-                     <p><strong>CWC Number:</strong> {selectedRegistration.child_welfare_committee_number}</p>
+                 <h5 className="mb-3 text-secondary">Committee & Child Information</h5>
+                 <Row className="mb-4">
+                   <Col md={6} className="mb-2">
+                     <strong>State:</strong> {selectedRegistration.state}
                    </Col>
-                   <Col md={6}>
-                     <p><strong>CNCP Child Enrollment No.:</strong> {selectedRegistration.cncp_child_enroll_number}</p>
-                     <p><strong>CNCP Child Aadhaar No.:</strong> {selectedRegistration.cncp_child_aadhaar_number}</p>
-                     <p><strong>Status:</strong> <Badge bg={selectedRegistration.status === 'pending' ? 'warning' : 'success'}>{selectedRegistration.status}</Badge></p>
-                     <p><strong>Registration Date:</strong> {new Date(selectedRegistration.created_at).toLocaleDateString()}</p>
+                   <Col md={6} className="mb-2">
+                     <strong>District:</strong> {selectedRegistration.district}
+                   </Col>
+                   <Col md={6} className="mb-2">
+                     <strong>CWC Name:</strong> {selectedRegistration.child_welfare_committee_name}
+                   </Col>
+                   <Col md={6} className="mb-2">
+                     <strong>CWC Number:</strong> {selectedRegistration.child_welfare_committee_number}
+                   </Col>
+                   <Col md={6} className="mb-2">
+                     <strong>CNCP Child Enrollment No.:</strong> {selectedRegistration.cncp_child_enroll_number}
+                   </Col>
+                   <Col md={6} className="mb-2">
+                     <strong>CNCP Child Aadhaar No.:</strong> {selectedRegistration.cncp_child_aadhaar_number}
+                   </Col>
+                   <Col md={6} className="mb-2">
+                     <strong>Status:</strong> <Badge bg={selectedRegistration.status === 'pending' ? 'warning' : 'success'}>{selectedRegistration.status}</Badge>
+                   </Col>
+                   <Col md={6} className="mb-2">
+                     <strong>Registration Date:</strong> {new Date(selectedRegistration.created_at).toLocaleDateString()}
                    </Col>
                  </Row>
                  <hr />
-                 <h5>Uploaded Documents</h5>
-                 <Row>
-                    <Col md={4} className="mb-3">
-                        <strong>Child Details:</strong><br/>
-                        {renderFileLink(selectedRegistration.cncp_child_details, 'View Document')}
+                 <h5 className="mb-3 text-secondary">Uploaded Documents</h5>
+                 <Row className="g-3">
+                    <Col md={6} lg={4}>
+                        <div className="document-item p-3 border rounded bg-light">
+                            <strong>Child Details:</strong><br/>
+                            {renderFileLink(selectedRegistration.cncp_child_details, 'View Document')}
+                        </div>
                     </Col>
-                    <Col md={4} className="mb-3">
-                        <strong>Home Verification:</strong><br/>
-                        {renderFileLink(selectedRegistration.home_verification, 'View Document')}
+                    <Col md={6} lg={4}>
+                        <div className="document-item p-3 border rounded bg-light">
+                            <strong>Home Verification:</strong><br/>
+                            {renderFileLink(selectedRegistration.home_verification, 'View Document')}
+                        </div>
                     </Col>
-                    <Col md={4} className="mb-3">
-                        <strong>SIR:</strong><br/>
-                        {renderFileLink(selectedRegistration.sir, 'View Document')}
+                    <Col md={6} lg={4}>
+                        <div className="document-item p-3 border rounded bg-light">
+                            <strong>SIR:</strong><br/>
+                            {renderFileLink(selectedRegistration.sir, 'View Document')}
+                        </div>
                     </Col>
-                    <Col md={4} className="mb-3">
-                        <strong>Rehabilitation Plan:</strong><br/>
-                        {renderFileLink(selectedRegistration.rehabilitation_plan, 'View Document')}
+                    <Col md={6} lg={4}>
+                        <div className="document-item p-3 border rounded bg-light">
+                            <strong>Rehabilitation Plan:</strong><br/>
+                            {renderFileLink(selectedRegistration.rehabilitation_plan, 'View Document')}
+                        </div>
                     </Col>
-                    <Col md={4} className="mb-3">
-                        <strong>Order Sent to Department:</strong><br/>
-                        {renderFileLink(selectedRegistration.order_sent_to_department, 'View Document')}
+                    <Col md={6} lg={4}>
+                        <div className="document-item p-3 border rounded bg-light">
+                            <strong>Order Sent to Department:</strong><br/>
+                            {renderFileLink(selectedRegistration.order_sent_to_department, 'View Document')}
+                        </div>
                     </Col>
-                    <Col md={4} className="mb-3">
-                        <strong>Follow-up on Direction:</strong><br/>
-                        {renderFileLink(selectedRegistration.follow_up_on_direction, 'View Document')}
+                    <Col md={6} lg={4}>
+                        <div className="document-item p-3 border rounded bg-light">
+                            <strong>Follow-up on Direction:</strong><br/>
+                            {renderFileLink(selectedRegistration.follow_up_on_direction, 'View Document')}
+                        </div>
                     </Col>
                  </Row>
                </Modal.Body>
