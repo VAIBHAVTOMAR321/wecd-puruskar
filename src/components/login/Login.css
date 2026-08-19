@@ -135,7 +135,7 @@
 .login-card .form-control,
 .login-card .form-select {
     min-height: 44px;
-    font-size: 15px;
+    font-size: 12px;
     box-shadow: none !important;
     border: 1px solid var(--drc-border);
     border-radius: 8px;
