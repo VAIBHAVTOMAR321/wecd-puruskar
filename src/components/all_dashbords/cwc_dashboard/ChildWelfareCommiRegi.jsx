@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Container,
   Row,
@@ -27,6 +27,7 @@ const DISTRICT_API_URL =
 
 const ChildWelfareCommiRegi = () => {
   const navigate = useNavigate();
+  const formRef = useRef(null);
 
   // ==========================================
   // SIDEBAR STATES
@@ -186,6 +187,10 @@ const ChildWelfareCommiRegi = () => {
   // ==========================================
 
   const handleReset = () => {
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+
     setFormData({
       state: "Uttarakhand",
       district: "",
@@ -414,24 +419,7 @@ const ChildWelfareCommiRegi = () => {
       // RESET FORM
       // ========================================
 
-      setFormData({
-        state: "Uttarakhand",
-        district: "",
-
-        child_welfare_committee_name: "",
-        child_welfare_committee_number: "",
-
-        cncp_child_enroll_number: "",
-        cncp_child_aadhaar_number: "",
-
-        cncp_child_details: null,
-        home_verification: null,
-        sir: null,
-        rehabilitation_plan: null,
-        order_sent_to_department: null,
-        follow_up_on_direction: null,
-      });
-
+      handleReset();
     } catch (err) {
       console.error(
         "Submit Error:",
@@ -567,8 +555,8 @@ const ChildWelfareCommiRegi = () => {
           <Card className="cwc-form-card">
 
             <Card.Body>
-
               <Form
+                ref={formRef}
                 onSubmit={handleSubmit}
                 encType="multipart/form-data"
               >
