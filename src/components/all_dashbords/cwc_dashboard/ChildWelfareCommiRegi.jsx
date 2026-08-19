@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 import CWCLeftNav from "./CWCLeftNav";
 import CWCtopNav from "./CWCTopNav";
+import "../../../../src/assets/css/cwcregis.css";
 
 const CWC_API_URL =
   "https://mahadevaaya.com/srcproject/srcproject_backend/api/cncp-child-welfare-committee/";
