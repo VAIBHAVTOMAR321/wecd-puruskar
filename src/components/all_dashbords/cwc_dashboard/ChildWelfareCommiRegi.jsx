@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
+import { useAuth } from "../../login/AuthContext";
 import CWCLeftNav from "./CWCLeftNav";
 import CWCtopNav from "./CWCTopNav";
 import "../../../../src/assets/css/cwcregis.css";
@@ -28,6 +29,7 @@ const DISTRICT_API_URL =
 const ChildWelfareCommiRegi = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
+  const { authFetch } = useAuth();
 
   // ==========================================
   // SIDEBAR STATES
@@ -113,14 +115,7 @@ const ChildWelfareCommiRegi = () => {
         setDistrictLoading(true);
         setDistrictError("");
 
-        const response = await fetch(DISTRICT_API_URL, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-        });
-
-        if (!response.ok) {
+        const response = await authFetch(DISTRICT_API_URL); if (!response.ok) {
           throw new Error("Failed to fetch districts.");
         }
 
@@ -145,7 +140,7 @@ const ChildWelfareCommiRegi = () => {
     };
 
     fetchDistricts();
-  }, []);
+  }, [authFetch]);
 
   // ==========================================
   // TOGGLE SIDEBAR
@@ -342,23 +337,10 @@ const ChildWelfareCommiRegi = () => {
       // POST REQUEST
       // ========================================
 
-      const response = await fetch(
-        CWC_API_URL,
-        {
-          method: "POST",
-
-          // IMPORTANT:
-          // Don't set Content-Type manually.
-          // Browser automatically creates:
-          // multipart/form-data; boundary=...
-
-          headers: {
-            Accept: "application/json",
-          },
-
-          body: payload,
-        }
-      );
+      const response = await authFetch(CWC_API_URL, {
+        method: "POST",
+        body: payload,
+      });
 
       // ========================================
       // API RESPONSE

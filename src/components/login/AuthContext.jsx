@@ -30,14 +30,20 @@ export const AuthProvider = ({ children }) => {
   const authFetch = async (url, options = {}) => {
     let accessToken = localStorage.getItem('accessToken');
 
+    const headers = {
+      ...options.headers,
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    // Let the browser set Content-Type for FormData
+    if (!(options.body instanceof FormData)) {
+      headers['Content-Type'] = 'application/json';
+    }
+
     // Add authorization header
     const authOptions = {
       ...options,
-      headers: {
-        ...options.headers,
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
+      headers,
     };
 
     let response = await fetch(url, authOptions);
