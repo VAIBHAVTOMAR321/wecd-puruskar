@@ -102,7 +102,7 @@ const CWCLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClic
           {sidebarOpen ? (
             <div className="logo-container">
               <div className="logo">
-                  Admin Panel
+                  CWC Panel
               </div>
             </div>
           ) : (
