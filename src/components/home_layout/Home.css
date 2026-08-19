@@ -3,11 +3,21 @@
 ===================================================== */
 
 .drc-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
     background: #fff !important;
     padding: 14px 0;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(15, 48, 87, 0.06);
     
+}
+
+.drc-navbar.navbar-scrolled {
+    padding: 10px 0;
+    box-shadow: 0 6px 20px rgba(15, 48, 87, 0.12);
 }
 
 .drc-navbar .navbar-brand {
@@ -47,6 +57,10 @@
         padding: 12px 0;
     }
 
+    .drc-navbar.navbar-scrolled {
+        padding: 10px 0;
+    }
+
     .drc-navbar .navbar-brand {
         font-size: 20px;
     }
@@ -69,6 +83,10 @@
         padding: 10px 0;
     }
 
+    .drc-navbar.navbar-scrolled {
+        padding: 8px 0;
+    }
+
     .drc-navbar .navbar-brand {
         font-size: 18px;
     }
@@ -89,6 +107,10 @@
 @media (max-width: 575px) {
     .drc-navbar {
         padding: 10px 0;
+    }
+
+    .drc-navbar.navbar-scrolled {
+        padding: 8px 0;
     }
 
     .drc-navbar .navbar-brand {

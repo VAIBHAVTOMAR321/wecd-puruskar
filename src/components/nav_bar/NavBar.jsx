@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Button, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaDatabase } from "react-icons/fa";
 import ulLogo from "../../assets/images/uk_logo.jpeg"
 
 function NavBar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <Navbar expand="lg" className="drc-navbar" sticky="top">
+    <Navbar expand="lg" className={`drc-navbar ${scrolled ? "navbar-scrolled" : ""}`} fixed="top">
       <Container>
         {/* Logo */}
         <Navbar.Brand as={Link} to="/">

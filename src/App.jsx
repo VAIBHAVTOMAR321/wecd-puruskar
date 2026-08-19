@@ -27,21 +27,23 @@ const AppContent = () => {
   return (
     <>
       {!isDisRoute && <NavBar />}
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/AboutUs" element={<AboutUs />} />
-        <Route path="/SuccessStory" element={<SuccessStory />} />
-       
+      <div className={!isDisRoute ? "main-content" : ""}>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/SuccessStory" element={<SuccessStory />} />
+          
 
-        {/* Dis Routes */}
-        <Route path="/DisDashboard" element={<DisDashBoard />} />
-        <Route path="/StateDashBoard" element={<StateDashBoard />} />
-        <Route path="/DepartDashBoard" element={<DepartDashBoard />} />
-        <Route path="/CWCDashBoard" element={<CWCDashBoard />} />
-        {/* Add other Dis routes from DisLeftNav here as needed */}
-      </Routes>
+          {/* Dis Routes */}
+          <Route path="/DisDashboard" element={<DisDashBoard />} />
+          <Route path="/StateDashBoard" element={<StateDashBoard />} />
+          <Route path="/DepartDashBoard" element={<DepartDashBoard />} />
+          <Route path="/CWCDashBoard" element={<CWCDashBoard />} />
+          {/* Add other Dis routes from DisLeftNav here as needed */}
+        </Routes>
+      </div>
       {!isDisRoute && <Footer />}
     </>
   );
