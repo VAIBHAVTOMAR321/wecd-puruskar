@@ -26,7 +26,7 @@
     color: var(--drc-primary);
 }
 
-.drc-navbar .nav-link {
+.drc-navbar .nav-link-custom {
     font-weight: 500;
     font-size: 15px;
     color: var(--drc-text);
@@ -34,8 +34,25 @@
     padding: 8px 14px;
 }
 
-.drc-navbar .nav-link:hover {
+.drc-navbar .nav-link-custom:hover {
     color: var(--drc-primary);
+}
+
+.drc-navbar .nav-link-custom.active {
+    color: var(--drc-primary);
+    font-weight: 600;
+    position: relative;
+}
+
+.drc-navbar .nav-link-custom.active::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 14px;
+    right: 14px;
+    height: 2px;
+    background: var(--drc-primary);
+    border-radius: 2px;
 }
 
 .drc-navbar .primary-btn.btn-sm {
@@ -65,7 +82,7 @@
         font-size: 20px;
     }
 
-    .drc-navbar .nav-link {
+    .drc-navbar .nav-link-custom {
         font-size: 14px;
         padding: 10px 12px;
     }
@@ -91,7 +108,7 @@
         font-size: 18px;
     }
 
-    .drc-navbar .nav-link {
+    .drc-navbar .nav-link-custom {
         font-size: 13px;
         padding: 10px 10px;
     }
@@ -117,7 +134,7 @@
         font-size: 16px;
     }
 
-    .drc-navbar .nav-link {
+    .drc-navbar .nav-link-custom {
         font-size: 13px;
         padding: 10px 8px;
     }

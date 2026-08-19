@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Button, Container, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FaDatabase } from "react-icons/fa";
 import ulLogo from "../../assets/images/uk_logo.jpeg"
 
@@ -40,15 +40,15 @@ function NavBar() {
             
 
             {/* SERVICES */}
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={NavLink} to="/" end className="nav-link-custom">
               Home
             </Nav.Link>
 
             {/* BENEFITS */}
-            <Nav.Link as={Link} to="/AboutUs">
+            <Nav.Link as={NavLink} to="/AboutUs" className="nav-link-custom">
               About Us
             </Nav.Link>
-            <Nav.Link as={Link} to="/SuccessStory">
+            <Nav.Link as={NavLink} to="/SuccessStory" className="nav-link-custom">
               Success story
             </Nav.Link>
 
