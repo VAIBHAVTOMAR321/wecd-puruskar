@@ -24,7 +24,7 @@ import ChildWelfareCommiRegi from "./components/all_dashbords/cwc_dashboard/Chil
 // A wrapper component to conditionally render the NavBar
 const AppContent = () => {
   const location = useLocation();
-  const isDisRoute = ["/DisDashBoard", "/DepartDashBoard", "/StateDashBoard", "/ChildWelfareCommiRegi","/CWCDashBoard"].some((route) =>
+  const isDisRoute = ["/DisDashBoard", "/DepartDashBoard", "/StateDashBoard", "/CWCRegiDetails", "/ChildWelfareCommiRegi","/CWCDashBoard"].some((route) =>
     location.pathname.startsWith(route)
   );
 
@@ -46,6 +46,8 @@ const AppContent = () => {
           <Route path="/DepartDashBoard" element={<DepartDashBoard />} />
           <Route path="/CWCDashBoard" element={<CWCDashBoard />} />
           <Route path="/ChildWelfareCommiRegi" element={<ChildWelfareCommiRegi />} />
+          <Route path="/CWCRegiDetails" element={<CWCRegiDetails />} />
+          
           
           {/* Add other Dis routes from DisLeftNav here as needed */}
         </Routes>
