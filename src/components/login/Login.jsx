@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
-import { FaDatabase } from 'react-icons/fa';
+import { FaDatabase, FaUserShield, FaBuilding, FaGlobe, FaKey } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import './Login.css';
@@ -150,22 +150,20 @@ function Login() {
             </div>
           </Col>
 
-          <Col lg={6} className="login-form-col">
-            <Card className="login-card">
-              <Card.Header className="login-header">
-                <div className="login-logo">
-                  <FaDatabase />
+          <Col lg={6} className="login-form-col d-flex align-items-center justify-content-center py-5">
+            <Card className="login-card border-0 shadow-lg w-100" style={{ maxWidth: '500px' }}>
+              <Card.Body className="p-4 p-md-5">
+                <div className="text-center mb-4">
+                  <FaDatabase size={40} className="text-primary mb-3" />
+                  <h3 className="fw-bold">{getLoginTitle()}</h3>
+                  <p className="text-muted">Welcome! Please login to your account.</p>
                 </div>
-                <h4>{getLoginTitle()}</h4>
-                <p>Welcome to the State Resource Center</p>
-              </Card.Header>
-              <Card.Body>
                 <Form className="login-form" onSubmit={handleLogin}>
                   <Form.Group className="mb-3">
                     <Form.Label>Login as</Form.Label>
-                    <div className="d-flex">
+                    <div className="d-flex flex-wrap">
                       <Form.Check
-                        inline
+                        className="me-3 mb-2"
                         label="State Admin"
                         name="loginType"
                         type="radio"
@@ -174,7 +172,7 @@ function Login() {
                         checked={loginType === 'state'}
                         onChange={(e) => setLoginType(e.target.value)} />
                       <Form.Check
-                        inline
+                        className="me-3 mb-2"
                         label="District Admin"
                         name="loginType"
                         type="radio"
@@ -183,7 +181,7 @@ function Login() {
                         checked={loginType === 'district'}
                         onChange={(e) => setLoginType(e.target.value)} />
                       <Form.Check
-                        inline
+                        className="me-3 mb-2"
                         label="CWC"
                         name="loginType"
                         type="radio"
@@ -192,7 +190,7 @@ function Login() {
                         checked={loginType === 'cwc'}
                         onChange={(e) => setLoginType(e.target.value)} />
                       <Form.Check
-                        inline
+                        className="mb-2"
                         label="Department"
                         name="loginType"
                         type="radio"
@@ -203,9 +201,21 @@ function Login() {
                     </div>
                   </Form.Group>
 
+                  {loginType === 'state' && (
+                    <Form.Group className="mb-3" controlId="formUsername">
+                      <Form.Label><FaUserShield className="me-2" />Username</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value="Uttarakhand"
+                        readOnly
+                        disabled
+                      />
+                    </Form.Group>
+                  )}
+
                   {loginType === 'department' && (
                     <Form.Group className="mb-3" controlId="formDepartment">
-                      <Form.Label>Select Department</Form.Label>
+                      <Form.Label><FaBuilding className="me-2" />Select Department</Form.Label>
                       <Form.Select
                         aria-label="Department selection"
                         value={selectedDepartment}
@@ -227,7 +237,7 @@ function Login() {
 
                   {(loginType === 'district' || loginType === 'cwc') && (
                     <Form.Group className="mb-3" controlId="formDistrict">
-                      <Form.Label>Select District</Form.Label>
+                      <Form.Label><FaGlobe className="me-2" />Select District</Form.Label>
                       <Form.Select
                         aria-label="District selection"
                         value={selectedDistrict}
@@ -248,12 +258,12 @@ function Login() {
                   )}
 
                   <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label><FaKey className="me-2" />Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                   </Form.Group>
 
                   <div className="text-center mt-4">
-                    {error.api && <p className="text-danger">{error.api}</p>}
+                    {error.api && <p className="text-danger text-center">{error.api}</p>}
                     <Button variant="primary" type="submit" className="login-submit-btn">
                       Login
                     </Button>
