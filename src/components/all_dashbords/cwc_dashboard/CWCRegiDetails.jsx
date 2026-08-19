@@ -309,74 +309,74 @@ const CWCRegiDetails = () => {
                    <FaFilePdf className="me-2" />
                    Uploaded Documents
                  </h5>
-                 <Row className="cwc-docs-grid">
-                    <Col lg={4} md={4} className="mb-3">
-                      <Card className="cwc-doc-card">
-                        <Card.Body>
-                          <div className="cwc-doc-icon"><FaFilePdf /></div>
-                          <span className="cwc-doc-label">Child Details</span>
-                          <div className="cwc-doc-action">
-                            {renderFileLink(selectedRegistration.cncp_child_details, 'View Document')}
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col md={4} className="mb-3">
-                      <Card className="cwc-doc-card">
-                        <Card.Body>
-                          <div className="cwc-doc-icon"><FaFilePdf /></div>
-                          <span className="cwc-doc-label">Home Verification</span>
-                          <div className="cwc-doc-action">
-                            {renderFileLink(selectedRegistration.home_verification, 'View Document')}
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col md={4} className="mb-3">
-                      <Card className="cwc-doc-card">
-                        <Card.Body>
-                          <div className="cwc-doc-icon"><FaFilePdf /></div>
-                          <span className="cwc-doc-label">SIR</span>
-                          <div className="cwc-doc-action">
-                            {renderFileLink(selectedRegistration.sir, 'View Document')}
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col md={4} className="mb-3">
-                      <Card className="cwc-doc-card">
-                        <Card.Body>
-                          <div className="cwc-doc-icon"><FaFilePdf /></div>
-                          <span className="cwc-doc-label">Rehabilitation Plan</span>
-                          <div className="cwc-doc-action">
-                            {renderFileLink(selectedRegistration.rehabilitation_plan, 'View Document')}
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col md={4} className="mb-3">
-                      <Card className="cwc-doc-card">
-                        <Card.Body>
-                          <div className="cwc-doc-icon"><FaFilePdf /></div>
-                          <span className="cwc-doc-label">Order Sent to Department</span>
-                          <div className="cwc-doc-action">
-                            {renderFileLink(selectedRegistration.order_sent_to_department, 'View Document')}
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col md={4} className="mb-3">
-                      <Card className="cwc-doc-card">
-                        <Card.Body>
-                          <div className="cwc-doc-icon"><FaFilePdf /></div>
-                          <span className="cwc-doc-label">Follow-up on Direction</span>
-                          <div className="cwc-doc-action">
-                            {renderFileLink(selectedRegistration.follow_up_on_direction, 'View Document')}
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  </Row>
+                  <div className="cwc-docs-grid">
+                     <div className="cwc-doc-col">
+                       <Card className="cwc-doc-card">
+                         <Card.Body>
+                           <div className="cwc-doc-icon"><FaFilePdf /></div>
+                           <span className="cwc-doc-label">Child Details</span>
+                           <div className="cwc-doc-action">
+                             {renderFileLink(selectedRegistration.cncp_child_details, 'View Document')}
+                           </div>
+                         </Card.Body>
+                       </Card>
+                     </div>
+                     <div className="cwc-doc-col">
+                       <Card className="cwc-doc-card">
+                         <Card.Body>
+                           <div className="cwc-doc-icon"><FaFilePdf /></div>
+                           <span className="cwc-doc-label">Home Verification</span>
+                           <div className="cwc-doc-action">
+                             {renderFileLink(selectedRegistration.home_verification, 'View Document')}
+                           </div>
+                         </Card.Body>
+                       </Card>
+                     </div>
+                     <div className="cwc-doc-col">
+                       <Card className="cwc-doc-card">
+                         <Card.Body>
+                           <div className="cwc-doc-icon"><FaFilePdf /></div>
+                           <span className="cwc-doc-label">SIR</span>
+                           <div className="cwc-doc-action">
+                             {renderFileLink(selectedRegistration.sir, 'View Document')}
+                           </div>
+                         </Card.Body>
+                       </Card>
+                     </div>
+                     <div className="cwc-doc-col">
+                       <Card className="cwc-doc-card">
+                         <Card.Body>
+                           <div className="cwc-doc-icon"><FaFilePdf /></div>
+                           <span className="cwc-doc-label">Rehabilitation Plan</span>
+                           <div className="cwc-doc-action">
+                             {renderFileLink(selectedRegistration.rehabilitation_plan, 'View Document')}
+                           </div>
+                         </Card.Body>
+                       </Card>
+                     </div>
+                     <div className="cwc-doc-col">
+                       <Card className="cwc-doc-card">
+                         <Card.Body>
+                           <div className="cwc-doc-icon"><FaFilePdf /></div>
+                           <span className="cwc-doc-label">Order Sent to Department</span>
+                           <div className="cwc-doc-action">
+                             {renderFileLink(selectedRegistration.order_sent_to_department, 'View Document')}
+                           </div>
+                         </Card.Body>
+                       </Card>
+                     </div>
+                     <div className="cwc-doc-col">
+                       <Card className="cwc-doc-card">
+                         <Card.Body>
+                           <div className="cwc-doc-icon"><FaFilePdf /></div>
+                           <span className="cwc-doc-label">Follow-up on Direction</span>
+                           <div className="cwc-doc-action">
+                             {renderFileLink(selectedRegistration.follow_up_on_direction, 'View Document')}
+                           </div>
+                         </Card.Body>
+                       </Card>
+                     </div>
+                  </div>
                </Modal.Body>
                <Modal.Footer className="cwc-modal-footer">
                  <Button variant="secondary" onClick={handleCloseModal} className="cwc-modal-close-btn">
