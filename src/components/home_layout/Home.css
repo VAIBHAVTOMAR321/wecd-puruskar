@@ -64,6 +64,24 @@
     box-shadow: none;
 }
 
+.drc-navbar .lang-toggle-btn {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #c6d9f0;
+    color: #2563eb;
+    background: #eef5ff;
+    transition: all 0.2s ease;
+    min-height: auto;
+}
+
+.drc-navbar .lang-toggle-btn:hover {
+    background: #dae8ff;
+    border-color: #2563eb;
+    color: #1a3fa0;
+}
+
 
 /* =====================================================
    NAVBAR RESPONSIVE

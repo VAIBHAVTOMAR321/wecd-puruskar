@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Button, Container, NavDropdown } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import { FaDatabase } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 import ulLogo from "../../assets/images/uk_logo.jpeg"
 
 function NavBar() {
   const [scrolled, setScrolled] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,8 +56,16 @@ function NavBar() {
 
           </Nav>
 
-          {/* LOGIN */}
-          <Nav>
+          {/* LANGUAGE TOGGLE & LOGIN */}
+          <Nav className="align-items-center gap-2">
+            <Button
+              variant="outline-secondary"
+              size="sm"
+              onClick={toggleLanguage}
+              className="lang-toggle-btn"
+            >
+              {language === "en" ? "हिंदी" : "English"}
+            </Button>
             <Button
               as={Link}
               to="/Login"

@@ -18,6 +18,7 @@ import Footer from "./components/footer/Footer";
 import StateDashBoard from "./components/all_dashbords/state_Admin/StateDashBoard";
 import DepartDashBoard from "./components/all_dashbords/depart/DepartDashBoard";
 import CWCDashBoard from "./components/all_dashbords/cwc_dashboard/CWCDashBoard";
+import { LanguageProvider } from "./context/LanguageContext";
 
 // A wrapper component to conditionally render the NavBar
 const AppContent = () => {
@@ -52,7 +53,11 @@ const AppContent = () => {
 };
 
 function App() {
-  return <AppContent />;
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
+  );
 }
 
 export default App;
