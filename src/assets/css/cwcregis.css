@@ -96,6 +96,7 @@
   min-height: 42px;
   border-radius: 7px;
   font-weight: 600;
+  font-size: 12px;
 }
 
 @media (max-width: 767px) {
