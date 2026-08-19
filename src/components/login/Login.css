@@ -131,7 +131,9 @@
     font-size: 16px;
     text-align: left;
 }
-
+.login-submit-btn{
+    font-size:12px !important;
+}
 .login-card .form-control,
 .login-card .form-select {
     min-height: 44px;
