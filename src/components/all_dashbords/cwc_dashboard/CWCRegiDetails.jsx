@@ -12,11 +12,12 @@ import {
   Badge,
 } from "react-bootstrap";
 
-import { FaEye, FaFilePdf } from "react-icons/fa";
+import { FaEye, FaFilePdf, FaClipboardList, FaClock, FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import CWCLeftNav from "./CWCLeftNav";
 import CWCtopNav from "./CWCTopNav";
 import { useAuth } from "../../login/AuthContext";
+import "../../../../src/assets/css/cwcregis.css";
 
 const CWCRegiDetails = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -85,17 +86,45 @@ const CWCRegiDetails = () => {
      setSelectedRegistration(null);
    };
 
+   const getMediaUrl = (path) => {
+     if (!path) return null;
+     if (path.startsWith("http://") || path.startsWith("https://")) return path;
+     return `https://mahadevaaya.com/srcproject/srcproject_backend${path}`;
+   };
+
    const renderFileLink = (url, label) => {
-     if (!url) {
-       return <span className="text-muted">Not provided</span>;
+     const mediaUrl = getMediaUrl(url);
+
+     if (!mediaUrl) {
+       return (
+         <span className="cwc-doc-missing">
+           <FaFilePdf className="me-1 text-muted" /> Not provided
+         </span>
+       );
      }
+
+     const isImage = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(mediaUrl);
+
+     if (isImage) {
+       return (
+         <a href={mediaUrl} target="_blank" rel="noopener noreferrer" className="cwc-doc-link cwc-image-link">
+           <img src={mediaUrl} alt={label} className="cwc-doc-thumb" />
+           <span className="cwc-doc-text">{label}</span>
+         </a>
+       );
+     }
+
      return (
-       <a href={url} target="_blank" rel="noopener noreferrer">
-         <FaFilePdf className="me-2" />
+       <a href={mediaUrl} target="_blank" rel="noopener noreferrer" className="cwc-doc-link">
+         <FaFilePdf className="me-1" />
          {label}
        </a>
      );
    };
+
+   const totalRegistrations = registrations.length;
+   const pendingCount = registrations.filter(r => r.status === 'pending').length;
+   const approvedCount = registrations.filter(r => r.status === 'approved').length;
 
    return (
      <div className="dashboard-container">
@@ -109,132 +138,248 @@ const CWCRegiDetails = () => {
          <CWCtopNav toggleSidebar={toggleSidebar} />
 
          <Container fluid className="dashboard-box mt-3">
-           <Card>
-             <Card.Header as="h4">CNCP Child Registrations</Card.Header>
+           <div className="cwc-page-header">
+             <div>
+               <h1 className="cwc-page-title">CNCP Child Registrations</h1>
+               <p className="cwc-page-subtitle">Manage and review child welfare committee registration records</p>
+             </div>
+           </div>
+
+           <Row className="cwc-stats-row g-3 mb-4">
+             <Col md={4}>
+               <Card className="cwc-stat-card cwc-stat-total">
+                 <Card.Body>
+                   <div className="cwc-stat-icon"><FaClipboardList /></div>
+                   <div className="cwc-stat-info">
+                     <span className="cwc-stat-value">{totalRegistrations}</span>
+                     <span className="cwc-stat-label">Total Registrations</span>
+                   </div>
+                 </Card.Body>
+               </Card>
+             </Col>
+             <Col md={4}>
+               <Card className="cwc-stat-card cwc-stat-pending">
+                 <Card.Body>
+                   <div className="cwc-stat-icon"><FaClock /></div>
+                   <div className="cwc-stat-info">
+                     <span className="cwc-stat-value">{pendingCount}</span>
+                     <span className="cwc-stat-label">Pending Review</span>
+                   </div>
+                 </Card.Body>
+               </Card>
+             </Col>
+             <Col md={4}>
+               <Card className="cwc-stat-card cwc-stat-approved">
+                 <Card.Body>
+                   <div className="cwc-stat-icon"><FaCheckCircle /></div>
+                   <div className="cwc-stat-info">
+                     <span className="cwc-stat-value">{approvedCount}</span>
+                     <span className="cwc-stat-label">Approved</span>
+                   </div>
+                 </Card.Body>
+               </Card>
+             </Col>
+           </Row>
+
+           <Card className="cwc-table-card">
+             <Card.Header as="h5" className="cwc-card-header">
+               Registration Records
+             </Card.Header>
              <Card.Body>
-               {loading && <div className="text-center"><Spinner animation="border" /> <p>Loading Registrations...</p></div>}
-               {error && <Alert variant="danger">{error}</Alert>}
+               {loading && (
+                 <div className="cwc-loading-state">
+                   <Spinner animation="border" variant="primary" />
+                   <p className="cwc-loading-text">Loading Registrations...</p>
+                 </div>
+               )}
+               {error && <Alert variant="danger" className="cwc-alert">{error}</Alert>}
                {!loading && !error && (
-                 <Table striped bordered hover responsive>
-                   <thead>
-                     <tr>
-                       <th>#</th>
-                       <th>Form ID</th>
-                       <th>Enrollment No.</th>
-                       <th>CWC Name</th>
-                       <th>District</th>
-                       <th>Status</th>
-                       <th>Actions</th>
-                     </tr>
-                   </thead>
-                   <tbody>
-                     {registrations.length > 0 ? (
-                       registrations.map((reg, index) => (
-                         <tr key={reg.id}>
-                           <td>{index + 1}</td>
-                           <td>{reg.form_id}</td>
-                           <td>{reg.cncp_child_enroll_number}</td>
-                           <td>{reg.child_welfare_committee_name}</td>
-                           <td>{reg.district}</td>
-                           <td>
-                             <Badge bg={reg.status === 'pending' ? 'warning' : 'success'}>
-                               {reg.status}
-                             </Badge>
-                           </td>
-                           <td>
-                             <Button variant="primary" size="sm" onClick={() => handleViewClick(reg)}>
-                               <FaEye /> View
-                             </Button>
+                 <div className="cwc-table-wrapper">
+                   <Table striped bordered hover responsive className="cwc-registration-table">
+                     <thead>
+                       <tr>
+                         <th>#</th>
+                         <th>Form ID</th>
+                         <th>Enrollment No.</th>
+                         <th>CWC Name</th>
+                         <th>District</th>
+                         <th>Status</th>
+                         <th>Actions</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       {registrations.length > 0 ? (
+                         registrations.map((reg, index) => (
+                           <tr key={reg.id} className="cwc-table-row">
+                             <td className="cwc-table-index">{index + 1}</td>
+                             <td className="cwc-table-form-id">{reg.form_id}</td>
+                             <td className="cwc-table-enroll">{reg.cncp_child_enroll_number}</td>
+                             <td className="cwc-table-cwc">{reg.child_welfare_committee_name}</td>
+                             <td className="cwc-table-district">{reg.district}</td>
+                             <td>
+                               <Badge bg={reg.status === 'pending' ? 'warning' : 'success'} className="cwc-status-badge">
+                                 {reg.status}
+                               </Badge>
+                             </td>
+                             <td>
+                               <Button variant="primary" size="sm" onClick={() => handleViewClick(reg)} className="cwc-action-btn">
+                                 <FaEye className="me-1" /> View
+                               </Button>
+                             </td>
+                           </tr>
+                         ))
+                       ) : (
+                         <tr>
+                           <td colSpan="7" className="cwc-empty-state">
+                             <FaClipboardList className="cwc-empty-icon" />
+                             <p className="mb-0">No registrations found.</p>
                            </td>
                          </tr>
-                       ))
-                     ) : (
-                       <tr>
-                         <td colSpan="7" className="text-center">No registrations found.</td>
-                       </tr>
-                     )}
-                   </tbody>
-                 </Table>
+                       )}
+                     </tbody>
+                   </Table>
+                 </div>
                )}
              </Card.Body>
            </Card>
 
            {selectedRegistration && (
-             <Modal show={showModal} onHide={handleCloseModal} size="lg">
-               <Modal.Header closeButton>
-                 <Modal.Title className="text-primary fw-bold">Registration Details - {selectedRegistration.form_id}</Modal.Title>
+             <Modal show={showModal} onHide={handleCloseModal} size="lg" centered className="cwc-registration-modal">
+               <Modal.Header closeButton className="cwc-modal-header">
+                 <Modal.Title as="h5">
+                   <FaClipboardList className="me-2" />
+                   Registration Details - {selectedRegistration.form_id}
+                 </Modal.Title>
                </Modal.Header>
-               <Modal.Body>
-                 <h5 className="mb-3 text-secondary">Committee & Child Information</h5>
+               <Modal.Body className="cwc-modal-body">
                  <Row className="mb-4">
-                   <Col md={6} className="mb-2">
-                     <strong>State:</strong> {selectedRegistration.state}
+                   <Col md={6}>
+                     <Card className="cwc-detail-card">
+                       <Card.Body>
+                         <h6 className="cwc-detail-section-title">Applicant Information</h6>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">State:</span>
+                           <span className="cwc-detail-value">{selectedRegistration.state}</span>
+                         </div>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">District:</span>
+                           <span className="cwc-detail-value">{selectedRegistration.district}</span>
+                         </div>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">CWC Name:</span>
+                           <span className="cwc-detail-value">{selectedRegistration.child_welfare_committee_name}</span>
+                         </div>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">CWC Number:</span>
+                           <span className="cwc-detail-value">{selectedRegistration.child_welfare_committee_number}</span>
+                         </div>
+                       </Card.Body>
+                     </Card>
                    </Col>
-                   <Col md={6} className="mb-2">
-                     <strong>District:</strong> {selectedRegistration.district}
-                   </Col>
-                   <Col md={6} className="mb-2">
-                     <strong>CWC Name:</strong> {selectedRegistration.child_welfare_committee_name}
-                   </Col>
-                   <Col md={6} className="mb-2">
-                     <strong>CWC Number:</strong> {selectedRegistration.child_welfare_committee_number}
-                   </Col>
-                   <Col md={6} className="mb-2">
-                     <strong>CNCP Child Enrollment No.:</strong> {selectedRegistration.cncp_child_enroll_number}
-                   </Col>
-                   <Col md={6} className="mb-2">
-                     <strong>CNCP Child Aadhaar No.:</strong> {selectedRegistration.cncp_child_aadhaar_number}
-                   </Col>
-                   <Col md={6} className="mb-2">
-                     <strong>Status:</strong> <Badge bg={selectedRegistration.status === 'pending' ? 'warning' : 'success'}>{selectedRegistration.status}</Badge>
-                   </Col>
-                   <Col md={6} className="mb-2">
-                     <strong>Registration Date:</strong> {new Date(selectedRegistration.created_at).toLocaleDateString()}
+                   <Col md={6}>
+                     <Card className="cwc-detail-card">
+                       <Card.Body>
+                         <h6 className="cwc-detail-section-title">Child Information</h6>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">Enrollment No.:</span>
+                           <span className="cwc-detail-value">{selectedRegistration.cncp_child_enroll_number}</span>
+                         </div>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">Aadhaar No.:</span>
+                           <span className="cwc-detail-value">{selectedRegistration.cncp_child_aadhaar_number}</span>
+                         </div>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">Status:</span>
+                           <span className="cwc-detail-value">
+                             <Badge bg={selectedRegistration.status === 'pending' ? 'warning' : 'success'} className="cwc-status-badge">
+                               {selectedRegistration.status}
+                             </Badge>
+                           </span>
+                         </div>
+                         <div className="cwc-detail-item">
+                           <span className="cwc-detail-label">Registered On:</span>
+                           <span className="cwc-detail-value">{new Date(selectedRegistration.created_at).toLocaleDateString()}</span>
+                         </div>
+                       </Card.Body>
+                     </Card>
                    </Col>
                  </Row>
-                 <hr />
-                 <h5 className="mb-3 text-secondary">Uploaded Documents</h5>
-                 <Row className="g-3">
-                    <Col md={6} lg={4}>
-                        <div className="document-item p-3 border rounded bg-light">
-                            <strong>Child Details:</strong><br/>
+                 <hr className="cwc-modal-divider" />
+                 <h5 className="cwc-doc-section-title">
+                   <FaFilePdf className="me-2" />
+                   Uploaded Documents
+                 </h5>
+                 <Row className="cwc-docs-grid">
+                    <Col lg={4} md={4} className="mb-3">
+                      <Card className="cwc-doc-card">
+                        <Card.Body>
+                          <div className="cwc-doc-icon"><FaFilePdf /></div>
+                          <span className="cwc-doc-label">Child Details</span>
+                          <div className="cwc-doc-action">
                             {renderFileLink(selectedRegistration.cncp_child_details, 'View Document')}
-                        </div>
+                          </div>
+                        </Card.Body>
+                      </Card>
                     </Col>
-                    <Col md={6} lg={4}>
-                        <div className="document-item p-3 border rounded bg-light">
-                            <strong>Home Verification:</strong><br/>
+                    <Col md={4} className="mb-3">
+                      <Card className="cwc-doc-card">
+                        <Card.Body>
+                          <div className="cwc-doc-icon"><FaFilePdf /></div>
+                          <span className="cwc-doc-label">Home Verification</span>
+                          <div className="cwc-doc-action">
                             {renderFileLink(selectedRegistration.home_verification, 'View Document')}
-                        </div>
+                          </div>
+                        </Card.Body>
+                      </Card>
                     </Col>
-                    <Col md={6} lg={4}>
-                        <div className="document-item p-3 border rounded bg-light">
-                            <strong>SIR:</strong><br/>
+                    <Col md={4} className="mb-3">
+                      <Card className="cwc-doc-card">
+                        <Card.Body>
+                          <div className="cwc-doc-icon"><FaFilePdf /></div>
+                          <span className="cwc-doc-label">SIR</span>
+                          <div className="cwc-doc-action">
                             {renderFileLink(selectedRegistration.sir, 'View Document')}
-                        </div>
+                          </div>
+                        </Card.Body>
+                      </Card>
                     </Col>
-                    <Col md={6} lg={4}>
-                        <div className="document-item p-3 border rounded bg-light">
-                            <strong>Rehabilitation Plan:</strong><br/>
+                    <Col md={4} className="mb-3">
+                      <Card className="cwc-doc-card">
+                        <Card.Body>
+                          <div className="cwc-doc-icon"><FaFilePdf /></div>
+                          <span className="cwc-doc-label">Rehabilitation Plan</span>
+                          <div className="cwc-doc-action">
                             {renderFileLink(selectedRegistration.rehabilitation_plan, 'View Document')}
-                        </div>
+                          </div>
+                        </Card.Body>
+                      </Card>
                     </Col>
-                    <Col md={6} lg={4}>
-                        <div className="document-item p-3 border rounded bg-light">
-                            <strong>Order Sent to Department:</strong><br/>
+                    <Col md={4} className="mb-3">
+                      <Card className="cwc-doc-card">
+                        <Card.Body>
+                          <div className="cwc-doc-icon"><FaFilePdf /></div>
+                          <span className="cwc-doc-label">Order Sent to Department</span>
+                          <div className="cwc-doc-action">
                             {renderFileLink(selectedRegistration.order_sent_to_department, 'View Document')}
-                        </div>
+                          </div>
+                        </Card.Body>
+                      </Card>
                     </Col>
-                    <Col md={6} lg={4}>
-                        <div className="document-item p-3 border rounded bg-light">
-                            <strong>Follow-up on Direction:</strong><br/>
+                    <Col md={4} className="mb-3">
+                      <Card className="cwc-doc-card">
+                        <Card.Body>
+                          <div className="cwc-doc-icon"><FaFilePdf /></div>
+                          <span className="cwc-doc-label">Follow-up on Direction</span>
+                          <div className="cwc-doc-action">
                             {renderFileLink(selectedRegistration.follow_up_on_direction, 'View Document')}
-                        </div>
+                          </div>
+                        </Card.Body>
+                      </Card>
                     </Col>
-                 </Row>
+                  </Row>
                </Modal.Body>
-               <Modal.Footer>
-                 <Button variant="secondary" onClick={handleCloseModal}>
+               <Modal.Footer className="cwc-modal-footer">
+                 <Button variant="secondary" onClick={handleCloseModal} className="cwc-modal-close-btn">
                    Close
                  </Button>
                </Modal.Footer>
@@ -242,9 +387,9 @@ const CWCRegiDetails = () => {
            )}
 
           </Container>
-       </div>
-     </div>
-   );
-};
+        </div>
+      </div>
+    );
+  };
 
 export default CWCRegiDetails;
