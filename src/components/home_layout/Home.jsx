@@ -38,306 +38,210 @@ import {
   FaFileAlt,
   FaAppleAlt,
 } from "react-icons/fa";
+import { useLanguage } from "../../context/LanguageContext";
 
 import "./Home.css";
 import drcHomeImg from "../../assets/images/drc_home-img.png";
 
+const translations = {
+  en: {
+    heroBadge: "State Resource Center",
+    heroTitle1: "Empowering Children",
+    heroTitle2: "Through Information",
+    heroDescription: "A centralized digital platform where you can easily find information about departments, schemes, services, objectives, and benefits available for children.",
+    exploreButton: "Explore Departments",
+    browseButton: "Browse Schemes",
+    statDepartments: "Departments",
+    statDepartmentsDesc: "Active government bodies",
+    statSchemes: "Schemes",
+    statSchemesDesc: "Child welfare programs",
+    statBeneficiaries: "Beneficiaries",
+    statBeneficiariesDesc: "Children reached nationwide",
+    howItWorksBadge: "How DRC Works",
+    howItWorksTitle: "From Department to Beneficiary",
+    howItWorksDescription: "Find information in SRC in a simple and organized way.",
+    timelineSteps: ["Department", "Work Area", "Scheme / Service", "Objective", "Benefits"],
+    departmentsTitle: "Government Departments",
+    departmentsDescription: "Department-wise work, schemes, and services related to children in one place.",
+    studentsSuffix: "Students",
+    schemesSuffix: "Schemes",
+    statsTitle: "Department Statistics",
+    statsDescription: "A graphical overview of student and scheme counts across various departments.",
+    statsStudentsTitle: "Registered Students",
+    statsSchemesTitle: "Available Schemes",
+    statsShowLess: "Show Less",
+    statsShowMore: "more",
+    empowermentBadge: "Child Empowerment",
+    empowermentTitle: "Key Areas of Child Empowerment",
+    empowermentDescription: "Key areas related to children's education, safety, health, and development.",
+    beneficiariesLabel: "Beneficiaries",
+    schemesByAreaLabel: "Schemes by Area",
+    beneficiariesByAreaLabel: "Beneficiaries by Area",
+    findSchemesBadge: "For You",
+    findSchemesTitle: "Find Schemes by Department",
+    findSchemesDescription: "Select a department to see the government schemes relevant to its work area.",
+    schemesUnder: "Schemes under",
+    noSchemesFound: "No schemes found for this department.",
+    objectiveLabel: "Objective",
+    eligibilityLabel: "Eligibility",
+    benefitsLabel: "Benefits",
+    schemesTitle: "Key Schemes & Services",
+    schemesDescription: "Get information about the objectives, eligibility, and benefits of the scheme.",
+    allDepartments: "All Departments",
+    enrolledLabel: "Enrolled",
+    activeStatus: "Active",
+    statusLabel: "Status",
+    departments: [
+      { name: "Justice and Legal Advisory Department", workArea: "Child Rights and Legal Aid", studentCount: 1250, schemesCount: 5 },
+      { name: "Finance Department", workArea: "Financial assistance and budget for schemes", studentCount: 8500, schemesCount: 8 },
+      { name: "Planning Department", workArea: "Planning for state development", studentCount: 3200, schemesCount: 6 },
+      { name: "Health and Family Welfare Department", workArea: "Child health, nutrition and medicine", studentCount: 15000, schemesCount: 12 },
+      { name: "Education Department", workArea: "Child education, schools and literacy", studentCount: 25000, schemesCount: 15 },
+      { name: "Youth Welfare and Sports Department", workArea: "Sports, youth development and talent encouragement", studentCount: 7800, schemesCount: 9 },
+      { name: "Panchayati Raj Department", workArea: "Child welfare programs at rural level", studentCount: 11200, schemesCount: 7 },
+      { name: "Rural Development Department", workArea: "Development and assistance programs for rural children", studentCount: 9500, schemesCount: 10 },
+      { name: "Skill Development and Service Scheme Department", workArea: "Skills and vocational training", studentCount: 6400, schemesCount: 11 },
+      { name: "Housing and Urban Development Department", workArea: "Child and family assistance in urban areas", studentCount: 4800, schemesCount: 8 },
+      { name: "Labor Department", workArea: "Child labor prevention and welfare of children of workers", studentCount: 2100, schemesCount: 6 },
+      { name: "Water Supply Department", workArea: "Availability of clean drinking water", studentCount: 18000, schemesCount: 4 },
+      { name: "Food and Civil Supplies Consumer Affairs Department", workArea: "Food security and supply", studentCount: 22000, schemesCount: 5 },
+      { name: "Social Welfare Department", workArea: "Social security and welfare", studentCount: 13500, schemesCount: 14 },
+      { name: "Agriculture Department", workArea: "Agricultural development and farmer welfare", studentCount: 5600, schemesCount: 9 },
+      { name: "Women and Child Development Department", workArea: "Women empowerment and welfare", studentCount: 19800, schemesCount: 18 },
+      { name: "Association for Voluntary Action (AVA)", workArea: "Community development through voluntary work", studentCount: 850, schemesCount: 3 },
+      { name: "SPOTIKIM, Police Headquarters", workArea: "Law and order and child safety", studentCount: 450, schemesCount: 4 },
+    ],
+    empowermentAreas: [
+      { title: "Child Education", description: "Education and learning opportunities", beneficiaries: 120500, programs: 25 },
+      { title: "Child Protection", description: "Safety and child rights", beneficiaries: 55200, programs: 15 },
+      { title: "Health & Nutrition", description: "Health and nutrition services", beneficiaries: 210000, programs: 32 },
+      { title: "Scholarships", description: "Academic and financial assistance", beneficiaries: 85000, programs: 18 },
+      { title: "Skill Development", description: "Skills and vocational training", beneficiaries: 42000, programs: 22 },
+      { title: "Digital Literacy", description: "Digital education and awareness", beneficiaries: 75000, programs: 12 },
+    ],
+    schemes: [
+      { studentCount: 95000, name: "Beti Bachao, Beti Padhao", department: "Women and Child Development Department", category: "Protection", objective: "To promote the safety, education, and empowerment of girls.", eligibility: "Girls and their families", benefits: "Promotion of girls' education, safety, and social awareness." },
+      { studentCount: 85000, name: "Mid-Day Meal Scheme", department: "Education Department", category: "Nutrition", objective: "To improve school attendance and nutrition levels of children.", eligibility: "Students of eligible schools", benefits: "Provision of nutritious meals in school." },
+      { studentCount: 120000, name: "Integrated Child Development Services", department: "Women and Child Development Department", category: "Health", objective: "To improve the health, nutrition, and early development of young children.", eligibility: "Children aged 0-6 years and eligible mothers", benefits: "Nutrition, health check-ups, and Anganwadi services." },
+      { studentCount: 45000, name: "Sukanya Samriddhi Yojana", department: "Finance Department", category: "Finance", objective: "To promote savings for a girl child's future education and other needs.", eligibility: "Eligible girl children", benefits: "Savings and financial benefits as per government rules." },
+      { studentCount: 15000, name: "Child Labor Prevention and Rehabilitation", department: "Labor Department", category: "Welfare", objective: "To prevent child labor and connect children with education and rehabilitation.", eligibility: "Children affected by child labor", benefits: "Education, skill training, and rehabilitation support." },
+    ],
+  },
+  hi: {
+    heroBadge: "राज्य संसाधन केंद्र",
+    heroTitle1: "बच्चों को सशक्त बनाना",
+    heroTitle2: "सूचना के माध्यम से",
+    heroDescription: "एक केंद्रीकृत डिजिटल प्लेटफॉर्म जहाँ आप विभाग, योजनाएँ, सेवाएँ, उद्देश्य और बच्चों के लिए उपलब्ध लाभ आसानी से खोज सकते हैं।",
+    exploreButton: "विभागों को अन्वेषण करें",
+    browseButton: "योजनाएं ब्राउज़ करें",
+    statDepartments: "विभाग",
+    statDepartmentsDesc: "सक्रिय सरकारी निकाय",
+    statSchemes: "योजनाएं",
+    statSchemesDesc: "बाल कल्याण कार्यक्रम",
+    statBeneficiaries: "लाभार्थी",
+    statBeneficiariesDesc: "देश भर में बच्चों तक पहुंच",
+    howItWorksBadge: "डीआरसी कैसे काम करता है",
+    howItWorksTitle: "विभाग से लाभार्थी तक",
+    howItWorksDescription: "एसआरसी में जानकारी को सरल और व्यवस्थित तरीके से खोजें।",
+    timelineSteps: ["विभाग", "कार्य क्षेत्र", "योजना / सेवा", "उद्देश्य", "लाभ"],
+    departmentsTitle: "सरकारी विभाग",
+    departmentsDescription: "विभागवार कार्य, योजनाएँ और बच्चों से संबंधित सेवाओं की जानकारी एक ही स्थान पर।",
+    studentsSuffix: "छात्र",
+    schemesSuffix: "योजनाएं",
+    statsTitle: "विभाग सांख्यिकी",
+    statsDescription: "विभिन्न विभागों में छात्र और योजना गणना का एक ग्राफिकल अवलोकन।",
+    statsStudentsTitle: "पंजीकृत छात्र",
+    statsSchemesTitle: "उपलब्ध योजनाएं",
+    statsShowLess: "कम दिखाएं",
+    statsShowMore: "और",
+    empowermentBadge: "बाल अधिकारिता",
+    empowermentTitle: "बाल अधिकारिता के प्रमुख क्षेत्र",
+    empowermentDescription: "बच्चों की शिक्षा, सुरक्षा, स्वास्थ्य और विकास से जुड़े प्रमुख क्षेत्र।",
+    beneficiariesLabel: "लाभार्थी",
+    schemesByAreaLabel: "क्षेत्र द्वारा योजनाएं",
+    beneficiariesByAreaLabel: "क्षेत्र द्वारा लाभार्थी",
+    findSchemesBadge: "आपके लिए",
+    findSchemesTitle: "विभाग द्वारा योजनाएं खोजें",
+    findSchemesDescription: "इसके कार्य क्षेत्र से संबंधित सरकारी योजनाओं को देखने के लिए एक विभाग का चयन करें।",
+    schemesUnder: "के तहत योजनाएं",
+    noSchemesFound: "इस विभाग के लिए कोई योजना नहीं मिली।",
+    objectiveLabel: "उद्देश्य",
+    eligibilityLabel: "पात्रता",
+    benefitsLabel: "लाभ",
+    schemesTitle: "प्रमुख योजनाएं और सेवाएं",
+    schemesDescription: "योजना के उद्देश्य, पात्रता और लाभ की जानकारी प्राप्त करें।",
+    allDepartments: "सभी विभाग",
+    enrolledLabel: "नामांकित",
+    activeStatus: "सक्रिय",
+    statusLabel: "स्थिति",
+    departments: [
+        { name: "न्याय एवं विधि परामर्शी विभाग", workArea: "बाल अधिकार एवं कानूनी सहायता", studentCount: 1250, schemesCount: 5 },
+        { name: "वित्त विभाग", workArea: "योजनाओं के लिए वित्तीय सहायता एवं बजट", studentCount: 8500, schemesCount: 8 },
+        { name: "नियोजन विभाग", workArea: "राज्य के विकास की योजना", studentCount: 3200, schemesCount: 6 },
+        { name: "स्वास्थ्य एवं परिवार कल्याण विभाग", workArea: "बाल स्वास्थ्य, पोषण एवं चिकित्सा", studentCount: 15000, schemesCount: 12 },
+        { name: "शिक्षा विभाग", workArea: "बाल शिक्षा, विद्यालय एवं साक्षरता", studentCount: 25000, schemesCount: 15 },
+        { name: "युवा कल्याण एवं खेल विभाग", workArea: "खेल, युवा विकास एवं प्रतिभा प्रोत्साहन", studentCount: 7800, schemesCount: 9 },
+        { name: "पंचायती राज विभाग", workArea: "ग्रामीण स्तर पर बाल कल्याण कार्यक्रम", studentCount: 11200, schemesCount: 7 },
+        { name: "ग्राम्य विकास विभाग", workArea: "ग्रामीण बच्चों के विकास एवं सहायता कार्यक्रम", studentCount: 9500, schemesCount: 10 },
+        { name: "कौशल विकास एवं सेवा योजना विभाग", workArea: "कौशल एवं व्यावसायिक प्रशिक्षण", studentCount: 6400, schemesCount: 11 },
+        { name: "आवास एवं शहरी विकास विभाग", workArea: "शहरी क्षेत्रों में बाल एवं परिवार सहायता", studentCount: 4800, schemesCount: 8 },
+        { name: "श्रम विभाग", workArea: "बाल श्रम रोकथाम एवं श्रमिक परिवारों के बच्चों का कल्याण", studentCount: 2100, schemesCount: 6 },
+        { name: "पेयजल विभाग", workArea: "स्वच्छ पेयजल की उपलब्धता", studentCount: 18000, schemesCount: 4 },
+        { name: "खाद्य एवं नागरिक आपूर्ति उपभोक्ता विभाग", workArea: "खाद्य सुरक्षा और आपूर्ति", studentCount: 22000, schemesCount: 5 },
+        { name: "समाज कल्याण विभाग", workArea: "सामाजिक सुरक्षा और कल्याण", studentCount: 13500, schemesCount: 14 },
+        { name: "कृषि विभाग", workArea: "कृषि विकास और किसान कल्याण", studentCount: 5600, schemesCount: 9 },
+        { name: "महिला कल्याण विभाग", workArea: "महिला सशक्तिकरण एवं कल्याण", studentCount: 19800, schemesCount: 18 },
+        { name: "एसोसिएशन फॉर वॉलंटरी एक्शन (AVA)", workArea: "स्वैच्छिक कार्यों के माध्यम से सामुदायिक विकास", studentCount: 850, schemesCount: 3 },
+        { name: "एसपीओटीकाईएम, पुलिस मुख्यालय", workArea: "कानून व्यवस्था और बाल सुरक्षा", studentCount: 450, schemesCount: 4 },
+    ],
+    empowermentAreas: [
+        { title: "बाल शिक्षा", description: "शिक्षा एवं सीखने के अवसर", beneficiaries: 120500, programs: 25 },
+        { title: "बाल संरक्षण", description: "सुरक्षा एवं बाल अधिकार", beneficiaries: 55200, programs: 15 },
+        { title: "स्वास्थ्य एवं पोषण", description: "स्वास्थ्य एवं पोषण सेवाएँ", beneficiaries: 210000, programs: 32 },
+        { title: "छात्रवृत्ति", description: "शैक्षणिक एवं वित्तीय सहायता", beneficiaries: 85000, programs: 18 },
+        { title: "कौशल विकास", description: "कौशल एवं व्यावसायिक प्रशिक्षण", beneficiaries: 42000, programs: 22 },
+        { title: "डिजिटल साक्षरता", description: "डिजिटल शिक्षा एवं जागरूकता", beneficiaries: 75000, programs: 12 },
+    ],
+    schemes: [
+        { studentCount: 95000, name: "बेटी बचाओ, बेटी पढ़ाओ", department: "महिला कल्याण विभाग", category: "Protection", objective: "बालिकाओं की सुरक्षा, शिक्षा एवं सशक्तिकरण को बढ़ावा देना।", eligibility: "बालिकाएँ एवं उनके परिवार", benefits: "बालिकाओं की शिक्षा, सुरक्षा एवं सामाजिक जागरूकता को बढ़ावा।" },
+        { studentCount: 85000, name: "मध्याह्न भोजन योजना", department: "शिक्षा विभाग", category: "Nutrition", objective: "बच्चों की विद्यालय में उपस्थिति और पोषण स्तर में सुधार करना।", eligibility: "पात्र विद्यालयों के विद्यार्थी", benefits: "विद्यालय में पौष्टिक भोजन की सुविधा।" },
+        { studentCount: 120000, name: "एकीकृत बाल विकास सेवाएँ", department: "महिला कल्याण विभाग", category: "Health", objective: "छोटे बच्चों के स्वास्थ्य, पोषण और प्रारंभिक विकास में सुधार करना।", eligibility: "0–6 वर्ष के बच्चे एवं पात्र माताएँ", benefits: "पोषण, स्वास्थ्य जांच एवं आंगनवाड़ी सेवाएँ।" },
+        { studentCount: 45000, name: "सुकन्या समृद्धि योजना", department: "वित्त विभाग", category: "Finance", objective: "बालिका के भविष्य की शिक्षा एवं अन्य आवश्यकताओं के लिए बचत को बढ़ावा देना।", eligibility: "पात्र बालिकाएँ", benefits: "बचत एवं सरकारी नियमों के अनुसार वित्तीय लाभ।" },
+        { studentCount: 15000, name: "बाल श्रम रोकथाम एवं पुनर्वास", department: "श्रम विभाग", category: "Welfare", objective: "बाल श्रम को रोकना तथा बच्चों को शिक्षा एवं पुनर्वास से जोड़ना।", eligibility: "बाल श्रम से प्रभावित बच्चे", benefits: "शिक्षा, कौशल प्रशिक्षण एवं पुनर्वास सहायता।" },
+    ],
+  }
+};
 
-
-
-
-
-// =====================================================
-// 12 DEPARTMENTS
-// =====================================================
-
-const departments = [
-  {
-    name: "न्याय एवं विधि परामर्शी विभाग",
-    workArea: "बाल अधिकार एवं कानूनी सहायता",
-    icon: <FaBalanceScale />,
-    cardColor: "#e7f5ff",
-    color: "#8ecae6",
-    studentCount: 1250,
-    schemesCount: 5,
-  },
-  {
-    name: "वित्त विभाग",
-    workArea: "योजनाओं के लिए वित्तीय सहायता एवं बजट",
-    icon: <FaHandsHelping />,
-    cardColor: "#fff8e1",
-    color: "#fca311",
-    studentCount: 8500,
-    schemesCount: 8,
-  },
-  {
-    name: "नियोजन विभाग",
-    workArea: "राज्य के विकास की योजना",
-    icon: <FaChartLine />,
-    cardColor: "#eaf6f5",
-    color: "#2a9d8f",
-    studentCount: 3200,
-    schemesCount: 6,
-  },
-  {
-    name: "स्वास्थ्य एवं परिवार कल्याण विभाग",
-    workArea: "बाल स्वास्थ्य, पोषण एवं चिकित्सा",
-    icon: <FaHeartbeat />,
-    cardColor: "#fdeee9",
-    color: "#e76f51",
-    studentCount: 15000,
-    schemesCount: 12,
-  },
-  {
-    name: "शिक्षा विभाग",
-    workArea: "बाल शिक्षा, विद्यालय एवं साक्षरता",
-    icon: <FaSchool />,
-    cardColor: "#e4f8fb",
-    color: "#48cae4",
-    studentCount: 25000,
-    schemesCount: 15,
-  },
-  {
-    name: "युवा कल्याण एवं खेल विभाग",
-    workArea: "खेल, युवा विकास एवं प्रतिभा प्रोत्साहन",
-    icon: <FaRunning />,
-    cardColor: "#f6eefe",
-    color: "#c77dff",
-    studentCount: 7800,
-    schemesCount: 9,
-  },
-  {
-    name: "पंचायती राज विभाग",
-    workArea: "ग्रामीण स्तर पर बाल कल्याण कार्यक्रम",
-    icon: <FaMapMarkedAlt />,
-    cardColor: "#f0f9e6",
-    color: "#70e000",
-    studentCount: 11200,
-    schemesCount: 7,
-  },
-  {
-    name: "ग्राम्य विकास विभाग",
-    workArea: "ग्रामीण बच्चों के विकास एवं सहायता कार्यक्रम",
-    icon: <FaHome />,
-    cardColor: "#fff9e6",
-    color: "#ffbe0b",
-    studentCount: 9500,
-    schemesCount: 10,
-  },
-  {
-    name: "कौशल विकास एवं सेवा योजना विभाग",
-    workArea: "कौशल एवं व्यावसायिक प्रशिक्षण",
-    icon: <FaBriefcase />,
-    cardColor: "#e0f7fa",
-    color: "#00b4d8",
-    studentCount: 6400,
-    schemesCount: 11,
-  },
-  {
-    name: "आवास एवं शहरी विकास विभाग",
-    workArea: "शहरी क्षेत्रों में बाल एवं परिवार सहायता",
-    icon: <FaBuilding />,
-    cardColor: "#fef0f5",
-    color: "#f72585",
-    studentCount: 4800,
-    schemesCount: 8,
-  },
-  {
-    name: "श्रम विभाग",
-    workArea: "बाल श्रम रोकथाम एवं श्रमिक परिवारों के बच्चों का कल्याण",
-    icon: <FaHardHat />,
-    cardColor: "#f9fbe7",
-    color: "#c0d628",
-    studentCount: 2100,
-    schemesCount: 6,
-  },
-  {
-    name: "पेयजल विभाग",
-    workArea: "स्वच्छ पेयजल की उपलब्धता",
-    icon: <FaTint />,
-    cardColor: "#ebf9f8",
-    color: "#ade8f4",
-    studentCount: 18000,
-    schemesCount: 4,
-  },
-  {
-    name: "खाद्य एवं नागरिक आपूर्ति उपभोक्ता विभाग",
-    workArea: "खाद्य सुरक्षा और आपूर्ति",
-    icon: <FaShoppingCart />,
-    cardColor: "#fff5f7",
-    color: "#ff8fab",
-    studentCount: 22000,
-    schemesCount: 5,
-  },
-  {
-    name: "समाज कल्याण विभाग",
-    workArea: "सामाजिक सुरक्षा और कल्याण",
-    icon: <FaUsers />,
-    cardColor: "#f3eef2",
-    color: "#b5838d",
-    studentCount: 13500,
-    schemesCount: 14,
-  },
-  {
-    name: "कृषि विभाग",
-    workArea: "कृषि विकास और किसान कल्याण",
-    icon: <FaLeaf />,
-    cardColor: "#edf8f3",
-    color: "#52b788",
-    studentCount: 5600,
-    schemesCount: 9,
-  },
-  {
-    name: "महिला कल्याण विभाग",
-    workArea: "महिला सशक्तिकरण एवं कल्याण",
-    icon: <FaChild />,
-    cardColor: "#fef3f7",
-    color: "#f78fb3",
-    studentCount: 19800,
-    schemesCount: 18,
-  },
-  {
-    name: "एसोसिएशन फॉर वॉलंटरी एक्शन (AVA)",
-    workArea: "स्वैच्छिक कार्यों के माध्यम से सामुदायिक विकास",
-    icon: <FaHandHoldingHeart />,
-    cardColor: "#fffde6",
-    color: "#ffdd00",
-    studentCount: 850,
-    schemesCount: 3,
-  },
-  {
-    name: "एसपीओटीकाईएम, पुलिस मुख्यालय",
-    workArea: "कानून व्यवस्था और बाल सुरक्षा",
-    icon: <FaShieldAlt />,
-    cardColor: "#eeeffd",
-    color: "#a2a6f0",
-    studentCount: 450,
-    schemesCount: 4,
-  },
+const departmentIcons = [
+    <FaBalanceScale />, <FaHandsHelping />, <FaChartLine />, <FaHeartbeat />, <FaSchool />,
+    <FaRunning />, <FaMapMarkedAlt />, <FaHome />, <FaBriefcase />, <FaBuilding />,
+    <FaHardHat />, <FaTint />, <FaShoppingCart />, <FaUsers />, <FaLeaf />,
+    <FaChild />, <FaHandHoldingHeart />, <FaShieldAlt />,
 ];
 
-
-// =====================================================
-// CHILD EMPOWERMENT
-// =====================================================
-
-const empowermentAreas = [
-  {
-    title: "बाल शिक्षा",
-    description: "शिक्षा एवं सीखने के अवसर",
-    icon: <FaBookOpen />,
-    beneficiaries: 120500,
-    programs: 25,
-  },
-  {
-    title: "बाल संरक्षण",
-    description: "सुरक्षा एवं बाल अधिकार",
-    icon: <FaShieldAlt />,
-    beneficiaries: 55200,
-    programs: 15,
-  },
-  {
-    title: "स्वास्थ्य एवं पोषण",
-    description: "स्वास्थ्य एवं पोषण सेवाएँ",
-    icon: <FaHeartbeat />,
-    beneficiaries: 210000,
-    programs: 32,
-  },
-  {
-    title: "छात्रवृत्ति",
-    description: "शैक्षणिक एवं वित्तीय सहायता",
-    icon: <FaGraduationCap />,
-    beneficiaries: 85000,
-    programs: 18,
-  },
-  {
-    title: "कौशल विकास",
-    description: "कौशल एवं व्यावसायिक प्रशिक्षण",
-    icon: <FaBriefcase />,
-    beneficiaries: 42000,
-    programs: 22,
-  },
-  {
-    title: "डिजिटल साक्षरता",
-    description: "डिजिटल शिक्षा एवं जागरूकता",
-    icon: <FaLaptop />,
-    beneficiaries: 75000,
-    programs: 12,
-  },
+const departmentColors = [
+    "#e7f5ff", "#fff8e1", "#eaf6f5", "#fdeee9", "#e4f8fb", "#f6eefe", "#f0f9e6",
+    "#fff9e6", "#e0f7fa", "#fef0f5", "#f9fbe7", "#ebf9f8", "#fff5f7", "#f3eef2",
+    "#edf8f3", "#fef3f7", "#fffde6", "#eeeffd"
 ];
 
-
-// =====================================================
-// SCHEMES
-// =====================================================
-
-const schemes = [
-  {
-    studentCount: 95000,
-    name: "बेटी बचाओ, बेटी पढ़ाओ",
-    department: "महिला सशक्तिकरण एवं बाल विकास विभाग",
-    category: "Protection",
-    icon: <FaShieldAlt />,
-    objective:
-      "बालिकाओं की सुरक्षा, शिक्षा एवं सशक्तिकरण को बढ़ावा देना।",
-    eligibility: "बालिकाएँ एवं उनके परिवार",
-    benefits:
-      "बालिकाओं की शिक्षा, सुरक्षा एवं सामाजिक जागरूकता को बढ़ावा।",
-  },
-  {
-    studentCount: 85000,
-    name: "मध्याह्न भोजन योजना",
-    department: "शिक्षा विभाग",
-    category: "Nutrition",
-    icon: <FaLeaf />,
-    objective:
-      "बच्चों की विद्यालय में उपस्थिति और पोषण स्तर में सुधार करना।",
-    eligibility: "पात्र विद्यालयों के विद्यार्थी",
-    benefits:
-      "विद्यालय में पौष्टिक भोजन की सुविधा।",
-  },
-  {
-    studentCount: 120000,
-    name: "एकीकृत बाल विकास सेवाएँ",
-    department: "महिला सशक्तिकरण एवं बाल विकास विभाग",
-    category: "Health",
-    icon: <FaHeartbeat />,
-    objective:
-      "छोटे बच्चों के स्वास्थ्य, पोषण और प्रारंभिक विकास में सुधार करना।",
-    eligibility: "0–6 वर्ष के बच्चे एवं पात्र माताएँ",
-    benefits:
-      "पोषण, स्वास्थ्य जांच एवं आंगनवाड़ी सेवाएँ।",
-  },
-  {
-    studentCount: 45000,
-    name: "सुकन्या समृद्धि योजना",
-    department: "वित्त विभाग",
-    category: "Finance",
-    icon: <FaBriefcase />,
-    objective:
-      "बालिका के भविष्य की शिक्षा एवं अन्य आवश्यकताओं के लिए बचत को बढ़ावा देना।",
-    eligibility: "पात्र बालिकाएँ",
-    benefits:
-      "बचत एवं सरकारी नियमों के अनुसार वित्तीय लाभ।",
-  },
-  {
-    studentCount: 15000,
-    name: "बाल श्रम रोकथाम एवं पुनर्वास",
-    department: "श्रम विभाग",
-    category: "Welfare",
-    icon: <FaHandsHelping />,
-    objective:
-      "बाल श्रम को रोकना तथा बच्चों को शिक्षा एवं पुनर्वास से जोड़ना।",
-    eligibility: "बाल श्रम से प्रभावित बच्चे",
-    benefits:
-      "शिक्षा, कौशल प्रशिक्षण एवं पुनर्वास सहायता।",
-  },
+const departmentIconColors = [
+    "#8ecae6", "#fca311", "#2a9d8f", "#e76f51", "#48cae4", "#c77dff", "#70e000",
+    "#ffbe0b", "#00b4d8", "#f72585", "#c0d628", "#ade8f4", "#ff8fab", "#b5838d",
+    "#52b788", "#f78fb3", "#ffdd00", "#a2a6f0"
 ];
 
-const schemeDepartments = [
-  "All Departments",
-  ...Array.from(new Set(schemes.map((scheme) => scheme.department))),
+const empowermentIcons = [
+    <FaBookOpen />, <FaShieldAlt />, <FaHeartbeat />, <FaGraduationCap />, <FaBriefcase />, <FaLaptop />
 ];
+
+const schemeIcons = {
+    Protection: <FaShieldAlt />,
+    Nutrition: <FaLeaf />,
+    Health: <FaHeartbeat />,
+    Finance: <FaBriefcase />,
+    Welfare: <FaHandsHelping />,
+};
 
 const categoryColors = {
   Protection: "#7c3aed",
@@ -347,18 +251,6 @@ const categoryColors = {
   Welfare: "#f59e0b",
 };
 
-// category tags data
-const categoryTags = [
-  { label: 'Education', icon: <FaGraduationCap />, color: '#1a5276' },
-  { label: 'Health', icon: <FaHeartbeat />, color: '#e74c3c' },
-  { label: 'Nutrition', icon: <FaAppleAlt />, color: '#138808' },
-  { label: 'Protection', icon: <FaShieldAlt />, color: '#8e44ad' },
-  { label: 'Welfare', icon: <FaHandsHelping />, color: '#FF9933' },
-];
-
-// stat ring data
-const totalSchemes = departments.reduce((sum, dept) => sum + dept.schemesCount, 0);
-const totalBeneficiaries = empowermentAreas.reduce((sum, a) => sum + a.beneficiaries, 0);
 const statRingSegments = [
   { label: 'Education', percent: 35, color: '#1a5276' },
   { label: 'Health', percent: 25, color: '#e74c3c' },
@@ -371,29 +263,45 @@ const statRingSegments = [
 // =====================================================
 
 function Home() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const departments = t.departments.map((dept, i) => ({
+    ...dept,
+    icon: departmentIcons[i],
+    cardColor: departmentColors[i],
+    color: departmentIconColors[i],
+  }));
+
+  const empowermentAreas = t.empowermentAreas.map((area, i) => ({ ...area, icon: empowermentIcons[i] }));
+  const schemes = t.schemes.map(scheme => ({ ...scheme, icon: schemeIcons[scheme.category] || <FaBookOpen /> }));
+  const schemeDepartments = [t.allDepartments, ...Array.from(new Set(schemes.map((scheme) => scheme.department)))];
   
   const [selectedDepartment, setSelectedDepartment] = useState(null);
   const [activeSchemeDepartment, setActiveSchemeDepartment] = useState("All Departments");
   const [studentLegendExpanded, setStudentLegendExpanded] = useState(false);
   const [schemeLegendExpanded, setSchemeLegendExpanded] = useState(false);
   const [hoverStat, setHoverStat] = useState(null);
+
+  const totalSchemes = departments.reduce((sum, dept) => sum + dept.schemesCount, 0);
+  const totalBeneficiaries = empowermentAreas.reduce((sum, a) => sum + a.beneficiaries, 0);
+
   const categories = [
-  { label: 'Education', icon: <FaGraduationCap />, color: '#1a5276', count: Math.round(totalSchemes * 0.35) },
-  { label: 'Health', icon: <FaHeartbeat />, color: '#e74c3c', count: Math.round(totalSchemes * 0.25) },
-  { label: 'Nutrition', icon: <FaAppleAlt />, color: '#27ae60', count: Math.round(totalSchemes * 0.20) },
-  { label: 'Protection', icon: <FaShieldAlt />, color: '#8e44ad', count: Math.round(totalSchemes * 0.12) },
-  { label: 'Welfare', icon: <FaHandsHelping />, color: '#FF9933', count: Math.round(totalSchemes * 0.08) },
-];
-// inside your component:
-const [activeCard, setActiveCard] = useState(null);
-const [activeTag, setActiveTag] = useState(null);
+    { label: t.empowermentAreas[0].title, icon: <FaGraduationCap />, color: '#1a5276', count: Math.round(totalSchemes * 0.35) },
+    { label: t.empowermentAreas[2].title, icon: <FaHeartbeat />, color: '#e74c3c', count: Math.round(totalSchemes * 0.25) },
+    { label: t.empowermentAreas[2].title, icon: <FaAppleAlt />, color: '#27ae60', count: Math.round(totalSchemes * 0.20) },
+    { label: t.empowermentAreas[1].title, icon: <FaShieldAlt />, color: '#8e44ad', count: Math.round(totalSchemes * 0.12) },
+    { label: t.schemes[4].category, icon: <FaHandsHelping />, color: '#FF9933', count: Math.round(totalSchemes * 0.08) },
+  ];
+  // inside your component:
+  const [activeCard, setActiveCard] = useState(null);
+  const [activeTag, setActiveTag] = useState(null);
   const [tooltip, setTooltip] = useState({
     visible: false,
     content: "",
     x: 0,
     y: 0,
   });
-
 
   // Group schemes by department for easier lookup
   const schemesByDepartment = departments.reduce((acc, dept) => {
@@ -403,7 +311,7 @@ const [activeTag, setActiveTag] = useState(null);
 
   const filteredSchemes =
     activeSchemeDepartment === "All Departments"
-      ? schemes
+      ? schemes : activeSchemeDepartment === t.allDepartments ? schemes
       : schemes.filter((scheme) => scheme.department === activeSchemeDepartment);
 
   const handleDepartmentClick = (departmentName) => {
@@ -415,9 +323,9 @@ const [activeTag, setActiveTag] = useState(null);
     setActiveSchemeDepartment(department);
   };
 const statCards = [
-  { key: 'dept', icon: <FaDatabase />, label: 'Departments', value: departments.length, suffix: '+', color: '#FF9933', desc: 'Active government bodies' },
-  { key: 'scheme', icon: <FaFileAlt />, label: 'Schemes', value: totalSchemes.toLocaleString('en-IN'), suffix: '+', color: '#1a5276', desc: 'Child welfare programs' },
-  { key: 'ben', icon: <FaUsers />, label: 'Beneficiaries', value: (totalBeneficiaries / 100000).toFixed(1), suffix: 'L+', color: '#138808', desc: 'Children reached nationwide' },
+  { key: 'dept', icon: <FaDatabase />, label: t.statDepartments, value: departments.length, suffix: '+', color: '#FF9933', desc: t.statDepartmentsDesc },
+  { key: 'scheme', icon: <FaFileAlt />, label: t.statSchemes, value: totalSchemes.toLocaleString('en-IN'), suffix: '+', color: '#1a5276', desc: t.statSchemesDesc },
+  { key: 'ben', icon: <FaUsers />, label: t.statBeneficiaries, value: (totalBeneficiaries / 100000).toFixed(1), suffix: 'L+', color: '#138808', desc: t.statBeneficiariesDesc },
 ];
   const generateConicGradient = (data, key, colors) => {
     const total = data.reduce((sum, item) => sum + item[key], 0);
@@ -513,18 +421,16 @@ const handleMouseLeave = () => {
 
         <div className="hero-badge">
           <FaDatabase />
-          <span>State Resource Center</span>
+          <span>{t.heroBadge}</span>
         </div>
 
         <h1>
-          Empowering Children
-          <span>Through Information</span>
+          {t.heroTitle1}
+          <span>{t.heroTitle2}</span>
         </h1>
 
         <p>
-          एक केंद्रीकृत डिजिटल प्लेटफॉर्म जहाँ आप विभाग,
-          योजनाएँ, सेवाएँ, उद्देश्य और बच्चों के लिए उपलब्ध
-          लाभ आसानी से खोज सकते हैं।
+          {t.heroDescription}
         </p>
 
         {/* Interactive Stat Cards Row */}
@@ -554,10 +460,10 @@ const handleMouseLeave = () => {
         {/* Buttons */}
         <div className="hero-buttons">
           <Button className="primary-btn" onClick={() => handleScroll("departments")}>
-            Explore Departments <FaArrowRight />
+            {t.exploreButton} <FaArrowRight />
           </Button>
           <Button className="secondary-btn" onClick={() => handleScroll("schemes")}>
-            Browse Schemes
+            {t.browseButton}
           </Button>
         </div>
 
@@ -606,7 +512,7 @@ const handleMouseLeave = () => {
               <div className="strip-icon" style={{ background: '#FF9933' }}><FaDatabase /></div>
               <div>
                 <strong>{departments.length}+</strong>
-                <span>Departments</span>
+                <span>{t.statDepartments}</span>
               </div>
             </div>
             <div className="strip-divider" />
@@ -614,15 +520,15 @@ const handleMouseLeave = () => {
               <div className="strip-icon" style={{ background: '#1a5276' }}><FaFileAlt /></div>
               <div>
                 <strong>{totalSchemes.toLocaleString('en-IN')}+</strong>
-                <span>Schemes</span>
+                <span>{t.statSchemes}</span>
               </div>
             </div>
             <div className="strip-divider" />
             <div className="strip-item">
               <div className="strip-icon" style={{ background: '#138808' }}><FaCheckCircle /></div>
               <div>
-                <strong>Active</strong>
-                <span>Status</span>
+                <strong>{t.activeStatus}</strong>
+                <span>{t.statusLabel}</span>
               </div>
             </div>
           </div>
@@ -675,14 +581,14 @@ const handleMouseLeave = () => {
 
           <div className="section-heading">
 
-            <Badge>How DRC Works</Badge>
+            <Badge>{t.howItWorksBadge}</Badge>
 
             <h2>
-              From Department to Beneficiary
+              {t.howItWorksTitle}
             </h2>
 
             <p>
-              SRC में जानकारी को सरल और व्यवस्थित तरीके से खोजें।
+              {t.howItWorksDescription}
             </p>
 
           </div>
@@ -692,36 +598,36 @@ const handleMouseLeave = () => {
             <div className="timeline-item">
               <div className="timeline-icon"><FaBuilding /></div>
               <div className="timeline-content">
-                <span className="timeline-step">Step 1</span>
-                <h5>Department (विभाग)</h5>
+                <span className="timeline-step">{language === 'en' ? 'Step' : 'चरण'} 1</span>
+                <h5>{t.timelineSteps[0]}</h5>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-icon"><FaBriefcase /></div>
               <div className="timeline-content">
-                <span className="timeline-step">Step 2</span>
-                <h5>Work Area (कार्य क्षेत्र)</h5>
+                <span className="timeline-step">{language === 'en' ? 'Step' : 'चरण'} 2</span>
+                <h5>{t.timelineSteps[1]}</h5>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-icon"><FaBookOpen /></div>
               <div className="timeline-content">
-                <span className="timeline-step">Step 3</span>
-                <h5>Scheme (योजना / सेवा)</h5>
+                <span className="timeline-step">{language === 'en' ? 'Step' : 'चरण'} 3</span>
+                <h5>{t.timelineSteps[2]}</h5>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-icon"><FaGraduationCap /></div>
               <div className="timeline-content">
-                <span className="timeline-step">Step 4</span>
-                <h5>Objective (उद्देश्य)</h5>
+                <span className="timeline-step">{language === 'en' ? 'Step' : 'चरण'} 4</span>
+                <h5>{t.timelineSteps[3]}</h5>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-icon"><FaHandsHelping /></div>
               <div className="timeline-content">
-                <span className="timeline-step">Step 5</span>
-                <h5>Benefits (लाभ)</h5>
+                <span className="timeline-step">{language === 'en' ? 'Step' : 'चरण'} 5</span>
+                <h5>{t.timelineSteps[4]}</h5>
               </div>
             </div>
           </div>
@@ -743,12 +649,11 @@ const handleMouseLeave = () => {
            
 
             <h2>
-              Government Departments
+              {t.departmentsTitle}
             </h2>
 
             <p>
-              विभागवार कार्य, योजनाएँ और बच्चों से संबंधित
-              सेवाओं की जानकारी एक ही स्थान पर।
+              {t.departmentsDescription}
             </p>
           </div>
 
@@ -780,11 +685,11 @@ const handleMouseLeave = () => {
                     <div className="department-stats">
                       <div>
                         <strong>{department.studentCount.toLocaleString('en-IN')}</strong>
-                        <small>Students</small>
+                        <small>{t.studentsSuffix}</small>
                       </div>
                       <div>
                         <strong>{department.schemesCount}</strong>
-                        <small>Schemes</small>
+                        <small>{t.schemesSuffix}</small>
                       </div>
                     </div>
 
@@ -812,14 +717,14 @@ const handleMouseLeave = () => {
       <section id="department-stats" className="section department-stats-section">
         <Container>
           <div className="section-heading">
-            <h2>Department Statistics</h2>
-            <p>A graphical overview of student and scheme counts across various departments.</p>
+            <h2>{t.statsTitle}</h2>
+            <p>{t.statsDescription}</p>
           </div>
 
           <Row className="g-5">
             <Col lg={6}>
               <div className="pie-chart-card">
-                <h4 className="chart-title">Registered Students</h4>
+                <h4 className="chart-title">{t.statsStudentsTitle}</h4>
                 <div className="pie-chart-wrapper">
                   <div
                     className="pie-chart"
@@ -837,7 +742,7 @@ const handleMouseLeave = () => {
                     ))}
                     {sortedByStudent.length > 5 && (
                       <li className="legend-toggle" onClick={() => setStudentLegendExpanded(!studentLegendExpanded)}>
-                        {studentLegendExpanded ? "Show Less" : `... and ${sortedByStudent.length - 5} more`}
+                        {studentLegendExpanded ? t.statsShowLess : `... ${language === 'en' ? 'and' : 'और'} ${sortedByStudent.length - 5} ${t.statsShowMore}`}
                       </li>
                     )}
                   </ul>
@@ -847,7 +752,7 @@ const handleMouseLeave = () => {
 
             <Col lg={6}>
               <div className="pie-chart-card">
-                <h4 className="chart-title">Available Schemes</h4>
+                <h4 className="chart-title">{t.statsSchemesTitle}</h4>
                 <div className="pie-chart-wrapper">
                   <div
                     className="pie-chart"
@@ -865,7 +770,7 @@ const handleMouseLeave = () => {
                     ))}
                     {sortedBySchemes.length > 5 && (
                        <li className="legend-toggle" onClick={() => setSchemeLegendExpanded(!schemeLegendExpanded)}>
-                         {schemeLegendExpanded ? "Show Less" : `... and ${sortedBySchemes.length - 5} more`}
+                         {schemeLegendExpanded ? t.statsShowLess : `... ${language === 'en' ? 'and' : 'और'} ${sortedBySchemes.length - 5} ${t.statsShowMore}`}
                        </li>
                     )}
                   </ul>
@@ -887,15 +792,14 @@ const handleMouseLeave = () => {
 
           <div className="section-heading light-heading">
 
-            <Badge>Child Empowerment</Badge>
+            <Badge>{t.empowermentBadge}</Badge>
 
             <h2>
-              Key Areas of Child Empowerment
+              {t.empowermentTitle}
             </h2>
 
             <p>
-              बच्चों की शिक्षा, सुरक्षा, स्वास्थ्य और विकास
-              से जुड़े प्रमुख क्षेत्र।
+              {t.empowermentDescription}
             </p>
 
           </div>
@@ -916,11 +820,11 @@ const handleMouseLeave = () => {
                     <div className="empowerment-item-stats">
                       <div>
                         <strong>{area.beneficiaries.toLocaleString('en-IN')}</strong>
-                        <small>Beneficiaries</small>
+                        <small>{t.beneficiariesLabel}</small>
                       </div>
                       <div>
                         <strong>{area.programs}</strong>
-                        <small>Schemes</small>
+                        <small>{t.schemesSuffix}</small>
                       </div>
                     </div>
                     <div className="empowerment-item-arrow">
@@ -933,7 +837,7 @@ const handleMouseLeave = () => {
             <Col lg={6}>
               <div className="empowerment-chart-container">
                 <div className="empowerment-chart">
-                  <h5 className="empowerment-chart-title">Beneficiaries by Area</h5>
+                  <h5 className="empowerment-chart-title">{t.beneficiariesByAreaLabel}</h5>
                   {empowermentAreas.map((area, index) => (
                     <div className="bar-chart-item" key={index}>
                       <div className="bar-chart-label">{area.title}</div>
@@ -949,7 +853,7 @@ const handleMouseLeave = () => {
                   ))}
                 </div>
                 <div className="empowerment-chart">
-                  <h5 className="empowerment-chart-title">Schemes by Area</h5>
+                  <h5 className="empowerment-chart-title">{t.schemesByAreaLabel}</h5>
                   {empowermentAreas.map((area, index) => (
                     <div className="bar-chart-item" key={index}>
                       <div className="bar-chart-label">{area.title}</div>
@@ -981,10 +885,10 @@ const handleMouseLeave = () => {
       <section className="section find-schemes-section section-padding">
         <Container>
           <div className="section-heading">
-            <Badge>For You</Badge>
-            <h2>Find Schemes by Department</h2>
+            <Badge>{t.findSchemesBadge}</Badge>
+            <h2>{t.findSchemesTitle}</h2>
             <p>
-              Select a department to see the government schemes relevant to its work area.
+              {t.findSchemesDescription}
             </p>
           </div>
 
@@ -999,7 +903,7 @@ const handleMouseLeave = () => {
                   <div className="department-icon">{department.icon}</div>
                   <small>{department.name}</small>
                   <div className="scheme-count-badge">
-                    {department.schemesCount} Scheme{department.schemesCount !== 1 ? 's' : ''}
+                    {department.schemesCount} {t.schemesSuffix}
                   </div>
                 </div>
               </Col>
@@ -1009,7 +913,7 @@ const handleMouseLeave = () => {
           {selectedDepartment && (
             <div className="selected-department-schemes">
               <div className="selected-department-header">
-                <h3>Schemes under <span>{selectedDepartment}</span></h3>
+                <h3>{t.schemesUnder} <span>{selectedDepartment}</span></h3>
               </div>
 
               <Row className="g-4">
@@ -1031,11 +935,11 @@ const handleMouseLeave = () => {
                           </Accordion.Header>
                           <Accordion.Body>
                             <div className="scheme-detail">
-                              <strong>उद्देश्य</strong>
+                              <strong>{t.objectiveLabel}</strong>
                               <p>{scheme.objective}</p>
-                              <strong>पात्रता</strong>
+                              <strong>{t.eligibilityLabel}</strong>
                               <p>{scheme.eligibility}</p>
-                              <strong>लाभ</strong>
+                              <strong>{t.benefitsLabel}</strong>
                               <p>{scheme.benefits}</p>
                             </div>
                           </Accordion.Body>
@@ -1045,7 +949,7 @@ const handleMouseLeave = () => {
                   ))
                 ) : (
                   <Col lg={12}>
-                    <p className="text-center text-muted">No schemes found for this department.</p>
+                    <p className="text-center text-muted">{t.noSchemesFound}</p>
                   </Col>
                 )}
               </Row>
@@ -1069,14 +973,14 @@ const handleMouseLeave = () => {
 
           <div className="section-heading">
 
-            <Badge>Government Schemes</Badge>
+            <Badge>{t.schemesTitle}</Badge>
 
             <h2>
-             Key Schemes & Services
+             {t.schemesTitle}
             </h2>
 
             <p>
-              योजना के उद्देश्य, पात्रता और लाभ की जानकारी प्राप्त करें।
+              {t.schemesDescription}
             </p>
 
           </div>
@@ -1112,18 +1016,18 @@ const handleMouseLeave = () => {
                     <h3>{scheme.name}</h3>
                     <p className="scheme-card-meta">{scheme.department}</p>
                     {scheme.studentCount && (
-                      <p className="scheme-card-meta"><strong>Enrolled:</strong> {scheme.studentCount.toLocaleString('en-IN')} students</p>
+                      <p className="scheme-card-meta"><strong>{t.enrolledLabel}:</strong> {scheme.studentCount.toLocaleString('en-IN')} {t.studentsSuffix}</p>
                     )}
                     <p>{scheme.objective}</p>
                   </div>
 
                   <div className="scheme-card-footer">
                     <div>
-                      <strong>पात्रता</strong>
+                      <strong>{t.eligibilityLabel}</strong>
                       <p>{scheme.eligibility}</p>
                     </div>
                     <div>
-                      <strong>लाभ</strong>
+                      <strong>{t.benefitsLabel}</strong>
                       <p>{scheme.benefits}</p>
                     </div>
                   </div>
