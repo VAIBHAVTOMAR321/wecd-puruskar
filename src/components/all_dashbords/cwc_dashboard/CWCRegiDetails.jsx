@@ -139,7 +139,7 @@ const CWCRegiDetails = () => {
 
          <Container fluid className="dashboard-box mt-3">
            <div className="cwc-page-header">
-             <div>
+             <div className="cwc-page-header-content">
                <h1 className="cwc-page-title">CNCP Child Registrations</h1>
                <p className="cwc-page-subtitle">Manage and review child welfare committee registration records</p>
              </div>
