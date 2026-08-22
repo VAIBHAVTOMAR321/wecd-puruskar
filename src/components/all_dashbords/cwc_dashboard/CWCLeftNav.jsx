@@ -5,41 +5,14 @@ import {
   FaSignOutAlt,
   FaChevronDown,
   FaChevronRight,
-  FaImages,
-  FaUsers,
-  FaBook,
-  FaBuilding,
-  FaImage,
-  FaTools,
-  FaComments, 
-  FaCube,
-  FaProjectDiagram,
-  FaServer,
-  FaUserCircle,
-  FaCalendarAlt,
-  FaPlusSquare,
-  FaEdit,
-  FaMusic,
-  FaGlassCheers,
-  FaIndustry,
-  FaQuestionCircle,
-  FaTrophy,
-  FaBriefcase,
-  FaGraduationCap, 
-  FaUsersCog, // Added for Our Team icon
-  FaTasks,
-  FaClock
+  FaFileAlt,
+  FaClipboardList,
 } from "react-icons/fa";
 
 import "../../../../src/assets/css/adminleftnav.css";
 
 
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import {
-  FaInfoCircle,
-  FaBullseye,
-  
-} from "react-icons/fa";
 
 
 
@@ -75,29 +48,29 @@ const CWCLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClic
     navigate("/", { replace: true });
   };
 
- const menuItems = [
-      {
-        icon: <FaTachometerAlt />,
-        label: "DashBoard",
-        path: "/CWCDashBoard",
-        active: true,
-      },
+  const menuItems = [
        {
-        icon: <FaTachometerAlt />,
-        label: "CWC Registration",
-        path: "/ChildWelfareCommiRegi",
-        active: true,
-      },
-       {
-        icon: <FaTachometerAlt />,
-        label: "CWC Registration Details",
-        path: "/CWCRegiDetails",
-        active: true,
-      },
-      
-      
-      
-     ];
+         icon: <FaTachometerAlt />,
+         label: "DashBoard",
+         path: "/CWCDashBoard",
+         active: true,
+       },
+        {
+         icon: <FaFileAlt />,
+         label: "CWC Registration",
+         path: "/ChildWelfareCommiRegi",
+         active: true,
+       },
+        {
+         icon: <FaClipboardList />,
+         label: "CWC Registration Details",
+         path: "/CWCRegiDetails",
+         active: true,
+       },
+       
+       
+       
+      ];
 
   //  Auto-close sidebar when switching to mobile or tablet
 
