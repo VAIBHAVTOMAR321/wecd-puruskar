@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -57,7 +57,7 @@ const translations = {
     statSchemesDesc: "Child welfare programs",
     statBeneficiaries: "Beneficiaries",
     statBeneficiariesDesc: "Children reached nationwide",
-    howItWorksBadge: "How DRC Works",
+    howItWorksBadge: "How SRC Works",
     howItWorksTitle: "From Department to Beneficiary",
     howItWorksDescription: "Find information in SRC in a simple and organized way.",
     timelineSteps: ["Department", "Work Area", "Scheme / Service", "Objective", "Benefits"],
@@ -315,9 +315,19 @@ function Home() {
       : schemes.filter((scheme) => scheme.department === activeSchemeDepartment);
 
   const handleDepartmentClick = (departmentName) => {
-    // Toggle selection: if the same department is clicked again, deselect it
     setSelectedDepartment(departmentName === selectedDepartment ? null : departmentName);
   };
+
+  useEffect(() => {
+    if (selectedDepartment) {
+      const el = document.getElementById('selected-department-schemes');
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [selectedDepartment]);
 
   const handleSchemeDepartmentSelect = (department) => {
     setActiveSchemeDepartment(department);
@@ -911,7 +921,7 @@ const handleMouseLeave = () => {
           </Row>
 
           {selectedDepartment && (
-            <div className="selected-department-schemes">
+            <div id="selected-department-schemes" className="selected-department-schemes">
               <div className="selected-department-header">
                 <h3>{t.schemesUnder} <span>{selectedDepartment}</span></h3>
               </div>

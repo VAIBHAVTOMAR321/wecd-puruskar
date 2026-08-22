@@ -54,7 +54,7 @@ const translations = {
     aboutDesc: "SRC is a centralized digital platform designed to provide comprehensive information about government departments, schemes, services, and benefits available for child empowerment. Our objective is to ensure easy access to information so that every child can receive their rights.",
     visionTitle: "Our Vision",
     missionTitle: "Our Mission",
-    visionQuote: "Every child should have access to information about their rights — this is the dream of DRC.",
+    visionQuote: "Every child should have access to information about their rights — this is the dream of SRC.",
     missionQuote: "To integrate, simplify, and make transparent the information about government schemes and services.",
     visionPoints: [
       "Ensuring access to information for every child",
@@ -332,7 +332,7 @@ function AboutUs() {
     },
   ];
 
-  /* ── How DRC Works - 5 step themes ── */
+  /* ── How SRC Works - 5 step themes ── */
   const howItWorks = t.howItWorks.map((step, i) => {
     const themes = [
       { bg:"#fff5f0", border:"#ffd6c7", iconBg:"#ffe8df", iconColor:"#d44a0a", bar:"#e8720c", shadow:"rgba(232,114,12,0.08)" },

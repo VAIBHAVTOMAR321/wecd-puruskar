@@ -67,9 +67,12 @@ const CWCLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClic
       e.preventDefault();
       onNavClick(path);
     } else if (!isActive) {
-      // Only close sidebar if navigating to a different page
       setSidebarOpen(false);
     }
+  };
+
+  const handleLogout = () => {
+    navigate("/", { replace: true });
   };
 
  const menuItems = [
@@ -174,12 +177,7 @@ const CWCLeftNav = ({ sidebarOpen, setSidebarOpen, isMobile, isTablet, onNavClic
         <div className="sidebar-footer">
           <Nav.Link
             className="nav-item logout-btn"
-            onClick={() => {
-              if (typeof logout === "function") {
-                logout();
-                navigate("/login");
-              }
-            }}
+            onClick={handleLogout}
           >
             <span className="nav-icon">
               <FaSignOutAlt />
