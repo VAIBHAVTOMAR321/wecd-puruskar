@@ -403,6 +403,8 @@ const ChildWelfareCommiRegi = () => {
         "Child Welfare Committee registration submitted successfully."
       );
 
+      window.alert("Registration successfully");
+
       // ========================================
       // RESET FORM
       // ========================================
